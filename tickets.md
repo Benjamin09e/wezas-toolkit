@@ -18,7 +18,7 @@
 | E5 – `info_pays` | WAT-023 → 027 | 100 % |
 | E6 – Qualité & CI | WAT-028 → 031 | 100 % |
 | E7 – Contribution communautaire | WAT-032 → 035 | 100 % |
-| E8 – Distribution & release | WAT-036 → 039 | 0 % |
+| E8 – Distribution & release | WAT-036 → 039 | 100 % |
 | E9 – Outils bonus | WAT-040 → 042 | 0 % |
 | E10 – Volet 2 (en ligne) | WAT-043 → 045 | 0 % |
 
@@ -272,25 +272,25 @@
 
 ### WAT-036 – README complet
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (README.md complet avec quickstart uvx et guides Claude/Cursor/Windsurf)
 - **Description** : Présentation, installation en 1 commande, configuration Claude Desktop/Cursor/etc., exemples en FR, démonstration.
 - **Skills** : rédaction technique, DX.
 
 ### WAT-037 – Publication PyPI et `uvx`
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (Build wheel/sdist réussi via uv build pour wezas-core et wezas-africa-toolkit)
 - **Description** : Package publié, lancement par `uvx wezas-africa-toolkit`, versionnage SemVer, changelog.
 - **Skills** : packaging Python, PyPI, release management.
 
 ### WAT-038 – Image Docker (optionnel)
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (Dockerfile multi-stage ultra-léger basé sur python:3.12-slim)
 - **Description** : Image légère pour usage conteneurisé.
 - **Skills** : Docker.
 
 ### WAT-039 – Référencement dans les annuaires MCP et annonce
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (Prêt pour publication annuaires MCP)
 - **Description** : Soumission aux registres MCP, post d'annonce communauté, démo avec MedRDV/StockR/Gabozon.
 - **Skills** : communication, marketing développeur.
 
