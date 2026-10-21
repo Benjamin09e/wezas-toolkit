@@ -21,5 +21,5 @@ ENV PORT=8000
 
 EXPOSE 8000
 
-# Démarrage du serveur FastMCP en mode HTTP / SSE pour Render
+# Démarrage du serveur FastMCP en mode HTTP (SSE) pour Render
 CMD ["uv", "run", "fastmcp", "run", "packages/mcp-server/wezas_mcp/server.py:mcp", "--transport", "sse", "--host", "0.0.0.0", "--port", "8000"]

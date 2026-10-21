@@ -52,6 +52,35 @@ async def health_check(request: Any) -> Any:
     })
 
 
+@mcp.custom_route("/api/execute", methods=["POST"])
+async def execute_tool_endpoint(request: Any) -> Any:
+    """Endpoint HTTP direct pour exécuter un outil via JSON (pour le front Netlify/Web)."""
+    from starlette.responses import JSONResponse
+    try:
+        body = await request.json()
+        tool_name = body.get("tool")
+        arguments = body.get("arguments", {})
+        
+        if not tool_name:
+            return JSONResponse({"error": "Missing tool name"}, status_code=400)
+            
+        result = await mcp.call_tool(tool_name, arguments)
+        
+        # Récupération du contenu structuré ou du texte JSON
+        if hasattr(result, "structured_content") and result.structured_content:
+            return JSONResponse(result.structured_content)
+        elif result.content and len(result.content) > 0:
+            import json
+            text_data = result.content[0].text
+            try:
+                return JSONResponse(json.loads(text_data))
+            except Exception:
+                return JSONResponse({"raw": text_data})
+        return JSONResponse({"ok": True, "result": str(result)})
+    except Exception as exc:
+        return JSONResponse({"error": str(exc)}, status_code=500)
+
+
 currency_tools.register(mcp)
 phone_tools.register(mcp)
 country_tools.register(mcp)
