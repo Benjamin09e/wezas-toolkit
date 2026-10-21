@@ -15,7 +15,7 @@
 | E2 – Données pays | WAT-009 → 012 | 100 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 100 % |
 | E4 – `convertir_devise` | WAT-018 → 022 | 40 % |
-| E5 – `info_pays` | WAT-023 → 027 | 0 % |
+| E5 – `info_pays` | WAT-023 → 027 | 100 % |
 | E6 – Qualité & CI | WAT-028 → 031 | 0 % |
 | E7 – Contribution communautaire | WAT-032 → 035 | 0 % |
 | E8 – Distribution & release | WAT-036 → 039 | 0 % |
@@ -182,31 +182,31 @@
 
 ### WAT-023 – Infos de base du pays
 - **Priorité / Taille** : P0 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (indicatif, devise, langues, fuseaux IANA)
 - **Description** : Retourner indicatif, devise (code, nom, symbole), langues officielles, capitale, fuseau(x) horaire(s) IANA.
 - **Skills** : Python, données géographiques.
 
 ### WAT-024 – Jours fériés fixes
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (jours fériés à date fixe)
 - **Description** : Jours fériés à date fixe par pays, paramètre `annee`.
 - **Skills** : recherche documentaire, droit du travail local.
 
 ### WAT-025 – Fêtes mobiles (chrétiennes et musulmanes)
 - **Priorité / Taille** : P1 / L
-- **Avancement** : À faire
+- **Avancement** : Terminé (Pâques/Ascension/Pentecôte calculés via Butcher + fêtes musulmanes tabulées)
 - **Description** : Calcul de Pâques, Ascension, Pentecôte ; fêtes islamiques (Aïd, Tabaski, Mawlid) par table annuelle stockée, avec mention que la date dépend de l'observation lunaire.
 - **Skills** : algorithmes de calendrier (Computus), calendrier hégirien, rigueur sur l'incertitude.
 
 ### WAT-026 – Fuseaux et heure locale
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (heure locale et décalage UTC dynamique via zoneinfo)
 - **Description** : Retourner heure locale actuelle et décalage UTC (via `zoneinfo`, hors ligne).
 - **Skills** : Python `zoneinfo`.
 
 ### WAT-027 – Enregistrement de l'outil MCP et docs
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (outil MCP info_pays avec filtrage des champs)
 - **Description** : Exposer l'outil, paramètre `champs` optionnel pour limiter la réponse.
 - **Skills** : FastMCP, rédaction technique.
 

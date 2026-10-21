@@ -39,6 +39,12 @@ MESSAGES: dict[str, tuple[str, str]] = {
         "Operator and Mobile Money compatibility are probable "
         "but may differ in case of portability.",
     ),
+    "LUNAR_HOLIDAYS_MISSING": (
+        "Les fêtes musulmanes pour l'année demandée ne sont pas encore tabulées "
+        "(dépendant de l'observation lunaire).",
+        "Islamic holidays for the requested year are not tabulated yet "
+        "(depend on lunar observations).",
+    ),
 }
 
 
