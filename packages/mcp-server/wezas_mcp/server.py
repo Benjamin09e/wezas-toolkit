@@ -1,5 +1,7 @@
 """Serveur MCP du Wezas Africa Toolkit (transport stdio par défaut)."""
 
+from typing import Any
+
 from fastmcp import FastMCP
 from wezas_core.log import configure_logging, get_logger
 
@@ -26,6 +28,28 @@ mcp = FastMCP(
 def ping() -> dict[str, str]:
     """Vérifie que le serveur répond. / Health check returning the server version."""
     return {"status": "ok", "version": __version__}
+
+
+@mcp.custom_route("/", methods=["GET"])
+@mcp.custom_route("/health", methods=["GET"])
+async def health_check(request: Any) -> Any:
+    """Route HTTP racine et health check pour Render et navigateurs."""
+    from starlette.responses import JSONResponse
+    return JSONResponse({
+        "status": "ok",
+        "service": "wezas-africa-toolkit",
+        "version": __version__,
+        "mcp_endpoint": "/sse",
+        "tools": [
+            "ping",
+            "valider_telephone",
+            "convertir_devise",
+            "info_pays",
+            "formater_montant",
+            "calculer_tva",
+            "lister_operateurs",
+        ],
+    })
 
 
 currency_tools.register(mcp)
