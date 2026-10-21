@@ -11,7 +11,7 @@
 | Epic | Tickets | Avancement |
 |---|---|---|
 | E0 – Cadrage | WAT-001 → 002 | 100 % |
-| E1 – Socle technique | WAT-003 → 008 | 50 % |
+| E1 – Socle technique | WAT-003 → 008 | 67 % |
 | E2 – Données pays | WAT-009 → 012 | 25 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 0 % |
 | E4 – `convertir_devise` | WAT-018 → 022 | 0 % |
@@ -64,7 +64,7 @@
 
 ### WAT-006 – Gestion d'erreurs et normalisation des entrées
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé
 - **Description** : Normalisation des pays (nom FR/EN, ISO-2, ISO-3, « Gabon », « GA »), des espaces et caractères du numéro, messages d'erreur clairs avec suggestions.
 - **Skills** : Python, ISO 3166, UX d'API.
 
