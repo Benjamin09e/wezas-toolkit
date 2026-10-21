@@ -13,8 +13,9 @@ import {
   CheckCircle2, 
   AlertCircle,
   Sparkles,
-  ArrowRight
+  Layers
 } from "lucide-react";
+import { SUPPORTED_COUNTRIES } from "@/data/countries";
 
 interface ToolConfig {
   id: string;
@@ -33,7 +34,7 @@ const TOOLS: ToolConfig[] = [
     description: "Validation E.164, détection de l'opérateur et éligibilité Mobile Money.",
     icon: Phone,
     defaultPayload: {
-      pays: "Gabon",
+      pays: "GA",
       numero: "077 12 34 56",
     },
   },
@@ -56,7 +57,7 @@ const TOOLS: ToolConfig[] = [
     description: "Indicatifs, fuseaux horaires, langues et calendrier complet des jours fériés légaux.",
     icon: Globe2,
     defaultPayload: {
-      pays: "Sénégal",
+      pays: "SN",
       annee: 2026,
     },
   },
@@ -69,7 +70,7 @@ const TOOLS: ToolConfig[] = [
     defaultPayload: {
       montant: 1250000,
       devise: "XOF",
-      pays: "Côte d'Ivoire",
+      pays: "CI",
       inclure_symbole: true,
     },
   },
@@ -81,7 +82,7 @@ const TOOLS: ToolConfig[] = [
     icon: Receipt,
     defaultPayload: {
       montant: 100000,
-      pays: "Cameroun",
+      pays: "CM",
       mode: "ht",
       type_taux: "standard",
     },
@@ -93,7 +94,7 @@ const TOOLS: ToolConfig[] = [
     description: "Listing des réseaux GSM et services Mobile Money par pays (MoMo, Orange Money, Wave...).",
     icon: Users,
     defaultPayload: {
-      pays: "Sénégal",
+      pays: "SN",
       avec_mobile_money_seulement: true,
     },
   },
@@ -101,7 +102,9 @@ const TOOLS: ToolConfig[] = [
 
 export default function Home() {
   const [selectedTool, setSelectedTool] = useState<ToolConfig>(TOOLS[0]);
-  const [payloadStr, setPayloadStr] = useState<string>(
+  const [currentArgs, setCurrentArgs] = useState<Record<string, any>>(TOOLS[0].defaultPayload);
+  const [viewMode, setViewMode] = useState<"form" | "json">("form");
+  const [jsonText, setJsonText] = useState<string>(
     JSON.stringify(TOOLS[0].defaultPayload, null, 2)
   );
   const [loading, setLoading] = useState<boolean>(false);
@@ -109,21 +112,32 @@ export default function Home() {
 
   const handleSelectTool = (tool: ToolConfig) => {
     setSelectedTool(tool);
-    setPayloadStr(JSON.stringify(tool.defaultPayload, null, 2));
+    setCurrentArgs(tool.defaultPayload);
+    setJsonText(JSON.stringify(tool.defaultPayload, null, 2));
     setResponse(null);
+  };
+
+  const updateArg = (key: string, value: any) => {
+    const updated = { ...currentArgs, [key]: value };
+    setCurrentArgs(updated);
+    setJsonText(JSON.stringify(updated, null, 2));
   };
 
   const handleExecute = async () => {
     try {
       setLoading(true);
-      const parsedArgs = JSON.parse(payloadStr);
+      let payloadToExecute = currentArgs;
+
+      if (viewMode === "json") {
+        payloadToExecute = JSON.parse(jsonText);
+      }
 
       const res = await fetch("/api/mcp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           tool: selectedTool.id,
-          arguments: parsedArgs,
+          arguments: payloadToExecute,
         }),
       });
 
@@ -155,7 +169,7 @@ export default function Home() {
           <div className="flex items-center space-x-4 text-sm text-slate-400">
             <span className="flex items-center gap-1.5 text-emerald-400 text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Serveur MCP Actif (6 outils)
+              12 Pays Couverts (Zone Franc XAF/XOF)
             </span>
           </div>
         </div>
@@ -176,7 +190,7 @@ export default function Home() {
                 <button
                   key={tool.id}
                   onClick={() => handleSelectTool(tool)}
-                  className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-start gap-3.5 ${
+                  className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-start gap-3.5 cursor-pointer ${
                     isSelected
                       ? "bg-amber-500/10 border-amber-500/40 text-white shadow-lg shadow-amber-500/5"
                       : "bg-slate-900/60 border-slate-800/80 text-slate-400 hover:border-slate-700 hover:text-slate-200"
@@ -206,36 +220,191 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Colonne Droite : Paramètres et Résultats */}
+        {/* Colonne Droite : Formulaire & Réponses */}
         <div className="lg:col-span-8 flex flex-col space-y-6">
-          {/* Panneau Paramètres / Exécution */}
+          {/* Panneau Paramètres / Formulaire */}
           <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-xl">
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
               <div className="flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-amber-500" />
                 <span className="text-sm font-medium text-slate-200">
-                  Paramètres d'appel : <code className="text-amber-400 font-mono">{selectedTool.id}</code>
+                  Paramètres : <code className="text-amber-400 font-mono">{selectedTool.id}</code>
                 </span>
               </div>
-              <button
-                onClick={handleExecute}
-                disabled={loading}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-medium text-sm transition-all disabled:opacity-50 shadow-md shadow-amber-500/10 cursor-pointer"
-              >
-                <Play className="w-4 h-4 fill-current" />
-                {loading ? "Exécution..." : "Tester l'outil"}
-              </button>
+              
+              <div className="flex items-center gap-3">
+                {/* Switcher Formulaire vs JSON */}
+                <div className="bg-slate-950 p-1 rounded-xl border border-slate-800 flex items-center text-xs">
+                  <button
+                    onClick={() => setViewMode("form")}
+                    className={`px-2.5 py-1 rounded-lg transition-all ${
+                      viewMode === "form" ? "bg-amber-500 text-slate-950 font-semibold" : "text-slate-400"
+                    }`}
+                  >
+                    Formulaire
+                  </button>
+                  <button
+                    onClick={() => setViewMode("json")}
+                    className={`px-2.5 py-1 rounded-lg transition-all ${
+                      viewMode === "json" ? "bg-amber-500 text-slate-950 font-semibold" : "text-slate-400"
+                    }`}
+                  >
+                    JSON
+                  </button>
+                </div>
+
+                <button
+                  onClick={handleExecute}
+                  disabled={loading}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-medium text-sm transition-all disabled:opacity-50 shadow-md shadow-amber-500/10 cursor-pointer"
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  {loading ? "Calcul..." : "Tester l'outil"}
+                </button>
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs text-slate-400 font-mono">Payload JSON (Arguments) :</label>
-              <textarea
-                value={payloadStr}
-                onChange={(e) => setPayloadStr(e.target.value)}
-                rows={6}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-emerald-400 focus:outline-none focus:border-amber-500/50 resize-y"
-              />
-            </div>
+            {/* Mode Formulaire Intuitif avec Liste des Pays */}
+            {viewMode === "form" ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Sélecteur de Pays si applicable */}
+                {"pays" in currentArgs && (
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-medium text-slate-400">Pays d'Afrique :</label>
+                    <select
+                      value={currentArgs.pays || ""}
+                      onChange={(e) => updateArg("pays", e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    >
+                      {selectedTool.id === "lister_operateurs" && (
+                        <option value="">Tous les pays</option>
+                      )}
+                      {SUPPORTED_COUNTRIES.map((c) => (
+                        <option key={c.iso2} value={c.iso2}>
+                          {c.flag} {c.name} ({c.iso2}) - {c.currency} ({c.dialCode})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Champ Numéro Téléphone */}
+                {"numero" in currentArgs && (
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-medium text-slate-400">Numéro de téléphone :</label>
+                    <input
+                      type="text"
+                      value={currentArgs.numero || ""}
+                      onChange={(e) => updateArg("numero", e.target.value)}
+                      placeholder="Ex: 077 12 34 56 ou +241..."
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    />
+                  </div>
+                )}
+
+                {/* Champ Montant */}
+                {"montant" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">Montant :</label>
+                    <input
+                      type="number"
+                      value={currentArgs.montant ?? ""}
+                      onChange={(e) => updateArg("montant", Number(e.target.value))}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    />
+                  </div>
+                )}
+
+                {/* Sélecteur Devise Source */}
+                {"de" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">De (Devise source) :</label>
+                    <select
+                      value={currentArgs.de || "EUR"}
+                      onChange={(e) => updateArg("de", e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    >
+                      <option value="EUR">EUR (€)</option>
+                      <option value="XAF">XAF (FCFA Afrique Centrale)</option>
+                      <option value="XOF">XOF (FCFA Afrique de l'Ouest)</option>
+                      <option value="USD">USD ($)</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Sélecteur Devise Cible */}
+                {"vers" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">Vers (Devise cible) :</label>
+                    <select
+                      value={currentArgs.vers || "XAF"}
+                      onChange={(e) => updateArg("vers", e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    >
+                      <option value="XAF">XAF (FCFA Afrique Centrale)</option>
+                      <option value="XOF">XOF (FCFA Afrique de l'Ouest)</option>
+                      <option value="EUR">EUR (€)</option>
+                      <option value="USD">USD ($)</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Sélecteur Année pour Jours Fériés */}
+                {"annee" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">Année :</label>
+                    <input
+                      type="number"
+                      value={currentArgs.annee || 2026}
+                      onChange={(e) => updateArg("annee", Number(e.target.value))}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    />
+                  </div>
+                )}
+
+                {/* Options TVA */}
+                {"mode" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">Mode de calcul :</label>
+                    <select
+                      value={currentArgs.mode || "ht"}
+                      onChange={(e) => updateArg("mode", e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    >
+                      <option value="ht">HT vers TTC (Ajouter TVA)</option>
+                      <option value="ttc">TTC vers HT (Extraire TVA)</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Filtre Mobile Money */}
+                {"avec_mobile_money_seulement" in currentArgs && (
+                  <div className="space-y-1.5 flex items-center gap-2 pt-6">
+                    <input
+                      type="checkbox"
+                      id="mm_only"
+                      checked={Boolean(currentArgs.avec_mobile_money_seulement)}
+                      onChange={(e) => updateArg("avec_mobile_money_seulement", e.target.checked)}
+                      className="w-4 h-4 rounded bg-slate-950 border-slate-800 text-amber-500 focus:ring-0"
+                    />
+                    <label htmlFor="mm_only" className="text-xs text-slate-300">
+                      Uniquement opérateurs avec Mobile Money
+                    </label>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Mode Éditeur JSON */
+              <div className="space-y-2">
+                <label className="text-xs text-slate-400 font-mono">Payload JSON :</label>
+                <textarea
+                  value={jsonText}
+                  onChange={(e) => setJsonText(e.target.value)}
+                  rows={6}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-emerald-400 focus:outline-none focus:border-amber-500/50 resize-y"
+                />
+              </div>
+            )}
           </div>
 
           {/* Panneau Réponse */}
@@ -266,7 +435,7 @@ export default function Home() {
               ) : (
                 <div className="h-full flex flex-col items-center justify-center text-slate-600 space-y-2 py-12">
                   <Terminal className="w-8 h-8 opacity-40" />
-                  <p className="text-xs">Cliquez sur « Tester l'outil » pour exécuter la requête.</p>
+                  <p className="text-xs">Sélectionnez les paramètres et cliquez sur « Tester l'outil ».</p>
                 </div>
               )}
             </div>
