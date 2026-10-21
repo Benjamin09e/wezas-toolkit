@@ -17,7 +17,7 @@
 | E4 – `convertir_devise` | WAT-018 → 022 | 100 % |
 | E5 – `info_pays` | WAT-023 → 027 | 100 % |
 | E6 – Qualité & CI | WAT-028 → 031 | 100 % |
-| E7 – Contribution communautaire | WAT-032 → 035 | 0 % |
+| E7 – Contribution communautaire | WAT-032 → 035 | 100 % |
 | E8 – Distribution & release | WAT-036 → 039 | 0 % |
 | E9 – Outils bonus | WAT-040 → 042 | 0 % |
 | E10 – Volet 2 (en ligne) | WAT-043 → 045 | 0 % |
@@ -244,25 +244,25 @@
 
 ### WAT-032 – CONTRIBUTING.md
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (CONTRIBUTING.md avec guide d'ajout pas à pas)
 - **Description** : Guide court : ajouter un pays, corriger une plage, sourcer, lancer les tests.
 - **Skills** : rédaction technique, animation de communauté.
 
 ### WAT-033 – Gabarits d'issues et de PR
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (templates GitHub d'issues et de PR)
 - **Description** : Templates : « Ajouter un pays », « Donnée erronée », « Nouvel outil ».
 - **Skills** : GitHub, gestion de communauté.
 
 ### WAT-034 – Template de pays et script de scaffolding
 - **Priorité / Taille** : P2 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (scripts/scaffold_country.py)
 - **Description** : Commande `make new-country ISO=XX` générant le fichier pré-rempli.
 - **Skills** : Python CLI, outillage développeur.
 
 ### WAT-035 – Code de conduite et gouvernance
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (CODE_OF_CONDUCT.md)
 - **Description** : Code de conduite, rôles de mainteneurs, processus de revue des données.
 - **Skills** : gouvernance open source.
 

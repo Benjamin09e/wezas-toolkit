@@ -1,0 +1,26 @@
+name: "Correction de données"
+description: "Signaler ou corriger une plage de numérotation, un opérateur ou un jour férié erroné."
+title: "[CORRECTION] "
+labels: ["correctif", "donnees"]
+body:
+  - type: input
+    id: country
+    attributes:
+      label: "Pays concerné"
+      placeholder: "ex. Gabon (GA), Côte d'Ivoire (CI)..."
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Description de l'erreur ou du changement récent"
+      placeholder: "ex. L'ARCEP a migré les numéros à 9 chiffres ou la plage 074 est désormais attribuée à Airtel..."
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: "Sources justificatives"
+      placeholder: "Lien officiel, communiqué de l'ARCEP ou Journal Officiel"
+    validations:
+      required: true

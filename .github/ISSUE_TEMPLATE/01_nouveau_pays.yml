@@ -1,0 +1,38 @@
+name: "Ajout d'un pays"
+description: "Proposer les données pour un nouveau pays africain non encore couvert."
+title: "[PAYS] Ajouter : "
+labels: ["pays", "donnees"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de contribuer à étendre la couverture de Wezas Africa Toolkit !
+  - type: input
+    id: country_name
+    attributes:
+      label: "Nom du pays"
+      placeholder: "ex. Madagascar, Rwanda, Guinée..."
+    validations:
+      required: true
+  - type: input
+    id: iso_codes
+    attributes:
+      label: "Codes ISO 2 et ISO 3"
+      placeholder: "ex. MG / MDG"
+    validations:
+      required: true
+  - type: input
+    id: dial_code
+    attributes:
+      label: "Indicatif international et longueur nationale"
+      placeholder: "ex. +261, longueur 9 chiffres"
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: "Sources officielles"
+      description: "Liens vers les décisions du régulateur national (ARTEC, RURA, etc.) ou de l'UIT."
+      placeholder: "https://www.itu.int/oth/..."
+    validations:
+      required: true
