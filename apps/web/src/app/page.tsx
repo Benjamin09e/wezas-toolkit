@@ -13,9 +13,12 @@ import {
   CheckCircle2, 
   AlertCircle,
   Sparkles,
-  Layers
+  Layers,
+  Code2
 } from "lucide-react";
 import { SUPPORTED_COUNTRIES } from "@/data/countries";
+import { VisualResultCard } from "@/components/VisualResultCard";
+import { SnippetGenerator } from "@/components/SnippetGenerator";
 
 interface ToolConfig {
   id: string;
@@ -407,7 +410,7 @@ export default function Home() {
             )}
           </div>
 
-          {/* Panneau Réponse */}
+          {/* Panneau Réponse et Visualisation */}
           <div className="flex-1 bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col min-h-[350px]">
             <div className="flex items-center justify-between mb-3 pb-3 border-b border-slate-800">
               <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
@@ -418,7 +421,7 @@ export default function Home() {
                 ) : (
                   <Sparkles className="w-4 h-4 text-slate-500" />
                 )}
-                <span>Résultat d'exécution MCP (Envelope)</span>
+                <span>Résultat & Intégration</span>
               </div>
               {response?.confiance && (
                 <span className="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-md">
@@ -427,7 +430,15 @@ export default function Home() {
               )}
             </div>
 
-            <div className="flex-1 bg-slate-950 border border-slate-800/80 rounded-xl p-4 overflow-auto">
+            {/* Carte Visuelle Haute Fidélité */}
+            {response && (
+              <div className="mb-4">
+                <VisualResultCard toolId={selectedTool.id} response={response} />
+              </div>
+            )}
+
+            {/* Onglet JSON Brut */}
+            <div className="bg-slate-950 border border-slate-800/80 rounded-xl p-4 overflow-auto max-h-56">
               {response ? (
                 <pre className="text-xs font-mono text-slate-200 leading-relaxed whitespace-pre-wrap">
                   {JSON.stringify(response, null, 2)}
@@ -438,6 +449,15 @@ export default function Home() {
                   <p className="text-xs">Sélectionnez les paramètres et cliquez sur « Tester l'outil ».</p>
                 </div>
               )}
+            </div>
+
+            {/* Générateur d'Extraits de Code pour Développeurs */}
+            <div className="mt-4">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                <Code2 className="w-4 h-4 text-amber-500" />
+                <span>Intégrer dans votre application (Copy-Paste)</span>
+              </div>
+              <SnippetGenerator toolId={selectedTool.id} args={currentArgs} />
             </div>
           </div>
         </div>
