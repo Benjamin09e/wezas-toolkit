@@ -1,0 +1,25 @@
+# Dockerfile pour le backend Wezas Africa Toolkit (API & MCP SSE/HTTP sur Render)
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Installation de uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+
+# Copie des définitions et packages
+COPY pyproject.toml uv.lock ./
+COPY packages/core ./packages/core
+COPY packages/mcp-server ./packages/mcp-server
+COPY data ./data
+
+# Synchronisation des dépendances sans les paquets de dev
+RUN uv sync --all-packages --no-dev
+
+ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8000
+
+EXPOSE 8000
+
+# Démarrage du serveur FastMCP en mode HTTP / SSE pour Render
+CMD ["uv", "run", "fastmcp", "run", "packages/mcp-server/wezas_mcp/server.py:mcp", "--transport", "sse", "--host", "0.0.0.0", "--port", "8000"]

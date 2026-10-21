@@ -1,0 +1,12 @@
+services:
+  # Service Backend Wezas Africa Toolkit sur Render
+  - type: web
+    name: wezas-backend
+    runtime: docker
+    dockerfilePath: Dockerfile.render
+    plan: free
+    region: frankfurt # ou oregon
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
