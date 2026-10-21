@@ -10,7 +10,7 @@
 
 | Epic | Tickets | Avancement |
 |---|---|---|
-| E0 – Cadrage | WAT-001 → 002 | 50 % |
+| E0 – Cadrage | WAT-001 → 002 | 100 % |
 | E1 – Socle technique | WAT-003 → 008 | 50 % |
 | E2 – Données pays | WAT-009 → 012 | 25 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 0 % |
@@ -35,7 +35,7 @@
 
 ### WAT-002 – Définir le contrat de sortie commun
 - **Priorité / Taille** : P0 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé
 - **Description** : Spécifier l'enveloppe JSON commune : `data`, `source`, `derniere_verification`, `confiance`, `avertissements`, et le format des erreurs (codes, messages FR/EN).
 - **Critères d'acceptation** : schéma JSON documenté dans `docs/output-contract.md`.
 - **Skills** : conception d'API, JSON Schema, rédaction technique.

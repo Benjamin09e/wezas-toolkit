@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "ErrorCode": {
+      "enum": [
+        "ENTREE_INVALIDE",
+        "PAYS_INCONNU",
+        "NUMERO_INVALIDE",
+        "DEVISE_NON_SUPPORTEE",
+        "MONTANT_INVALIDE",
+        "TAUX_INVALIDE",
+        "DONNEES_INDISPONIBLES",
+        "ERREUR_INTERNE"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "message": {
+          "$ref": "#/$defs/LocalizedName"
+        },
+        "details": {
+          "additionalProperties": true,
+          "title": "Details",
+          "type": "object"
+        },
+        "suggestions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Suggestions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    },
+    "LocalizedName": {
+      "additionalProperties": false,
+      "properties": {
+        "fr": {
+          "minLength": 1,
+          "title": "Fr",
+          "type": "string"
+        },
+        "en": {
+          "minLength": 1,
+          "title": "En",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fr",
+        "en"
+      ],
+      "title": "LocalizedName",
+      "type": "object"
+    },
+    "Warning_": {
+      "additionalProperties": false,
+      "description": "Avertissement non bloquant (ex. taux USD périmé, opérateur incertain).",
+      "properties": {
+        "code": {
+          "pattern": "^[A-Z][A-Z0-9_]+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/$defs/LocalizedName"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "Warning_",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Enveloppe de réponse : succès (`data`) ou échec (`error`), jamais les deux.",
+  "properties": {
+    "ok": {
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "data": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Data"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ErrorInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Origine de la donnée (régulateur, etc.)",
+      "title": "Source"
+    },
+    "derniere_verification": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Derniere Verification"
+    },
+    "confiance": {
+      "anyOf": [
+        {
+          "enum": [
+            "haute",
+            "moyenne",
+            "faible"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confiance"
+    },
+    "avertissements": {
+      "items": {
+        "$ref": "#/$defs/Warning_"
+      },
+      "title": "Avertissements",
+      "type": "array"
+    }
+  },
+  "required": [
+    "ok"
+  ],
+  "title": "Envelope",
+  "type": "object"
+}
