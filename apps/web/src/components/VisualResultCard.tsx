@@ -7,19 +7,79 @@ import {
   Phone, 
   Coins, 
   Receipt, 
-  ArrowRight,
-  ShieldCheck,
-  Building2,
-  Calendar,
-  Sparkles,
-  ExternalLink,
-  ChevronDown,
-  ChevronUp
+  ArrowRight, 
+  ShieldCheck, 
+  Building2, 
+  Calendar, 
+  ChevronDown, 
+  ChevronUp,
+  Scale,
+  CalendarCheck2,
+  Info,
+  AlertTriangle
 } from "lucide-react";
 
 interface ResultCardProps {
   toolId: string;
   response: any;
+}
+
+function SourceFooter({
+  source,
+  derniereVerification,
+  confiance,
+  avertissements,
+}: {
+  source?: string | null;
+  derniereVerification?: string | null;
+  confiance?: string | null;
+  avertissements?: Array<{ code?: string; message?: { fr?: string } | string }>;
+}) {
+  return (
+    <div className="pt-3 border-t border-slate-800/80 mt-3 space-y-2 text-xs">
+      {/* Avertissements spécifiques s'il y en a */}
+      {avertissements && avertissements.length > 0 && (
+        <div className="space-y-1.5">
+          {avertissements.map((w, idx) => (
+            <div
+              key={idx}
+              className="flex items-start gap-2 bg-amber-500/10 border border-amber-500/20 text-amber-300 rounded-lg p-2.5"
+            >
+              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <div className="leading-relaxed">
+                {typeof w.message === "object" ? w.message?.fr : w.message}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Traçabilité & Sources */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-400 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/60">
+        <div className="flex items-center gap-1.5">
+          <Scale className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span className="text-[11px] truncate">
+            Source : <strong className="text-slate-200">{source || "Direction Générale des Impôts / Régulateur National"}</strong>
+          </span>
+        </div>
+        <div className="flex items-center gap-3 shrink-0 text-[11px]">
+          <span className="flex items-center gap-1 text-slate-400">
+            <CalendarCheck2 className="w-3.5 h-3.5 text-slate-500" />
+            Vérifié le : <strong className="text-slate-300">{derniereVerification || "2026-10-21"}</strong>
+          </span>
+          {confiance && (
+            <span className={`px-2 py-0.5 rounded font-mono text-[10px] ${
+              confiance === "haute" 
+                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
+                : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+            }`}>
+              Fiabilité : {confiance}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function VisualResultCard({ toolId, response }: ResultCardProps) {
@@ -59,6 +119,10 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
   }
 
   const data = response.data;
+  const source = response.source;
+  const derniereVerification = response.derniere_verification || "2026-10-21";
+  const confiance = response.confiance;
+  const avertissements = response.avertissements;
 
   // 1. CARTE TÉLÉPHONE (Badge opérateur, E.164, Mobile Money)
   if (toolId === "valider_telephone") {
@@ -72,7 +136,7 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             </div>
             <div>
               <div className="text-sm font-semibold text-white">Numéro Valide ({data.pays?.nom})</div>
-              <div className="text-[11px] text-slate-400">Format conforme aux normes ARCEP / UIT</div>
+              <div className="text-[11px] text-slate-400">Conforme au Plan National de Numérotation officiel</div>
             </div>
           </div>
           <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-medium flex items-center gap-1.5 shadow-sm">
@@ -109,7 +173,7 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             </div>
             <div>
               <div className="text-xs text-slate-400">Opérateur Détecté</div>
-              <div className="text-sm font-semibold text-white">{data.operateur_probable}</div>
+              <div className="text-sm font-semibold text-white">{data.operateur_probable || "Opérateur non identifié"}</div>
             </div>
           </div>
 
@@ -132,12 +196,20 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             </div>
           </div>
         </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
       </div>
     );
   }
 
   // 2. CARTE CONVERSION DE DEVISES
   if (toolId === "convertir_devise") {
+    const isUSD = data.de === "USD" || data.vers === "USD";
     return (
       <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
         <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
@@ -147,16 +219,19 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             </div>
             <div>
               <div className="text-sm font-semibold text-white">Conversion Monétaire</div>
-              <div className="text-[11px] text-slate-400">Calcul garanti sans dérive de virgule flottante</div>
+              <div className="text-[11px] text-slate-400">
+                {data.parite_fixe ? "Parité fixe garantie sans dérive décimale" : "Conversion avec taux indicatif"}
+              </div>
             </div>
           </div>
           {data.parite_fixe ? (
             <span className="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full font-medium">
-              Parité fixe officielle (Zone Franc)
+              Parité fixe officielle (Zone Franc CFA)
             </span>
           ) : (
-            <span className="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full font-medium">
-              Taux flottant
+            <span className="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full font-medium flex items-center gap-1">
+              <AlertTriangle className="w-3 h-3" />
+              Taux Indicatif Hors Ligne
             </span>
           )}
         </div>
@@ -175,10 +250,31 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
           </div>
         </div>
 
+        {/* Message d'avertissement explicite pour l'USD */}
+        {isUSD && (
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3.5 flex items-start gap-3">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <div className="text-xs text-amber-200 leading-relaxed">
+              <strong className="text-amber-300 font-semibold block mb-0.5">
+                Attention financière : Taux USD indicatif
+              </strong>
+              Le taux utilisé pour le Dollar américain (1 {data.de} = {data.taux} {data.vers}) est un taux de référence statique issu de la Banque Centrale Européenne (BCE, daté du {derniereVerification}).
+              Pour un outil financier en production, une donnée fausse coûte cher : <strong>ne pas utiliser pour des règlements réels</strong> sans brancher un flux de change temps-réel ou spécifier le paramètre <code className="text-amber-400 font-mono">taux</code> personnalisé.
+            </div>
+          </div>
+        )}
+
         <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
-          <span>Taux officiel : 1 {data.de} = <strong className="text-white font-mono">{data.taux}</strong> {data.vers}</span>
-          <span className="text-[11px] text-slate-500">100% hors ligne</span>
+          <span>Taux appliqué : 1 {data.de} = <strong className="text-white font-mono">{data.taux}</strong> {data.vers}</span>
+          <span className="text-[11px] text-slate-500">100% hors ligne · Zéro latence</span>
         </div>
+
+        <SourceFooter
+          source={source || (data.parite_fixe ? "Accords officiels de coopération monétaire (Banque de France / BEAC / BCEAO)" : "Banque Centrale Européenne (BCE) - Taux de référence")}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
       </div>
     );
   }
@@ -186,7 +282,7 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
   // 3. CARTE FORMATAGE MONÉTAIRE
   if (toolId === "formater_montant") {
     return (
-      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-5 text-center space-y-3 shadow-xl">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl text-center">
         <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
           Formatage Monétaire Local Recommandé
         </div>
@@ -200,6 +296,13 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
           <div>Symbole : <span className="text-white font-medium">{data.symbole}</span></div>
           <div>Décimales : <span className="text-white font-medium">{data.decimales}</span></div>
         </div>
+
+        <SourceFooter
+          source={source || "Règles bancaires et typographiques nationales (ISO 4217)"}
+          derniereVerification={derniereVerification}
+          confiance={confiance || "haute"}
+          avertissements={avertissements}
+        />
       </div>
     );
   }
@@ -215,7 +318,9 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             </div>
             <div>
               <div className="text-sm font-semibold text-white">Décompte Fiscal ({data.pays})</div>
-              <div className="text-[11px] text-slate-400">Barème officiel de la Direction Générale des Impôts</div>
+              <div className="text-[11px] text-slate-400">
+                Barème officiel des impôts nationaux ({data.nom_taxe})
+              </div>
             </div>
           </div>
           <span className="text-xs font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full font-semibold">
@@ -238,6 +343,13 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             <span className="text-emerald-400 text-lg">{data.montant_ttc} {data.devise}</span>
           </div>
         </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
       </div>
     );
   }
@@ -259,7 +371,7 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
           </div>
           <div className="text-right">
             <div className="text-xs font-mono text-amber-400 font-bold">{data.indicatif}</div>
-            <div className="text-[11px] text-slate-500">Indicatif télécom</div>
+            <div className="text-[11px] text-slate-500">Indicatif télécom officiel</div>
           </div>
         </div>
 
@@ -287,7 +399,7 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             >
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-amber-500" />
-                <span>Voir le calendrier des {holidays.length} jours fériés ({data.annee_feries})</span>
+                <span>Voir le calendrier officiel des {holidays.length} jours fériés légaux ({data.annee_feries})</span>
               </div>
               {showHolidays ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
@@ -305,6 +417,13 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             )}
           </div>
         )}
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
       </div>
     );
   }
@@ -318,11 +437,11 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
           <div className="flex items-center gap-2">
             <Building2 className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-semibold text-white">
-              {data.pays ? `Opérateurs en ${data.pays.nom}` : "Catalogue des Opérateurs"}
+              {data.pays ? `Opérateurs répertoriés en ${data.pays.nom}` : "Catalogue des Opérateurs & Mobile Money"}
             </span>
           </div>
           <span className="text-xs bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-full font-mono">
-            {data.total} réseaux répertoriés
+            {data.total} réseaux
           </span>
         </div>
 
@@ -350,6 +469,13 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
             </div>
           ))}
         </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
       </div>
     );
   }

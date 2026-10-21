@@ -71,7 +71,8 @@ async def execute_tool_endpoint(request: Any) -> Any:
             return JSONResponse(result.structured_content)
         elif result.content and len(result.content) > 0:
             import json
-            text_data = result.content[0].text
+            first_item = result.content[0]
+            text_data = getattr(first_item, "text", str(first_item))
             try:
                 return JSONResponse(json.loads(text_data))
             except Exception:

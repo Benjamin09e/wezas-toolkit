@@ -145,5 +145,6 @@ def calculate_vat(
     return success(
         out_data,
         source=source,
+        derniere_verification=country_obj.last_verified,
         confiance="haute",
     )

@@ -1,6 +1,9 @@
 # Registre officiel des opérateurs et services Mobile Money
 # Wezas Africa Toolkit - WAT-012
 
+source: "Rapports annuels des régulateurs télécoms nationaux (ARCEP, ARTP, ART, NCC, CA) et portails officiels des opérateurs"
+last_verified: "2026-10-21"
+
 operators:
   # --- PAYS XAF (Afrique Centrale) ---
   # GABON (GA)

@@ -5,6 +5,10 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "bin": {
+    "wezas-africa-toolkit": "./bin/cli.mjs",
+    "wezas-africa": "./bin/cli.mjs"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "test": "node --test dist/index.js"

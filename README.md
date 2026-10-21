@@ -6,7 +6,7 @@
   <p>
     <a href="https://github.com/Benjamin09e/wezas-toolkit/actions/workflows/ci.yml"><img src="https://github.com/Benjamin09e/wezas-toolkit/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License MIT"></a>
-    <a href="https://pypi.org/project/wezas-africa-toolkit/"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg" alt="Python Versions"></a>
+    <a href="https://www.npmjs.com/package/wezas-africa-toolkit"><img src="https://img.shields.io/npm/v/wezas-africa-toolkit.svg?color=cb3837" alt="NPM Version"></a>
     <a href="https://smithery.ai/server/wezas-africa-toolkit"><img src="https://smithery.ai/badge/wezas-africa-toolkit" alt="Smithery Badge"></a>
   </p>
 </div>
@@ -24,20 +24,25 @@ Dans des projets comme **MedRDV**, **StockR** ou **Gabozon**, nous retrouvons sy
 
 ---
 
-## ⚡ Installation rapide
+## ⚡ Installation rapide & Connexion MCP
 
-### Option A : En local via `uvx` (Sans installation préalable)
+### Option A : Directement via `npx` (Recommandé, Node.js / Claude Desktop)
+```bash
+npx -y wezas-africa-toolkit
+```
+
+### Option B : En local via `uvx` (Python)
 ```bash
 uvx wezas-africa-toolkit
 ```
 
-### Option B : Installation en 1 clic via Smithery
+### Option C : Installation en 1 clic via Smithery
 Pour installer automatiquement le serveur sur Claude Desktop :
 ```bash
 npx -y @smithery/cli install wezas-africa-toolkit --client claude
 ```
 
-### Option C : Connexion distante via Server-Sent Events (SSE)
+### Option D : Connexion distante via Server-Sent Events (SSE)
 Vous pouvez également connecter vos agents directement au serveur hébergé sur Render sans rien exécuter en local :
 - **URL SSE** : `https://wezas-backend.onrender.com/sse`
 - **Méthode** : `sse`
@@ -47,7 +52,8 @@ Vous pouvez également connecter vos agents directement au serveur hébergé sur
 ## 🔌 Configuration dans vos IDE & Clients IA
 
 ### 1. Claude Desktop
-Ajoutez cette configuration dans votre fichier `claude_desktop_config.json` :
+
+Ajoutez ce bloc de configuration prêt à copier dans votre fichier de configuration Claude Desktop :
 
 - **macOS** : `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows** : `%APPDATA%\Claude\claude_desktop_config.json`
@@ -55,28 +61,30 @@ Ajoutez cette configuration dans votre fichier `claude_desktop_config.json` :
 ```json
 {
   "mcpServers": {
-    "wezas-africa-toolkit": {
-      "command": "uvx",
-      "args": ["wezas-africa-toolkit"]
+    "wezas-africa": {
+      "command": "npx",
+      "args": ["-y", "wezas-africa-toolkit"]
     }
   }
 }
 ```
 
+*(Si vous préférez l'environnement Python avec `uvx`, remplacez `"command": "uvx"` et `"args": ["wezas-africa-toolkit"]`).*
+
 ### 2. Cursor IDE
 Dans **Cursor Settings** > **Features** > **MCP Servers** > **Add New MCP Server** :
-- **Name** : `wezas-africa-toolkit`
+- **Name** : `wezas-africa`
 - **Type** : `command`
-- **Command** : `uvx wezas-africa-toolkit`
+- **Command** : `npx -y wezas-africa-toolkit`
 
 ### 3. Windsurf
 Dans votre fichier `~/.codeium/windsurf/mcp_config.json` :
 ```json
 {
   "mcpServers": {
-    "wezas-africa-toolkit": {
-      "command": "uvx",
-      "args": ["wezas-africa-toolkit"]
+    "wezas-africa": {
+      "command": "npx",
+      "args": ["-y", "wezas-africa-toolkit"]
     }
   }
 }

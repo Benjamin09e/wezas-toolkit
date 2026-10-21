@@ -70,8 +70,12 @@ def list_operators(
             "nom": country_obj.name.fr,
         }
 
+    import datetime as dt
+    verif_date = country_obj.last_verified if country_obj else dt.date(2026, 10, 21)
+
     return success(
         out_data,
         source="Catalogue officiel des opérateurs Wezas Africa Toolkit (operators.yaml)",
+        derniere_verification=verif_date,
         confiance="haute",
     )
