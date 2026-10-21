@@ -1,0 +1,30 @@
+{
+  "name": "@wezas/toolkit",
+  "version": "0.1.0",
+  "description": "Client SDK TypeScript officiel pour Wezas Africa Toolkit (validation téléphone, devises, TVA, pays africains).",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "node --test dist/index.js"
+  },
+  "keywords": [
+    "africa",
+    "toolkit",
+    "mcp",
+    "fintech",
+    "mobile-money",
+    "cfa",
+    "xaf",
+    "xof",
+    "vat",
+    "tva"
+  ],
+  "author": "Benjamin EKIA",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}
