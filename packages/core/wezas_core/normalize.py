@@ -9,6 +9,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 
 from wezas_core.envelope import Envelope, ErrorCode, failure
+from wezas_core.i18n import t
 from wezas_core.loader import get_countries
 from wezas_core.models import Country
 
@@ -54,14 +55,18 @@ def suggest_countries(
     return [f"{iso2} ({pool[iso2].name.fr})" for iso2 in seen[:limit]]
 
 
+def _pair(key: str, **params: object) -> tuple[str, str]:
+    m = t(key, **params)
+    return m.fr, m.en
+
+
 def country_not_found(query: str, countries: Mapping[str, Country] | None = None) -> Envelope:
     """Enveloppe d'erreur PAYS_INCONNU avec suggestions."""
     pool = get_countries() if countries is None else countries
     suggestions = suggest_countries(query, pool)
     return failure(
         ErrorCode.PAYS_INCONNU,
-        f"Pays inconnu ou non pris en charge : « {query} ».",
-        f'Unknown or unsupported country: "{query}".',
+        *_pair("COUNTRY_UNKNOWN", entree=query),
         details={"entree": query, "pays_disponibles": sorted(pool)},
         suggestions=suggestions,
     )

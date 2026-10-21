@@ -11,7 +11,7 @@
 | Epic | Tickets | Avancement |
 |---|---|---|
 | E0 – Cadrage | WAT-001 → 002 | 100 % |
-| E1 – Socle technique | WAT-003 → 008 | 67 % |
+| E1 – Socle technique | WAT-003 → 008 | 100 % |
 | E2 – Données pays | WAT-009 → 012 | 25 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 0 % |
 | E4 – `convertir_devise` | WAT-018 → 022 | 40 % |
@@ -70,13 +70,13 @@
 
 ### WAT-007 – Internationalisation FR/EN
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (catalogue de messages FR/EN dans `i18n.py` ; les noms de pays FR/EN sont dans les fichiers pays)
 - **Description** : Descriptions d'outils et messages bilingues, noms de pays localisés.
 - **Skills** : i18n, rédaction FR/EN.
 
 ### WAT-008 – Logging et télémétrie locale
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (`log.py` : stderr, niveau `WEZAS_LOG_LEVEL`, masquage des numéros)
 - **Description** : Logs sur stderr (jamais stdout en stdio), niveau configurable. Aucune télémétrie réseau.
 - **Skills** : Python logging, protocole stdio MCP.
 

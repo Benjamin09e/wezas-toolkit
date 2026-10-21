@@ -6,6 +6,9 @@ from typing import Any
 
 from fastmcp import FastMCP
 from wezas_core.currency import convert
+from wezas_core.log import get_logger
+
+log = get_logger("tools.currency")
 
 
 def register(mcp: FastMCP) -> None:
@@ -19,4 +22,6 @@ def register(mcp: FastMCP) -> None:
             de: Devise source : XAF, XOF ou EUR. / Source currency.
             vers: Devise cible : XAF, XOF ou EUR. / Target currency.
         """
-        return convert(montant, de, vers).model_dump(mode="json")
+        env = convert(montant, de, vers)
+        log.debug("convertir_devise ok=%s code=%s", env.ok, env.error.code if env.error else None)
+        return env.model_dump(mode="json")

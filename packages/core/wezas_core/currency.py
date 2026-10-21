@@ -7,6 +7,7 @@ from fractions import Fraction
 from typing import Any
 
 from wezas_core.envelope import Envelope, ErrorCode, failure, success
+from wezas_core.i18n import t
 
 # Unités de chaque devise pour 1 EUR (parité fixe, taux exact).
 FIXED_PER_EUR: dict[str, Fraction] = {
@@ -44,6 +45,11 @@ def _fraction_to_decimal(value: Fraction, places: int) -> Decimal:
     return Decimal(q).scaleb(-places)
 
 
+def _pair(key: str, **params: Any) -> tuple[str, str]:
+    m = t(key, **params)
+    return m.fr, m.en
+
+
 def convert(amount: Any, de: str, vers: str) -> Envelope:
     """Convertit `amount` de la devise `de` vers `vers` (XAF, XOF, EUR)."""
     codes: list[str] = []
@@ -52,17 +58,14 @@ def convert(amount: Any, de: str, vers: str) -> Envelope:
         if code in AMBIGUOUS:
             return failure(
                 ErrorCode.DEVISE_NON_SUPPORTEE,
-                f"« {raw} » est ambigu : précisez XAF (Afrique centrale) "
-                "ou XOF (Afrique de l'Ouest).",
-                f'"{raw}" is ambiguous: specify XAF (Central Africa) or XOF (West Africa).',
+                *_pair("CURRENCY_AMBIGUOUS", entree=raw),
                 details={"parametre": label, "entree": raw},
                 suggestions=AMBIGUOUS[code],
             )
         if code not in FIXED_PER_EUR:
             return failure(
                 ErrorCode.DEVISE_NON_SUPPORTEE,
-                f"Devise non prise en charge : « {raw} ». Disponibles : XAF, XOF, EUR.",
-                f'Unsupported currency: "{raw}". Available: XAF, XOF, EUR.',
+                *_pair("CURRENCY_UNSUPPORTED", entree=raw, disponibles="XAF, XOF, EUR"),
                 details={"parametre": label, "entree": raw},
                 suggestions=sorted(FIXED_PER_EUR),
             )
@@ -74,15 +77,13 @@ def convert(amount: Any, de: str, vers: str) -> Envelope:
     except (InvalidOperation, ValueError, TypeError):
         return failure(
             ErrorCode.MONTANT_INVALIDE,
-            f"Montant illisible : « {amount} ».",
-            f'Unreadable amount: "{amount}".',
+            *_pair("AMOUNT_UNREADABLE", entree=amount),
             details={"entree": str(amount)},
         )
     if value < 0 or value > MAX_AMOUNT:
         return failure(
             ErrorCode.MONTANT_INVALIDE,
-            "Le montant doit être compris entre 0 et 10^15.",
-            "The amount must be between 0 and 10^15.",
+            *_pair("AMOUNT_OUT_OF_RANGE"),
             details={"entree": str(amount)},
         )
 

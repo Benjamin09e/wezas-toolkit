@@ -1,6 +1,7 @@
 """Serveur MCP du Wezas Africa Toolkit (transport stdio par défaut)."""
 
 from fastmcp import FastMCP
+from wezas_core.log import configure_logging, get_logger
 
 from wezas_mcp import __version__
 from wezas_mcp.tools import currency as currency_tools
@@ -26,6 +27,8 @@ currency_tools.register(mcp)
 
 def main() -> None:
     """Point d'entrée : démarre le serveur en stdio."""
+    configure_logging()
+    get_logger("server").info("démarrage du serveur wezas-africa-toolkit %s", __version__)
     mcp.run()
 
 
