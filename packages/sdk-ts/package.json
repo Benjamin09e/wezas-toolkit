@@ -1,6 +1,6 @@
 {
-  "name": "@wezas/toolkit",
-  "version": "0.1.0",
+  "name": "wezas-africa-toolkit",
+  "version": "0.1.1",
   "description": "Client SDK TypeScript officiel pour Wezas Africa Toolkit (validation téléphone, devises, TVA, pays africains).",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
