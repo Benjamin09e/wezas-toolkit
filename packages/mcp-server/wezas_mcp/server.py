@@ -3,6 +3,7 @@
 from fastmcp import FastMCP
 
 from wezas_mcp import __version__
+from wezas_mcp.tools import currency as currency_tools
 
 mcp = FastMCP(
     name="wezas-africa-toolkit",
@@ -18,6 +19,9 @@ mcp = FastMCP(
 def ping() -> dict[str, str]:
     """Vérifie que le serveur répond. / Health check returning the server version."""
     return {"status": "ok", "version": __version__}
+
+
+currency_tools.register(mcp)
 
 
 def main() -> None:

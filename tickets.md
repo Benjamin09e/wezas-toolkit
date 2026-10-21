@@ -14,7 +14,7 @@
 | E1 – Socle technique | WAT-003 → 008 | 67 % |
 | E2 – Données pays | WAT-009 → 012 | 25 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 0 % |
-| E4 – `convertir_devise` | WAT-018 → 022 | 0 % |
+| E4 – `convertir_devise` | WAT-018 → 022 | 40 % |
 | E5 – `info_pays` | WAT-023 → 027 | 0 % |
 | E6 – Qualité & CI | WAT-028 → 031 | 0 % |
 | E7 – Contribution communautaire | WAT-032 → 035 | 0 % |
@@ -148,7 +148,7 @@
 
 ### WAT-018 – Conversion à parité fixe XAF/XOF/EUR
 - **Priorité / Taille** : P0 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé
 - **Description** : Parité 1 EUR = 655,957 XAF/XOF, calcul exact avec `Decimal`. XAF↔XOF à 1:1.
 - **Skills** : Python `decimal`, finance de base, zone franc CFA.
 
@@ -166,13 +166,13 @@
 
 ### WAT-021 – Arrondi et formatage
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : En cours (arrondi 0/2 décimales et validation des montants faits ; reste à documenter le mode d'arrondi)
 - **Description** : Pas de décimales pour XAF/XOF, 2 pour EUR/USD, arrondi bancaire ou commercial documenté, validation des montants (négatifs, NaN, énormes).
 - **Skills** : `decimal`, tests de cas limites.
 
 ### WAT-022 – Enregistrement de l'outil MCP et docs
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : En cours (outil enregistré, docs à écrire ; USD en attente de WAT-019)
 - **Description** : Exposer l'outil, documenter limites et précision.
 - **Skills** : FastMCP, rédaction technique.
 
