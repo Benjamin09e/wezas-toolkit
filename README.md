@@ -7,6 +7,7 @@
     <a href="https://github.com/Benjamin09e/wezas-toolkit/actions/workflows/ci.yml"><img src="https://github.com/Benjamin09e/wezas-toolkit/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License MIT"></a>
     <a href="https://pypi.org/project/wezas-africa-toolkit/"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg" alt="Python Versions"></a>
+    <a href="https://smithery.ai/server/wezas-africa-toolkit"><img src="https://smithery.ai/badge/wezas-africa-toolkit" alt="Smithery Badge"></a>
   </p>
 </div>
 
@@ -25,11 +26,21 @@ Dans des projets comme **MedRDV**, **StockR** ou **Gabozon**, nous retrouvons sy
 
 ## ⚡ Installation rapide
 
-Vous pouvez lancer le serveur MCP sans rien installer au préalable grâce à `uvx` :
-
+### Option A : En local via `uvx` (Sans installation préalable)
 ```bash
 uvx wezas-africa-toolkit
 ```
+
+### Option B : Installation en 1 clic via Smithery
+Pour installer automatiquement le serveur sur Claude Desktop :
+```bash
+npx -y @smithery/cli install wezas-africa-toolkit --client claude
+```
+
+### Option C : Connexion distante via Server-Sent Events (SSE)
+Vous pouvez également connecter vos agents directement au serveur hébergé sur Render sans rien exécuter en local :
+- **URL SSE** : `https://wezas-backend.onrender.com/sse`
+- **Méthode** : `sse`
 
 ---
 

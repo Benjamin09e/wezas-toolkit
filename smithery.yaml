@@ -1,0 +1,6 @@
+startCommand:
+  type: stdio
+  config:
+    command: uvx
+    args:
+      - wezas-africa-toolkit

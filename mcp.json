@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "wezas-africa-toolkit",
+  "description": "Boîte à outils hors ligne et serveur MCP pour développeurs en Afrique : validation télécom, opérateurs & Mobile Money (M-Pesa, Wave, MoMo), parités de devises (XAF, XOF, NGN, KES), calcul de TVA et jours fériés légaux.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Benjamin EKIA",
+    "url": "https://github.com/Benjamin09e"
+  },
+  "homepage": "https://github.com/Benjamin09e/wezas-toolkit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Benjamin09e/wezas-toolkit.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "africa",
+    "fintech",
+    "mobile-money",
+    "mpesa",
+    "wave",
+    "orange-money",
+    "momo",
+    "cfa",
+    "xaf",
+    "xof",
+    "naira",
+    "cedi",
+    "shilling",
+    "vat",
+    "offline"
+  ],
+  "runtime": "python",
+  "entrypoint": {
+    "type": "stdio",
+    "command": "uvx",
+    "args": ["wezas-africa-toolkit"]
+  },
+  "remote": {
+    "type": "sse",
+    "url": "https://wezas-backend.onrender.com/sse"
+  },
+  "tools": [
+    {
+      "name": "valider_telephone",
+      "description": "Valide et normalise un numéro de téléphone africain (E.164, national), détecte l'opérateur GSM et sa compatibilité Mobile Money."
+    },
+    {
+      "name": "convertir_devise",
+      "description": "Convertit un montant entre devises (XAF, XOF, EUR, USD) avec parité fixe garantie hors ligne ou taux personnalisé."
+    },
+    {
+      "name": "info_pays",
+      "description": "Fournit l'indicatif téléphonique, la devise, les fuseaux horaires, les langues et le calendrier des jours fériés légaux d'un pays africain."
+    },
+    {
+      "name": "formater_montant",
+      "description": "Formate un montant numérique selon les règles monétaires locales africaines (séparateurs, symbole, décimales)."
+    },
+    {
+      "name": "calculer_tva",
+      "description": "Calcule la TVA (modes HT vers TTC ou TTC vers HT) selon les taux officiels de la Direction Générale des Impôts du pays."
+    },
+    {
+      "name": "lister_operateurs",
+      "description": "Catalogue des opérateurs de téléphonie mobile et services Mobile Money par pays (MoMo, Wave, M-Pesa, Airtel Money)."
+    }
+  ]
+}
