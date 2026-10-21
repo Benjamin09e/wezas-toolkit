@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wezas-africa-toolkit"
+version = "0.1.0.dev0"
+description = "Serveur MCP pour builders africains : téléphone, devises, infos pays (hors ligne, sans clé)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = ["wezas-core", "fastmcp>=2"]
+
+[project.scripts]
+wezas-africa-toolkit = "wezas_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["wezas_mcp"]

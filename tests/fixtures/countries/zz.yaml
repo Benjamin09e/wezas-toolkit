@@ -1,0 +1,27 @@
+# FICTIF : données de test uniquement, ne pas utiliser comme référence.
+iso2: ZZ
+iso3: ZZZ
+name: {fr: Zedland, en: Zedland}
+capital: Zed City
+dial_code: "+999"
+currency: XAF
+languages: [fr]
+timezones: [Africa/Libreville]
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - {type: mobile, prefixes: ["6", "7"], operator: test-op}
+    - {type: fixed, prefixes: ["1"]}
+mobile_money: [test-money]
+holidays:
+  fixed:
+    - {date: "01-01", name: {fr: Jour de l'an, en: New Year's Day}}
+  easter_based:
+    - {offset_days: 1, name: {fr: Lundi de Pâques, en: Easter Monday}}
+  islamic:
+    2026:
+      - {date: 2026-03-20, name: {fr: Aïd el-Fitr, en: Eid al-Fitr}}
+sources:
+  - {label: Source de test}
+last_verified: 2026-10-21

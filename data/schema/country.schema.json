@@ -1,0 +1,319 @@
+{
+  "$defs": {
+    "EasterBasedHoliday": {
+      "additionalProperties": false,
+      "description": "Fête mobile calculée à partir de Pâques (ex. Lundi de Pâques = +1).",
+      "properties": {
+        "offset_days": {
+          "maximum": 100,
+          "minimum": -60,
+          "title": "Offset Days",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/$defs/LocalizedName"
+        }
+      },
+      "required": [
+        "offset_days",
+        "name"
+      ],
+      "title": "EasterBasedHoliday",
+      "type": "object"
+    },
+    "FixedHoliday": {
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "description": "MM-JJ",
+          "pattern": "^(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+          "title": "Date",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/LocalizedName"
+        }
+      },
+      "required": [
+        "date",
+        "name"
+      ],
+      "title": "FixedHoliday",
+      "type": "object"
+    },
+    "Holidays": {
+      "additionalProperties": false,
+      "properties": {
+        "fixed": {
+          "items": {
+            "$ref": "#/$defs/FixedHoliday"
+          },
+          "title": "Fixed",
+          "type": "array"
+        },
+        "easter_based": {
+          "items": {
+            "$ref": "#/$defs/EasterBasedHoliday"
+          },
+          "title": "Easter Based",
+          "type": "array"
+        },
+        "islamic": {
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/$defs/IslamicHoliday"
+            },
+            "type": "array"
+          },
+          "title": "Islamic",
+          "type": "object"
+        }
+      },
+      "title": "Holidays",
+      "type": "object"
+    },
+    "IslamicHoliday": {
+      "additionalProperties": false,
+      "description": "Fête musulmane : date stockée par année (dépend de l'observation lunaire).",
+      "properties": {
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/LocalizedName"
+        }
+      },
+      "required": [
+        "date",
+        "name"
+      ],
+      "title": "IslamicHoliday",
+      "type": "object"
+    },
+    "LocalizedName": {
+      "additionalProperties": false,
+      "properties": {
+        "fr": {
+          "minLength": 1,
+          "title": "Fr",
+          "type": "string"
+        },
+        "en": {
+          "minLength": 1,
+          "title": "En",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fr",
+        "en"
+      ],
+      "title": "LocalizedName",
+      "type": "object"
+    },
+    "NumberRange": {
+      "additionalProperties": false,
+      "description": "Plage de numéros nationaux (sans indicatif ni préfixe de ligne).",
+      "properties": {
+        "type": {
+          "enum": [
+            "mobile",
+            "fixed"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "prefixes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Prefixes",
+          "type": "array"
+        },
+        "operator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Identifiant dans operators.yaml",
+          "title": "Operator"
+        }
+      },
+      "required": [
+        "type",
+        "prefixes"
+      ],
+      "title": "NumberRange",
+      "type": "object"
+    },
+    "NumberingPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "national_length": {
+          "description": "Nombre de chiffres du numéro national",
+          "maximum": 12,
+          "minimum": 4,
+          "title": "National Length",
+          "type": "integer"
+        },
+        "trunk_prefix": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{1,2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trunk Prefix"
+        },
+        "ranges": {
+          "items": {
+            "$ref": "#/$defs/NumberRange"
+          },
+          "minItems": 1,
+          "title": "Ranges",
+          "type": "array"
+        }
+      },
+      "required": [
+        "national_length",
+        "ranges"
+      ],
+      "title": "NumberingPlan",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "iso2": {
+      "pattern": "^[A-Z]{2}$",
+      "title": "Iso2",
+      "type": "string"
+    },
+    "iso3": {
+      "pattern": "^[A-Z]{3}$",
+      "title": "Iso3",
+      "type": "string"
+    },
+    "name": {
+      "$ref": "#/$defs/LocalizedName"
+    },
+    "capital": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Capital"
+    },
+    "dial_code": {
+      "pattern": "^\\+\\d{1,3}$",
+      "title": "Dial Code",
+      "type": "string"
+    },
+    "currency": {
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string"
+    },
+    "languages": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Languages",
+      "type": "array"
+    },
+    "timezones": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Timezones",
+      "type": "array"
+    },
+    "numbering_plan": {
+      "$ref": "#/$defs/NumberingPlan"
+    },
+    "mobile_money": {
+      "description": "Identifiants de services",
+      "items": {
+        "type": "string"
+      },
+      "title": "Mobile Money",
+      "type": "array"
+    },
+    "holidays": {
+      "$ref": "#/$defs/Holidays"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "last_verified": {
+      "format": "date",
+      "title": "Last Verified",
+      "type": "string"
+    }
+  },
+  "required": [
+    "iso2",
+    "iso3",
+    "name",
+    "dial_code",
+    "currency",
+    "languages",
+    "timezones",
+    "numbering_plan",
+    "sources",
+    "last_verified"
+  ],
+  "title": "Country",
+  "type": "object"
+}
