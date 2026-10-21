@@ -45,6 +45,16 @@ MESSAGES: dict[str, tuple[str, str]] = {
         "Islamic holidays for the requested year are not tabulated yet "
         "(depend on lunar observations).",
     ),
+    "CURRENCY_RATE_OUTDATED": (
+        "Le taux de change indicatif hors ligne pour {devise} date du {date} "
+        "(utilisez le paramètre 'taux' pour spécifier un taux récent).",
+        "The offline indicative exchange rate for {devise} is from {date} "
+        "(use the 'taux' parameter to supply a fresh rate).",
+    ),
+    "RATE_INVALID": (
+        "Le taux personnalisé doit être un nombre strictement positif.",
+        "The custom exchange rate must be a strictly positive number.",
+    ),
 }
 
 

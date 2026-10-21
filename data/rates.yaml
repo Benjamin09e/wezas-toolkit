@@ -1,0 +1,9 @@
+# Taux de change indicatifs pour devises flottantes (hors ligne)
+# Wezas Africa Toolkit - WAT-019
+
+rates:
+  USD:
+    # 1 EUR en USD (taux de référence BCE indicatif)
+    per_eur: 1.0850
+    date: "2026-10-21"
+    source: "Banque Centrale Européenne (BCE) - Taux de référence indicatif hors ligne"

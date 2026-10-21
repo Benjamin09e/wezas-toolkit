@@ -14,7 +14,7 @@
 | E1 – Socle technique | WAT-003 → 008 | 100 % |
 | E2 – Données pays | WAT-009 → 012 | 100 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 100 % |
-| E4 – `convertir_devise` | WAT-018 → 022 | 40 % |
+| E4 – `convertir_devise` | WAT-018 → 022 | 100 % |
 | E5 – `info_pays` | WAT-023 → 027 | 100 % |
 | E6 – Qualité & CI | WAT-028 → 031 | 0 % |
 | E7 – Contribution communautaire | WAT-032 → 035 | 0 % |
@@ -154,25 +154,25 @@
 
 ### WAT-019 – Gestion USD avec taux de repli daté
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (data/rates.yaml + repli indicatif daté + avertissement)
 - **Description** : Fichier `data/rates.yaml` avec taux USD/EUR, date et source. Retourner `date_taux` et avertissement de péremption au-delà d'un seuil (ex. 30 jours).
 - **Skills** : finance, modélisation de données.
 
 ### WAT-020 – Taux personnalisé optionnel
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (paramètre 'taux' validé avec surchage)
 - **Description** : Paramètre `taux` pour surcharger le taux USD ; validation et traçabilité dans la réponse.
 - **Skills** : conception d'API, validation d'entrées.
 
 ### WAT-021 – Arrondi et formatage
 - **Priorité / Taille** : P1 / S
-- **Avancement** : En cours (arrondi 0/2 décimales et validation des montants faits ; reste à documenter le mode d'arrondi)
+- **Avancement** : Terminé (arrondi 0 décimale XAF/XOF, 2 décimales EUR/USD, max 10^15)
 - **Description** : Pas de décimales pour XAF/XOF, 2 pour EUR/USD, arrondi bancaire ou commercial documenté, validation des montants (négatifs, NaN, énormes).
 - **Skills** : `decimal`, tests de cas limites.
 
 ### WAT-022 – Enregistrement de l'outil MCP et docs
 - **Priorité / Taille** : P1 / S
-- **Avancement** : En cours (outil enregistré, docs à écrire ; USD en attente de WAT-019)
+- **Avancement** : Terminé (outil MCP convertir_devise enregistré avec doc bilingue)
 - **Description** : Exposer l'outil, documenter limites et précision.
 - **Skills** : FastMCP, rédaction technique.
 
