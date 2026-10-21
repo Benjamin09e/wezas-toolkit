@@ -5,6 +5,7 @@ from wezas_core.log import configure_logging, get_logger
 
 from wezas_mcp import __version__
 from wezas_mcp.tools import currency as currency_tools
+from wezas_mcp.tools import phone as phone_tools
 
 mcp = FastMCP(
     name="wezas-africa-toolkit",
@@ -23,6 +24,7 @@ def ping() -> dict[str, str]:
 
 
 currency_tools.register(mcp)
+phone_tools.register(mcp)
 
 
 def main() -> None:

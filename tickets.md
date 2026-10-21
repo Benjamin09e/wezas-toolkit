@@ -13,7 +13,7 @@
 | E0 – Cadrage | WAT-001 → 002 | 100 % |
 | E1 – Socle technique | WAT-003 → 008 | 100 % |
 | E2 – Données pays | WAT-009 → 012 | 100 % |
-| E3 – `valider_telephone` | WAT-013 → 017 | 0 % |
+| E3 – `valider_telephone` | WAT-013 → 017 | 100 % |
 | E4 – `convertir_devise` | WAT-018 → 022 | 40 % |
 | E5 – `info_pays` | WAT-023 → 027 | 0 % |
 | E6 – Qualité & CI | WAT-028 → 031 | 0 % |
@@ -114,31 +114,31 @@
 
 ### WAT-013 – Parsing et format international
 - **Priorité / Taille** : P0 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (E.164, local, nettoyage, trunk)
 - **Description** : Accepter formats locaux/internationaux (`+241…`, `00241…`, `06…`), retourner E.164, format national, format lisible. Gérer le zéro de tête et les anciens formats.
 - **Skills** : E.164, regex, Python, éventuelle comparaison avec `phonenumbers`.
 
 ### WAT-014 – Validation de longueur et préfixes
 - **Priorité / Taille** : P0 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (validation longueur et préfixes)
 - **Description** : Valider selon le plan du pays, distinguer mobile/fixe, renvoyer la raison précise de l'invalidité.
 - **Skills** : plans de numérotation, TDD.
 
 ### WAT-015 – Détection probable de l'opérateur
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (détection opérateur avec avertissement portabilité)
 - **Description** : Retourner `operateur_probable` avec `confiance` (haute/moyenne/faible) et avertissement sur la portabilité.
 - **Skills** : télécoms, conception de heuristiques.
 
 ### WAT-016 – Compatibilité Mobile Money
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (compatibilité Mobile Money)
 - **Description** : Lister les services Mobile Money probablement compatibles, marqués indicatifs.
 - **Skills** : fintech/Mobile Money, modélisation.
 
 ### WAT-017 – Enregistrement de l'outil MCP et docs
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (outil MCP valider_telephone enregistré et testé)
 - **Description** : Exposer l'outil avec description bilingue, exemples d'appel et de réponse dans la doc.
 - **Skills** : FastMCP, rédaction technique.
 

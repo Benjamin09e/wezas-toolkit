@@ -33,6 +33,12 @@ MESSAGES: dict[str, tuple[str, str]] = {
         "Pays inconnu ou non pris en charge : « {entree} ».",
         'Unknown or unsupported country: "{entree}".',
     ),
+    "PHONE_PORTABILITY": (
+        "L'opérateur et la compatibilité Mobile Money sont probables "
+        "mais peuvent différer en cas de portabilité.",
+        "Operator and Mobile Money compatibility are probable "
+        "but may differ in case of portability.",
+    ),
 }
 
 
