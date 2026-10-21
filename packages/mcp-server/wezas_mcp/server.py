@@ -37,10 +37,19 @@ operators_tools.register(mcp)
 
 
 def main() -> None:
-    """Point d'entrée : démarre le serveur en stdio."""
+    """Point d'entrée CLI / Docker."""
+    import os
     configure_logging()
     get_logger("server").info("démarrage du serveur wezas-africa-toolkit %s", __version__)
-    mcp.run()
+    
+    # Si la variable PORT est définie (ex: Render, Cloud Run, Heroku), démarrer en HTTP SSE
+    port = os.environ.get("PORT")
+    transport = os.environ.get("MCP_TRANSPORT")
+    if port or transport == "sse":
+        port_num = int(port) if port else 8000
+        mcp.run(transport="sse", host="0.0.0.0", port=port_num)
+    else:
+        mcp.run()
 
 
 if __name__ == "__main__":
