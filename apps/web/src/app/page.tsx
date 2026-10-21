@@ -19,6 +19,7 @@ import {
 import { SUPPORTED_COUNTRIES } from "@/data/countries";
 import { VisualResultCard } from "@/components/VisualResultCard";
 import { SnippetGenerator } from "@/components/SnippetGenerator";
+import { InstallationSection } from "@/components/InstallationSection";
 
 interface ToolConfig {
   id: string;
@@ -172,14 +173,18 @@ export default function Home() {
           <div className="flex items-center space-x-4 text-sm text-slate-400">
             <span className="flex items-center gap-1.5 text-emerald-400 text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              12 Pays Couverts (Zone Franc XAF/XOF)
+              15 Pays Couverts (Zone Franc, NG, GH, KE)
             </span>
           </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto p-6">
+        {/* Section d'Installation NPM / Python / MCP */}
+        <InstallationSection />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Colonne Gauche : Sélection des Outils */}
         <div className="lg:col-span-4 space-y-3">
           <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1 mb-2">
@@ -459,6 +464,7 @@ export default function Home() {
               </div>
               <SnippetGenerator toolId={selectedTool.id} args={currentArgs} />
             </div>
+          </div>
           </div>
         </div>
       </main>
