@@ -24,6 +24,24 @@ CURRENCY_INFO: dict[str, dict[str, str]] = {
         "symbole": "FCFA",
         "banque_centrale": "Banque Centrale des États de l'Afrique de l'Ouest",
     },
+    "NGN": {
+        "code": "NGN",
+        "nom": "Naira nigérian",
+        "symbole": "₦",
+        "banque_centrale": "Central Bank of Nigeria",
+    },
+    "GHS": {
+        "code": "GHS",
+        "nom": "Cedi ghanéen",
+        "symbole": "GH₵",
+        "banque_centrale": "Bank of Ghana",
+    },
+    "KES": {
+        "code": "KES",
+        "nom": "Shilling kényan",
+        "symbole": "KSh",
+        "banque_centrale": "Central Bank of Kenya",
+    },
 }
 
 

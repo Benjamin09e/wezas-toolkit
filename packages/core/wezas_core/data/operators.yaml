@@ -163,3 +163,49 @@ operators:
     nom: "Telecel Faso"
     pays: ["BF"]
     mobile_money: []
+
+  # --- NIGERIA (NG) ---
+  mtn-ng:
+    nom: "MTN Nigeria"
+    pays: ["NG"]
+    mobile_money: ["MoMo PSB", "OPay", "PalmPay"]
+  airtel-ng:
+    nom: "Airtel Nigeria"
+    pays: ["NG"]
+    mobile_money: ["Smartcash PSB", "OPay", "PalmPay"]
+  glo-ng:
+    nom: "Globacom (Glo)"
+    pays: ["NG"]
+    mobile_money: ["MoneyMaster PSB", "OPay"]
+  9mobile-ng:
+    nom: "9mobile"
+    pays: ["NG"]
+    mobile_money: ["9PSB", "PalmPay"]
+
+  # --- GHANA (GH) ---
+  mtn-gh:
+    nom: "MTN Ghana"
+    pays: ["GH"]
+    mobile_money: ["MTN MoMo"]
+  telecel-gh:
+    nom: "Telecel Ghana (ex-Vodafone)"
+    pays: ["GH"]
+    mobile_money: ["Telecel Cash"]
+  at-gh:
+    nom: "AT Ghana (AirtelTigo)"
+    pays: ["GH"]
+    mobile_money: ["AT Money"]
+
+  # --- KENYA (KE) ---
+  safaricom-ke:
+    nom: "Safaricom"
+    pays: ["KE"]
+    mobile_money: ["M-Pesa"]
+  airtel-ke:
+    nom: "Airtel Kenya"
+    pays: ["KE"]
+    mobile_money: ["Airtel Money"]
+  telkom-ke:
+    nom: "Telkom Kenya"
+    pays: ["KE"]
+    mobile_money: ["T-Kash"]

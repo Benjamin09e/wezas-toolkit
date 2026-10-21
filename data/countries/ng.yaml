@@ -1,0 +1,70 @@
+iso2: NG
+iso3: NGA
+name:
+  fr: Nigeria
+  en: Nigeria
+capital: Abuja
+dial_code: "+234"
+currency: NGN
+languages:
+  - en
+  - ha
+  - yo
+  - ig
+timezones:
+  - Africa/Lagos
+numbering_plan:
+  national_length: 10
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["803", "806", "813", "816", "810", "814", "903", "906", "703", "706", "704", "702"]
+      operator: mtn-ng
+    - type: mobile
+      prefixes: ["802", "808", "812", "701", "708", "902", "904", "907", "901"]
+      operator: airtel-ng
+    - type: mobile
+      prefixes: ["805", "807", "815", "811", "705", "905"]
+      operator: glo-ng
+    - type: mobile
+      prefixes: ["809", "817", "818", "909", "908"]
+      operator: 9mobile-ng
+    - type: fixed
+      prefixes: ["1", "2"]
+mobile_money:
+  - "MoMo PSB"
+  - "Smartcash PSB"
+  - "OPay"
+  - "PalmPay"
+  - "Moniepoint"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Workers' Day"}
+    - date: "06-12"
+      name: {fr: "Jour de la Démocratie", en: "Democracy Day"}
+    - date: "10-01"
+      name: {fr: "Fête Nationale (Indépendance)", en: "Independence Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Boxing Day", en: "Boxing Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha (Tabaski)", en: "Eid al-Kabir"}
+      - date: 2026-08-26
+        name: {fr: "Mawlid", en: "Mawlid"}
+sources:
+  - label: "NCC Nigeria National Numbering Plan"
+    url: "https://www.ncc.gov.ng/"
+last_verified: 2026-10-21

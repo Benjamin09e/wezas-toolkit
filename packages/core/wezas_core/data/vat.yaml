@@ -66,3 +66,20 @@ vat_rates:
     reduit: 0.00
     nom_local: "TVA"
     source: "Direction Générale des Impôts du Burkina Faso - CGI (18%)"
+
+  # --- Géants Anglophones (Big 4) ---
+  NG:
+    standard: 0.075  # 7.5% au Nigeria
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "Federal Inland Revenue Service (FIRS) - Value Added Tax Act (7.5%)"
+  GH:
+    standard: 0.15   # 15% standard VAT + levies (NHIL/GETFund/COVID)
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "Ghana Revenue Authority (GRA) - Value Added Tax Act (15%)"
+  KE:
+    standard: 0.16   # 16% standard VAT au Kenya
+    reduit: 0.08     # 8% sur les produits pétroliers
+    nom_local: "VAT"
+    source: "Kenya Revenue Authority (KRA) - Value Added Tax Act (16%)"

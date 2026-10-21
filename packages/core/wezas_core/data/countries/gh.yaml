@@ -1,0 +1,67 @@
+iso2: GH
+iso3: GHA
+name:
+  fr: Ghana
+  en: Ghana
+capital: Accra
+dial_code: "+233"
+currency: GHS
+languages:
+  - en
+  - tw
+timezones:
+  - Africa/Accra
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["24", "54", "55", "59"]
+      operator: mtn-gh
+    - type: mobile
+      prefixes: ["20", "50"]
+      operator: telecel-gh
+    - type: mobile
+      prefixes: ["27", "57", "26", "56"]
+      operator: at-gh
+    - type: fixed
+      prefixes: ["30", "31", "32"]
+mobile_money:
+  - "MTN MoMo"
+  - "Telecel Cash"
+  - "AT Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-07"
+      name: {fr: "Jour de la Constitution", en: "Constitution Day"}
+    - date: "03-06"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "May Day"}
+    - date: "08-04"
+      name: {fr: "Jour des Fondateurs", en: "Founders' Day"}
+    - date: "09-21"
+      name: {fr: "Jour commémoratif de Kwame Nkrumah", en: "Kwame Nkrumah Memorial Day"}
+    - date: "12-04"
+      name: {fr: "Journée des Agriculteurs", en: "Farmer's Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Boxing Day", en: "Boxing Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+sources:
+  - label: "NCA Ghana National Numbering Plan"
+    url: "https://nca.org.gh/"
+last_verified: 2026-10-21

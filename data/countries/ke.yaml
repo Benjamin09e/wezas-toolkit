@@ -1,0 +1,65 @@
+iso2: KE
+iso3: KEN
+name:
+  fr: Kenya
+  en: Kenya
+capital: Nairobi
+dial_code: "+254"
+currency: KES
+languages:
+  - en
+  - sw
+timezones:
+  - Africa/Nairobi
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["70", "71", "72", "79", "11"]
+      operator: safaricom-ke
+    - type: mobile
+      prefixes: ["73", "75", "78", "10"]
+      operator: airtel-ke
+    - type: mobile
+      prefixes: ["77"]
+      operator: telkom-ke
+    - type: fixed
+      prefixes: ["20", "41", "51"]
+mobile_money:
+  - "M-Pesa"
+  - "Airtel Money"
+  - "T-Kash"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "06-01"
+      name: {fr: "Madaraka Day", en: "Madaraka Day"}
+    - date: "10-10"
+      name: {fr: "Mazingira Day", en: "Mazingira Day"}
+    - date: "10-20"
+      name: {fr: "Mashujaa Day (Jour des Héros)", en: "Mashujaa Day"}
+    - date: "12-12"
+      name: {fr: "Jamhuri Day (Fête de la République)", en: "Jamhuri Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Boxing Day (Utamaduni Day)", en: "Boxing Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+sources:
+  - label: "Communications Authority of Kenya (CAK) Numbering Plan"
+    url: "https://ca.go.ke/"
+last_verified: 2026-10-21

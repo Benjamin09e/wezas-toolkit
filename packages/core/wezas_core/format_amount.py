@@ -39,6 +39,27 @@ DEFAULT_CURRENCY_CONFIG: dict[str, dict[str, Any]] = {
         "separateur_milliers": ",",
         "separateur_decimal": ".",
     },
+    "NGN": {
+        "symbole": "₦",
+        "position": "avant",
+        "decimales": 2,
+        "separateur_milliers": ",",
+        "separateur_decimal": ".",
+    },
+    "GHS": {
+        "symbole": "GH₵",
+        "position": "avant",
+        "decimales": 2,
+        "separateur_milliers": ",",
+        "separateur_decimal": ".",
+    },
+    "KES": {
+        "symbole": "KSh",
+        "position": "avant",
+        "decimales": 2,
+        "separateur_milliers": ",",
+        "separateur_decimal": ".",
+    },
 }
 
 SUPPORTED_CURRENCIES = list(DEFAULT_CURRENCY_CONFIG.keys())
