@@ -16,7 +16,7 @@
 | E3 – `valider_telephone` | WAT-013 → 017 | 100 % |
 | E4 – `convertir_devise` | WAT-018 → 022 | 100 % |
 | E5 – `info_pays` | WAT-023 → 027 | 100 % |
-| E6 – Qualité & CI | WAT-028 → 031 | 0 % |
+| E6 – Qualité & CI | WAT-028 → 031 | 100 % |
 | E7 – Contribution communautaire | WAT-032 → 035 | 0 % |
 | E8 – Distribution & release | WAT-036 → 039 | 0 % |
 | E9 – Outils bonus | WAT-040 → 042 | 0 % |
@@ -216,25 +216,25 @@
 
 ### WAT-028 – Tests unitaires et jeux de cas réels
 - **Priorité / Taille** : P0 / L
-- **Avancement** : À faire
+- **Avancement** : Terminé (127 tests unitaires, 97% de couverture de code)
 - **Description** : pytest, cas valides/invalides par pays, cas limites, couverture ≥ 90 % sur la logique.
 - **Skills** : pytest, TDD, connaissance du domaine.
 
 ### WAT-029 – CI GitHub Actions
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (.github/workflows/ci.yml avec matrice Python 3.10-3.13, ruff, mypy)
 - **Description** : Lint (ruff), typage (mypy), tests, matrice Python 3.10-3.13.
 - **Skills** : GitHub Actions, ruff, mypy.
 
 ### WAT-030 – Validation CI des fichiers de données
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (scripts/validate_data.py exécuté en CI)
 - **Description** : Job qui valide chaque fichier pays contre le schéma, vérifie `sources` non vide et `derniere_verification` présent.
 - **Skills** : JSON Schema, CI.
 
 ### WAT-031 – Tests d'intégration MCP
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (tests/test_mcp_integration.py avec transport stdio réel)
 - **Description** : Tests via client MCP (stdio) vérifiant listing et appels des 3 outils, et garantie d'absence d'accès réseau.
 - **Skills** : protocole MCP, tests d'intégration.
 
