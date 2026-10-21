@@ -21,6 +21,9 @@ def test_mcp_stdio_real_session():
             assert "valider_telephone" in names
             assert "convertir_devise" in names
             assert "info_pays" in names
+            assert "formater_montant" in names
+            assert "calculer_tva" in names
+            assert "lister_operateurs" in names
 
             # 2. Appel de validation de téléphone
             res_phone = await client.call_tool(

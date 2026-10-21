@@ -1,0 +1,68 @@
+# Taux de TVA standard et taux réduits par pays africain
+# Wezas Africa Toolkit - WAT-041
+
+vat_rates:
+  # --- Zone XAF (Afrique Centrale) ---
+  GA:
+    standard: 0.18
+    reduit: 0.10
+    super_reduit: 0.00
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts du Gabon (DGI) - Code Général des Impôts (18%)"
+  CM:
+    standard: 0.1925  # 17.5% + 10% centimes additionnels communaux = 19.25%
+    reduit: 0.00
+    nom_local: "TVA (avec CAC)"
+    source: "Direction Générale des Impôts du Cameroun - CGI art. 142 (17,5% + 10% CAC = 19,25%)"
+  CG:
+    standard: 0.189   # 18% + 5% centimes additionnels = 18.9%
+    reduit: 0.05
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts et des Domaines du Congo"
+  TD:
+    standard: 0.18
+    reduit: 0.09
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts du Tchad - CGI (18%)"
+  CF:
+    standard: 0.19
+    reduit: 0.00
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts de Centrafrique - CGI (19%)"
+  GQ:
+    standard: 0.15
+    reduit: 0.06
+    nom_local: "IVA"
+    source: "Ministerio de Hacienda de Guinea Ecuatorial - Ley Tributaria (15%)"
+
+  # --- Zone XOF (Afrique de l'Ouest) ---
+  SN:
+    standard: 0.18
+    reduit: 0.10
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts et des Domaines du Sénégal - CGI (18%)"
+  CI:
+    standard: 0.18
+    reduit: 0.09
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts de Côte d'Ivoire - CGI (18%)"
+  ML:
+    standard: 0.18
+    reduit: 0.05
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts du Mali - CGI (18%)"
+  BJ:
+    standard: 0.18
+    reduit: 0.00
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts du Bénin - CGI (18%)"
+  TG:
+    standard: 0.18
+    reduit: 0.00
+    nom_local: "TVA"
+    source: "Office Togolais des Recettes (OTR) - Code Général des Impôts (18%)"
+  BF:
+    standard: 0.18
+    reduit: 0.00
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts du Burkina Faso - CGI (18%)"

@@ -6,14 +6,18 @@ from wezas_core.log import configure_logging, get_logger
 from wezas_mcp import __version__
 from wezas_mcp.tools import country as country_tools
 from wezas_mcp.tools import currency as currency_tools
+from wezas_mcp.tools import format_amount as format_amount_tools
+from wezas_mcp.tools import operators as operators_tools
 from wezas_mcp.tools import phone as phone_tools
+from wezas_mcp.tools import vat as vat_tools
 
 mcp = FastMCP(
     name="wezas-africa-toolkit",
     version=__version__,
     instructions=(
         "Outils hors ligne pour builders africains : validation de téléphone, "
-        "conversion de devises, infos pays. / Offline tools for African builders."
+        "conversion de devises, infos pays, formatage de devises, calcul de TVA, "
+        "liste des opérateurs télécoms & mobile money. / Offline tools for African builders."
     ),
 )
 
@@ -27,6 +31,9 @@ def ping() -> dict[str, str]:
 currency_tools.register(mcp)
 phone_tools.register(mcp)
 country_tools.register(mcp)
+format_amount_tools.register(mcp)
+vat_tools.register(mcp)
+operators_tools.register(mcp)
 
 
 def main() -> None:

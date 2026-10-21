@@ -19,7 +19,7 @@
 | E6 – Qualité & CI | WAT-028 → 031 | 100 % |
 | E7 – Contribution communautaire | WAT-032 → 035 | 100 % |
 | E8 – Distribution & release | WAT-036 → 039 | 100 % |
-| E9 – Outils bonus | WAT-040 → 042 | 0 % |
+| E9 – Outils bonus | WAT-040 → 042 | 100 % |
 | E10 – Volet 2 (en ligne) | WAT-043 → 045 | 0 % |
 
 ---
@@ -300,19 +300,19 @@
 
 ### WAT-040 – `formater_montant`
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé
 - **Description** : Format local (1 000 FCFA), séparateurs et symboles par pays.
 - **Skills** : i18n, formatage.
 
 ### WAT-041 – `calculer_tva`
 - **Priorité / Taille** : P2 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé
 - **Description** : Taux de TVA par pays, calcul HT/TTC, sources fiscales datées.
 - **Skills** : fiscalité africaine, recherche documentaire.
 
 ### WAT-042 – `lister_operateurs`
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé
 - **Description** : Opérateurs et services Mobile Money par pays, réutilisant WAT-012.
 - **Skills** : FastMCP, modélisation de données.
 
