@@ -1,0 +1,54 @@
+iso2: CG
+iso3: COG
+name:
+  fr: Congo
+  en: Republic of the Congo
+capital: Brazzaville
+dial_code: "+242"
+currency: XAF
+languages:
+  - fr
+timezones:
+  - Africa/Brazzaville
+numbering_plan:
+  national_length: 9
+  ranges:
+    - type: mobile
+      prefixes: ["06"]
+      operator: mtn-cg
+    - type: mobile
+      prefixes: ["04", "05"]
+      operator: airtel-cg
+    - type: fixed
+      prefixes: ["22"]
+      operator: congo-telecom-cg
+mobile_money:
+  - "MTN MoMo"
+  - "Airtel Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "06-10"
+      name: {fr: "Fête de la Réconciliation", en: "Reconciliation Day"}
+    - date: "08-15"
+      name: {fr: "Fête Nationale (Indépendance)", en: "Independence Day"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "11-28"
+      name: {fr: "Journée de la République", en: "Republic Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+sources:
+  - label: "ARPCE Congo / Décision PNN 9 chiffres"
+    url: "https://www.arpce.cg"
+last_verified: 2026-10-21

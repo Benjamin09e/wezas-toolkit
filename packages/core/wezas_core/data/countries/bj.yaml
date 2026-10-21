@@ -1,0 +1,65 @@
+iso2: BJ
+iso3: BEN
+name:
+  fr: Bénin
+  en: Benin
+capital: Porto-Novo
+dial_code: "+229"
+currency: XOF
+languages:
+  - fr
+timezones:
+  - Africa/Porto-Novo
+numbering_plan:
+  national_length: 10
+  ranges:
+    - type: mobile
+      prefixes: ["0142", "0146", "0150", "0151", "0152", "0153", "0154", "0156", "0157", "0159", "0161", "0162", "0166", "0167", "0169", "0190", "0191", "0196", "0197"]
+      operator: mtn-bj
+    - type: mobile
+      prefixes: ["0145", "0155", "0158", "0160", "0163", "0164", "0165", "0168", "0194", "0195", "0198", "0199"]
+      operator: moov-bj
+    - type: mobile
+      prefixes: ["0140", "0141", "0143", "0144", "0147"]
+      operator: celtiis-bj
+    - type: fixed
+      prefixes: ["0120", "0121", "0122", "0123"]
+mobile_money:
+  - "MTN MoMo"
+  - "Moov Money"
+  - "Celtiis Cash"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-10"
+      name: {fr: "Fête du Vodoun (Religions traditionnelles)", en: "Vodoun Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "08-01"
+      name: {fr: "Fête Nationale (Indépendance)", en: "Independence Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Korité (Aïd el-Fitr)", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Tabaski (Aïd al-Adha)", en: "Eid al-Adha"}
+      - date: 2026-08-25
+        name: {fr: "Maouloud", en: "Mawlid"}
+sources:
+  - label: "ARCEP Bénin / Décision migration à 10 chiffres (30 nov. 2024)"
+    url: "https://arcep.bj"
+last_verified: 2026-10-21

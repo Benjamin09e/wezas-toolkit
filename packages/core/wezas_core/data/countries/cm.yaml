@@ -1,0 +1,60 @@
+iso2: CM
+iso3: CMR
+name:
+  fr: Cameroun
+  en: Cameroon
+capital: Yaoundé
+dial_code: "+237"
+currency: XAF
+languages:
+  - fr
+  - en
+timezones:
+  - Africa/Douala
+numbering_plan:
+  national_length: 9
+  ranges:
+    - type: mobile
+      prefixes: ["67", "680", "681", "682", "683", "650", "651", "652", "653", "654"]
+      operator: mtn-cm
+    - type: mobile
+      prefixes: ["69", "685", "686", "687", "688", "689", "655", "656", "657", "658", "659"]
+      operator: orange-cm
+    - type: mobile
+      prefixes: ["66"]
+      operator: nexttel-cm
+    - type: fixed
+      prefixes: ["222", "233", "242", "243"]
+mobile_money:
+  - "MTN MoMo"
+  - "Orange Money"
+  - "Blue Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "02-11"
+      name: {fr: "Fête de la Jeunesse", en: "Youth Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "05-20"
+      name: {fr: "Fête Nationale", en: "National Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha (Fête du Mouton)", en: "Eid al-Adha"}
+sources:
+  - label: "ART Cameroun / Plan National de Numérotation 9 chiffres (Loi 73/5 & 76/8)"
+    url: "https://www.art.cm"
+last_verified: 2026-10-21

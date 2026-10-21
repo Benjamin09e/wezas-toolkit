@@ -1,0 +1,71 @@
+iso2: BF
+iso3: BFA
+name:
+  fr: Burkina Faso
+  en: Burkina Faso
+capital: Ouagadougou
+dial_code: "+226"
+currency: XOF
+languages:
+  - fr
+timezones:
+  - Africa/Ouagadougou
+numbering_plan:
+  national_length: 8
+  ranges:
+    - type: mobile
+      prefixes: ["05", "06", "07", "74", "75", "76", "77"]
+      operator: orange-bf
+    - type: mobile
+      prefixes: ["01", "02", "03", "50", "51", "52", "53", "60", "61", "62", "63", "70", "71", "72", "73"]
+      operator: moov-bf
+    - type: mobile
+      prefixes: ["58", "68", "69", "78", "79"]
+      operator: telecel-bf
+    - type: fixed
+      prefixes: ["20", "24", "25"]
+mobile_money:
+  - "Orange Money"
+  - "Moov Money"
+  - "Coris Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-03"
+      name: {fr: "Soulèvement Populaire", en: "Popular Uprising Day"}
+    - date: "03-08"
+      name: {fr: "Journée Internationale de la Femme", en: "Women's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "08-05"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "10-31"
+      name: {fr: "Journée Nationale des Martyrs", en: "Martyrs' Day"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-11"
+      name: {fr: "Fête Nationale (Proclamation de la République)", en: "Proclamation of Republic"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Tabaski (Aïd al-Adha)", en: "Eid al-Adha"}
+      - date: 2026-08-25
+        name: {fr: "Mouloud (Mawlid)", en: "Mawlid"}
+sources:
+  - label: "ARCEP Burkina Faso / Loi n°079-2015/CNT Fêtes Légales"
+    url: "https://arcep.bf"
+last_verified: 2026-10-21

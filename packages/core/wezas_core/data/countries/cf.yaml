@@ -1,0 +1,66 @@
+iso2: CF
+iso3: CAF
+name:
+  fr: République Centrafricaine
+  en: Central African Republic
+capital: Bangui
+dial_code: "+236"
+currency: XAF
+languages:
+  - fr
+  - sg
+timezones:
+  - Africa/Bangui
+numbering_plan:
+  national_length: 8
+  ranges:
+    - type: mobile
+      prefixes: ["72", "74"]
+      operator: orange-cf
+    - type: mobile
+      prefixes: ["75", "76"]
+      operator: telecel-cf
+    - type: mobile
+      prefixes: ["70", "71"]
+      operator: moov-cf
+    - type: fixed
+      prefixes: ["21", "22"]
+mobile_money:
+  - "Orange Money"
+  - "Telecel Money"
+  - "Moov Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "03-29"
+      name: {fr: "Commémoration du Président Barthélemy Boganda", en: "Boganda Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "08-13"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-01"
+      name: {fr: "Fête Nationale (Proclamation de la République)", en: "Republic Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+sources:
+  - label: "ARCEP Centrafrique / ITU E.164 National Numbering Plan"
+    url: "https://www.itu.int"
+last_verified: 2026-10-21

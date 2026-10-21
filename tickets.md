@@ -12,7 +12,7 @@
 |---|---|---|
 | E0 – Cadrage | WAT-001 → 002 | 100 % |
 | E1 – Socle technique | WAT-003 → 008 | 100 % |
-| E2 – Données pays | WAT-009 → 012 | 25 % |
+| E2 – Données pays | WAT-009 → 012 | 100 % |
 | E3 – `valider_telephone` | WAT-013 → 017 | 0 % |
 | E4 – `convertir_devise` | WAT-018 → 022 | 40 % |
 | E5 – `info_pays` | WAT-023 → 027 | 0 % |
@@ -92,19 +92,19 @@
 
 ### WAT-010 – Collecte : Afrique centrale (XAF)
 - **Priorité / Taille** : P1 / L
-- **Avancement** : À faire
+- **Avancement** : Terminé (Gabon, Cameroun, Congo, Tchad, RCA, Guinée équatoriale)
 - **Description** : Données sourcées pour Gabon, Cameroun, Congo, Tchad, RCA, Guinée équatoriale (plans ARCEP/ART/régulateurs, opérateurs, Mobile Money). Noter les changements historiques (ex. Gabon 9 chiffres en 2019).
 - **Skills** : recherche documentaire, connaissance télécoms africains, rigueur de sourçage.
 
 ### WAT-011 – Collecte : Afrique de l'Ouest (XOF)
 - **Priorité / Taille** : P1 / L
-- **Avancement** : À faire
+- **Avancement** : Terminé (Sénégal, Côte d'Ivoire, Mali, Bénin, Togo, Burkina Faso)
 - **Description** : Idem pour Sénégal, Côte d'Ivoire, Mali, Bénin, Togo, Burkina Faso (Wave, Orange Money, Moov, MTN).
 - **Skills** : recherche documentaire, télécoms, Mobile Money.
 
 ### WAT-012 – Registre des opérateurs et services Mobile Money
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (data/operators.yaml avec opérateurs et Mobile Money)
 - **Description** : Fichier `data/operators.yaml` : opérateurs, services Mobile Money (Orange Money, MTN MoMo, Airtel Money, Moov Money, Wave), pays couverts, interopérabilité connue.
 - **Skills** : connaissance fintech africaine, modélisation de données.
 

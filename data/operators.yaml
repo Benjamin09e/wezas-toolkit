@@ -1,0 +1,165 @@
+# Registre officiel des opérateurs et services Mobile Money
+# Wezas Africa Toolkit - WAT-012
+
+operators:
+  # --- PAYS XAF (Afrique Centrale) ---
+  # GABON (GA)
+  libertis-ga:
+    nom: "Moov Africa Gabon Telecom (ex-Libertis)"
+    pays: ["GA"]
+    mobile_money: ["Moov Money"]
+  airtel-ga:
+    nom: "Airtel Gabon"
+    pays: ["GA"]
+    mobile_money: ["Airtel Money"]
+
+  # CAMEROUN (CM)
+  mtn-cm:
+    nom: "MTN Cameroon"
+    pays: ["CM"]
+    mobile_money: ["MTN MoMo"]
+  orange-cm:
+    nom: "Orange Cameroun"
+    pays: ["CM"]
+    mobile_money: ["Orange Money"]
+  nexttel-cm:
+    nom: "Nexttel Cameroun"
+    pays: ["CM"]
+    mobile_money: []
+  camtel-cm:
+    nom: "Camtel"
+    pays: ["CM"]
+    mobile_money: ["Blue Money"]
+
+  # CONGO-BRAZZAVILLE (CG)
+  mtn-cg:
+    nom: "MTN Congo"
+    pays: ["CG"]
+    mobile_money: ["MTN MoMo"]
+  airtel-cg:
+    nom: "Airtel Congo"
+    pays: ["CG"]
+    mobile_money: ["Airtel Money"]
+  congo-telecom-cg:
+    nom: "Congo Telecom"
+    pays: ["CG"]
+    mobile_money: []
+
+  # TCHAD (TD)
+  airtel-td:
+    nom: "Airtel Tchad"
+    pays: ["TD"]
+    mobile_money: ["Airtel Money"]
+  moov-td:
+    nom: "Moov Africa Tchad (ex-Tigo)"
+    pays: ["TD"]
+    mobile_money: ["Moov Money"]
+  sotel-td:
+    nom: "Sotel Tchad"
+    pays: ["TD"]
+    mobile_money: []
+
+  # CENTRAFRIQUE (CF)
+  orange-cf:
+    nom: "Orange Centrafrique"
+    pays: ["CF"]
+    mobile_money: ["Orange Money"]
+  telecel-cf:
+    nom: "Telecel Centrafrique"
+    pays: ["CF"]
+    mobile_money: ["Telecel Money"]
+  moov-cf:
+    nom: "Moov Africa Centrafrique"
+    pays: ["CF"]
+    mobile_money: ["Moov Money"]
+
+  # GUINÉE ÉQUATORIALE (GQ)
+  getesa-gq:
+    nom: "GETESA"
+    pays: ["GQ"]
+    mobile_money: []
+  muni-gq:
+    nom: "Muni (Hits Telecom)"
+    pays: ["GQ"]
+    mobile_money: []
+
+  # --- PAYS XOF (Afrique de l'Ouest) ---
+  # SÉNÉGAL (SN)
+  orange-sn:
+    nom: "Orange Sénégal (Sonatel)"
+    pays: ["SN"]
+    mobile_money: ["Orange Money", "Wave"]
+  free-sn:
+    nom: "Free Sénégal (Yas)"
+    pays: ["SN"]
+    mobile_money: ["Free Money", "Wave"]
+  expresso-sn:
+    nom: "Expresso Sénégal"
+    pays: ["SN"]
+    mobile_money: ["E-Money", "Wave"]
+
+  # CÔTE D'IVOIRE (CI)
+  orange-ci:
+    nom: "Orange Côte d'Ivoire"
+    pays: ["CI"]
+    mobile_money: ["Orange Money", "Wave"]
+  mtn-ci:
+    nom: "MTN Côte d'Ivoire"
+    pays: ["CI"]
+    mobile_money: ["MTN MoMo", "Wave"]
+  moov-ci:
+    nom: "Moov Africa Côte d'Ivoire"
+    pays: ["CI"]
+    mobile_money: ["Moov Money", "Wave"]
+
+  # MALI (ML)
+  orange-ml:
+    nom: "Orange Mali"
+    pays: ["ML"]
+    mobile_money: ["Orange Money", "Wave"]
+  moov-ml:
+    nom: "Moov Africa Malitel"
+    pays: ["ML"]
+    mobile_money: ["Moov Money", "Wave"]
+  telecel-ml:
+    nom: "Telecel Mali"
+    pays: ["ML"]
+    mobile_money: []
+
+  # BÉNIN (BJ)
+  mtn-bj:
+    nom: "MTN Bénin"
+    pays: ["BJ"]
+    mobile_money: ["MTN MoMo"]
+  moov-bj:
+    nom: "Moov Africa Bénin"
+    pays: ["BJ"]
+    mobile_money: ["Moov Money"]
+  celtiis-bj:
+    nom: "Celtiis Bénin (SBIN)"
+    pays: ["BJ"]
+    mobile_money: ["Celtiis Cash"]
+
+  # TOGO (TG)
+  togocom-tg:
+    nom: "Togocom (Togo Telecom / Togocel)"
+    pays: ["TG"]
+    mobile_money: ["T-Money"]
+  moov-tg:
+    nom: "Moov Africa Togo"
+    pays: ["TG"]
+    mobile_money: ["Flooz / Moov Money"]
+
+  # BURKINA FASO (BF)
+  orange-bf:
+    nom: "Orange Burkina Faso"
+    pays: ["BF"]
+    mobile_money: ["Orange Money", "Coris Money"]
+  moov-bf:
+    nom: "Moov Africa Burkina Faso"
+    pays: ["BF"]
+    mobile_money: ["Moov Money", "Coris Money"]
+  telecel-bf:
+    nom: "Telecel Faso"
+    pays: ["BF"]
+    mobile_money: []

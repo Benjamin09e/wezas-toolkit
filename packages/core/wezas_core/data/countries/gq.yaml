@@ -1,0 +1,55 @@
+iso2: GQ
+iso3: GNQ
+name:
+  fr: Guinée Équatoriale
+  en: Equatorial Guinea
+capital: Malabo
+dial_code: "+240"
+currency: XAF
+languages:
+  - es
+  - fr
+  - pt
+timezones:
+  - Africa/Malabo
+numbering_plan:
+  national_length: 9
+  ranges:
+    - type: mobile
+      prefixes: ["222"]
+      operator: getesa-gq
+    - type: mobile
+      prefixes: ["551", "555"]
+      operator: muni-gq
+    - type: fixed
+      prefixes: ["333"]
+mobile_money: []
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "05-25"
+      name: {fr: "Journée de l'Afrique", en: "Africa Day"}
+    - date: "06-05"
+      name: {fr: "Anniversaire du Président", en: "President's Birthday"}
+    - date: "08-03"
+      name: {fr: "Fête de la Liberté", en: "Freedom Day"}
+    - date: "08-15"
+      name: {fr: "Fête de la Constitution", en: "Constitution Day"}
+    - date: "10-12"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "12-08"
+      name: {fr: "Immaculée Conception", en: "Immaculate Conception"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 60
+      name: {fr: "Fête-Dieu (Corpus Christi)", en: "Corpus Christi"}
+sources:
+  - label: "ORTEL / ITU National Numbering Plan Equatorial Guinea"
+    url: "https://www.itu.int"
+last_verified: 2026-10-21

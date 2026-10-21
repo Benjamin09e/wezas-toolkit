@@ -1,0 +1,62 @@
+iso2: GA
+iso3: GAB
+name:
+  fr: Gabon
+  en: Gabon
+capital: Libreville
+dial_code: "+241"
+currency: XAF
+languages:
+  - fr
+timezones:
+  - Africa/Libreville
+numbering_plan:
+  national_length: 8
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["62", "65", "66"]
+      operator: libertis-ga
+    - type: mobile
+      prefixes: ["74", "77"]
+      operator: airtel-ga
+    - type: fixed
+      prefixes: ["11"]
+mobile_money:
+  - "Moov Money"
+  - "Airtel Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "04-17"
+      name: {fr: "Journée nationale de la Femme", en: "Women's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "08-16"
+      name: {fr: "Fête Nationale (1er jour)", en: "Independence Day (Day 1)"}
+    - date: "08-17"
+      name: {fr: "Fête Nationale (2e jour)", en: "Independence Day (Day 2)"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha (Tabaski)", en: "Eid al-Adha"}
+sources:
+  - label: "ARCEP Gabon / UIT Décision Plan National de Numérotation 2024"
+    url: "https://www.itu.int/oth/T020200004E/en"
+last_verified: 2026-10-21

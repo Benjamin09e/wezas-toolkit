@@ -1,0 +1,60 @@
+iso2: TD
+iso3: TCD
+name:
+  fr: Tchad
+  en: Chad
+capital: N'Djamena
+dial_code: "+235"
+currency: XAF
+languages:
+  - fr
+  - ar
+timezones:
+  - Africa/Ndjamena
+numbering_plan:
+  national_length: 8
+  ranges:
+    - type: mobile
+      prefixes: ["60", "62", "63", "65", "66", "68"]
+      operator: airtel-td
+    - type: mobile
+      prefixes: ["90", "91", "92", "93", "95", "98", "99"]
+      operator: moov-td
+    - type: mobile
+      prefixes: ["77"]
+      operator: sotel-td
+    - type: fixed
+      prefixes: ["22"]
+      operator: sotel-td
+mobile_money:
+  - "Airtel Money"
+  - "Moov Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "08-11"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "11-28"
+      name: {fr: "Fête de la République", en: "Republic Day"}
+    - date: "12-01"
+      name: {fr: "Journée de la Liberté et de la Démocratie", en: "Freedom Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha (Tabaski)", en: "Eid al-Adha"}
+      - date: 2026-08-25
+        name: {fr: "Mawlid (Mouloud)", en: "Mawlid"}
+sources:
+  - label: "ARCEP Tchad / Plan National de Numérotation"
+    url: "https://arcep.td"
+last_verified: 2026-10-21

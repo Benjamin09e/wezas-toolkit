@@ -1,0 +1,62 @@
+iso2: ML
+iso3: MLI
+name:
+  fr: Mali
+  en: Mali
+capital: Bamako
+dial_code: "+223"
+currency: XOF
+languages:
+  - fr
+  - bm
+timezones:
+  - Africa/Bamako
+numbering_plan:
+  national_length: 8
+  ranges:
+    - type: mobile
+      prefixes: ["7", "82", "83"]
+      operator: orange-ml
+    - type: mobile
+      prefixes: ["6"]
+      operator: moov-ml
+    - type: mobile
+      prefixes: ["9"]
+      operator: telecel-ml
+    - type: fixed
+      prefixes: ["20", "21", "44"]
+mobile_money:
+  - "Orange Money"
+  - "Moov Money"
+  - "Wave"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-20"
+      name: {fr: "Fête de l'Armée", en: "Army Day"}
+    - date: "03-26"
+      name: {fr: "Journée des Martyrs", en: "Martyrs' Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "05-25"
+      name: {fr: "Fête de l'Afrique", en: "Africa Day"}
+    - date: "09-22"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha (Tabaski)", en: "Eid al-Adha"}
+      - date: 2026-08-25
+        name: {fr: "Mawlid", en: "Mawlid"}
+sources:
+  - label: "AMRTP Mali / ITU National Numbering Plan"
+    url: "https://www.amrtp.ml"
+last_verified: 2026-10-21

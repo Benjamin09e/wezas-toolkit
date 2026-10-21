@@ -1,0 +1,64 @@
+iso2: SN
+iso3: SEN
+name:
+  fr: Sénégal
+  en: Senegal
+capital: Dakar
+dial_code: "+221"
+currency: XOF
+languages:
+  - fr
+timezones:
+  - Africa/Dakar
+numbering_plan:
+  national_length: 9
+  ranges:
+    - type: mobile
+      prefixes: ["77", "78"]
+      operator: orange-sn
+    - type: mobile
+      prefixes: ["76"]
+      operator: free-sn
+    - type: mobile
+      prefixes: ["70"]
+      operator: expresso-sn
+    - type: fixed
+      prefixes: ["33"]
+mobile_money:
+  - "Orange Money"
+  - "Wave"
+  - "Free Money"
+  - "E-Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "04-04"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Korité (Aïd el-Fitr)", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Tabaski (Aïd al-Adha)", en: "Eid al-Adha"}
+      - date: 2026-08-25
+        name: {fr: "Maouloud (Gamou)", en: "Mawlid"}
+sources:
+  - label: "ARTP Sénégal / Plan National de Numérotation"
+    url: "https://www.artp.sn"
+last_verified: 2026-10-21
