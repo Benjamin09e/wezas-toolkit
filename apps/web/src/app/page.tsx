@@ -17,6 +17,7 @@ import {
   Package,
   ExternalLink,
   FileCheck2,
+  Building2,
   QrCode,
   Share2,
   History,
@@ -214,6 +215,26 @@ export const TOOLS: ToolConfig[] = [
       { label: "Wave Sénégal (5 000 F)", args: { operateur: "Wave", pays: "SN", telephone: "77 123 45 67", montant: 5000, reference: "FACT-2026-001" } },
       { label: "Orange Money CI (10 000 F)", args: { operateur: "Orange Money", pays: "CI", telephone: "07 08 12 34 56", montant: 10000, reference: "COMMANDE-42" } },
       { label: "MTN MoMo Cameroun", args: { operateur: "MTN MoMo", pays: "CM", telephone: "670 12 34 56", montant: 25000, reference: "SUB-889" } },
+    ],
+  },
+  {
+    id: "valider_rib",
+    name: "Validation RIB & Compte",
+    shortName: "Compte / RIB",
+    category: "Fintech & Banque",
+    description: "Validation modulo 97 et identification de la banque (UEMOA / CEMAC).",
+    icon: Building2,
+    defaultPayload: {
+      code_banque: "CI008",
+      code_guichet: "01111",
+      numero_compte: "01234567890",
+      cle_rib: "28",
+    },
+    presets: [
+      { label: "🇨🇮 SGCI (Côte d'Ivoire)", args: { code_banque: "CI008", code_guichet: "01111", numero_compte: "01234567890", cle_rib: "28" } },
+      { label: "🇸🇳 Ecobank Sénégal", args: { code_banque: "SN048", code_guichet: "01001", numero_compte: "01234567890", cle_rib: "61" } },
+      { label: "🇬🇦 BGFIBank Gabon", args: { code_banque: "GA040", code_guichet: "00100", numero_compte: "01234567890", cle_rib: "09" } },
+      { label: "🇨🇲 Afriland First Bank", args: { code_banque: "CM021", code_guichet: "00001", numero_compte: "01234567890", cle_rib: "24" } },
     ],
   },
 ];
@@ -910,6 +931,63 @@ function PlaygroundContent() {
                         onChange={(e) => updateArg("reference", e.target.value)}
                         placeholder="Ex: FACT-2026-001"
                         className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-amber-500 min-h-[42px]"
+                      />
+                    </div>
+                  )}
+
+                  {/* Champs RIB Bancaire */}
+                  {"code_banque" in currentArgs && (
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-slate-400">Code Banque (5 car) :</label>
+                      <input
+                        type="text"
+                        value={currentArgs.code_banque || ""}
+                        onChange={(e) => updateArg("code_banque", e.target.value.toUpperCase())}
+                        placeholder="Ex: CI008, SN012, GA040..."
+                        maxLength={5}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 font-mono focus:outline-none focus:border-amber-500 min-h-[42px]"
+                      />
+                    </div>
+                  )}
+
+                  {"code_guichet" in currentArgs && (
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-slate-400">Code Guichet (5 chiffres) :</label>
+                      <input
+                        type="text"
+                        value={currentArgs.code_guichet || ""}
+                        onChange={(e) => updateArg("code_guichet", e.target.value)}
+                        placeholder="Ex: 01111"
+                        maxLength={5}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 font-mono focus:outline-none focus:border-amber-500 min-h-[42px]"
+                      />
+                    </div>
+                  )}
+
+                  {"numero_compte" in currentArgs && (
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-slate-400">Numéro de Compte (11-12 car) :</label>
+                      <input
+                        type="text"
+                        value={currentArgs.numero_compte || ""}
+                        onChange={(e) => updateArg("numero_compte", e.target.value)}
+                        placeholder="Ex: 01234567890"
+                        maxLength={12}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 font-mono focus:outline-none focus:border-amber-500 min-h-[42px]"
+                      />
+                    </div>
+                  )}
+
+                  {"cle_rib" in currentArgs && (
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-slate-400">Clé RIB (2 chiffres) :</label>
+                      <input
+                        type="text"
+                        value={currentArgs.cle_rib || ""}
+                        onChange={(e) => updateArg("cle_rib", e.target.value)}
+                        placeholder="Ex: 28"
+                        maxLength={2}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 font-mono focus:outline-none focus:border-amber-500 min-h-[42px]"
                       />
                     </div>
                   )}

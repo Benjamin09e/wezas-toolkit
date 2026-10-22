@@ -144,6 +144,25 @@ if res.ok:
 else:
     print("Erreur :", res.error.message.fr)`;
 
+    case "valider_rib":
+      return `from wezas_core.rib import validate_rib
+
+# Validation & décodage de compte bancaire / RIB (UEMOA / CEMAC)
+res = validate_rib(
+    code_banque="${args.code_banque || "CI008"}",
+    code_guichet="${args.code_guichet || "01111"}",
+    numero_compte="${args.numero_compte || "01234567890"}",
+    cle_rib="${args.cle_rib || "28"}"
+)
+
+if res.ok:
+    print("RIB valide :", res.data["rib_complet"])
+    print("Banque :", res.data["banque"]["nom"])
+    print("Zone :", res.data["banque"]["zone"])
+    print("BIC/SWIFT :", res.data["banque"]["bic"])
+else:
+    print("Erreur :", res.error.message.fr)`;
+
     default:
       return `# Outil : ${toolId}\n`;
   }

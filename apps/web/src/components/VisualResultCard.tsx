@@ -530,18 +530,18 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
   // 8. CARTE PAIEMENT MOBILE MONEY
   if (toolId === "generer_paiement_mobile_money") {
     return (
-      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0">
               <QrCode className="w-4 h-4" />
             </div>
-            <div>
-              <div className="text-sm font-semibold text-white">Intention de Paiement Mobile Money</div>
-              <div className="text-[11px] text-slate-400">{data.operateur} · {data.pays}</div>
+            <div className="min-w-0">
+              <div className="text-sm font-semibold text-white truncate">Intention de Paiement Mobile Money</div>
+              <div className="text-[11px] text-slate-400 truncate">{data.operateur} · {data.pays}</div>
             </div>
           </div>
-          <span className="text-sm font-bold font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+          <span className="self-start sm:self-auto text-sm font-bold font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
             {data.montant} {data.devise}
           </span>
         </div>
@@ -550,7 +550,7 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 space-y-2">
             <div className="text-xs font-semibold text-slate-300">Bénéficiaire</div>
-            <div className="text-base font-mono font-bold text-slate-100">{data.beneficiaire_e164}</div>
+            <div className="text-base font-mono font-bold text-slate-100 break-all">{data.beneficiaire_e164}</div>
             {data.reference && (
               <div className="text-xs text-slate-400">
                 Réf : <span className="text-amber-400 font-mono">{data.reference}</span>
@@ -567,20 +567,90 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
                   href={data.deeplink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-semibold transition-all mb-2 shadow-md shadow-emerald-500/10 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-semibold transition-all mb-2 shadow-md shadow-emerald-500/10 cursor-pointer min-h-[38px]"
                 >
                   <span>Lancer l'application ({data.operateur})</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                 </a>
               )}
               {data.code_ussd && (
-                <div className="bg-slate-900 border border-slate-800 rounded-lg p-2 font-mono text-xs text-amber-300">
+                <div className="bg-slate-900 border border-slate-800 rounded-lg p-2 font-mono text-xs text-amber-300 break-all">
                   Code USSD direct : <strong className="text-white">{data.code_ussd}</strong>
                 </div>
               )}
             </div>
             <div className="text-[11px] font-mono text-slate-500 break-all bg-slate-900/50 p-2 rounded border border-slate-800/60">
               Payload QR : {data.qr_payload}
+            </div>
+          </div>
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // 9. CARTE VALIDATION RIB / COMPTE BANCAIRE (UEMOA / CEMAC)
+  if (toolId === "valider_rib") {
+    return (
+      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl animate-in fade-in duration-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+              <Building2 className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-semibold text-white truncate">
+                {data.banque?.nom || "Banque Répertoriée"}
+              </div>
+              <div className="text-[11px] text-slate-400 flex items-center gap-1.5 flex-wrap">
+                {data.banque?.zone && (
+                  <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono text-[10px]">
+                    Zone {data.banque.zone}
+                  </span>
+                )}
+                {data.banque?.pays && (
+                  <span>Pays : <strong className="text-slate-200">{data.banque.pays}</strong></span>
+                )}
+                {data.banque?.bic && (
+                  <span>· BIC/SWIFT : <strong className="text-emerald-400 font-mono">{data.banque.bic}</strong></span>
+                )}
+              </div>
+            </div>
+          </div>
+          <span className="self-start sm:self-auto text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-medium shrink-0">
+            Clé Conforme ({data.cle_fournie})
+          </span>
+        </div>
+
+        {/* RIB Décomposé - Responsive Mobile */}
+        <div className="bg-slate-950/80 rounded-xl border border-slate-800 p-3 sm:p-4 space-y-3">
+          <div className="text-[11px] font-medium text-slate-400">Relevé d'Identité Bancaire officiel :</div>
+          <div className="text-base sm:text-xl font-bold font-mono text-amber-400 tracking-wider break-all bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+            {data.rib_complet}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-center font-mono">
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Banque (5)</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.code_banque}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Guichet (5)</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.code_guichet}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Compte</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.numero_compte}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Clé (2)</div>
+              <div className="text-xs sm:text-sm font-bold text-emerald-400 truncate">{data.cle_fournie}</div>
             </div>
           </div>
         </div>

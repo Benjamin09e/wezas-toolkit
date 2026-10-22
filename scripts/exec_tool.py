@@ -11,6 +11,7 @@ from wezas_core.payment import generate_payment_link
 from wezas_core.phone import validate_phone
 from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
+from wezas_core.rib import validate_rib
 
 
 def execute_tool(tool_name: str, args: dict):
@@ -61,6 +62,13 @@ def execute_tool(tool_name: str, args: dict):
             montant=args.get("montant", 0),
             pays=args.get("pays", ""),
             reference=args.get("reference"),
+        ).model_dump(mode="json")
+    elif tool_name == "valider_rib":
+        return validate_rib(
+            code_banque=args.get("code_banque", ""),
+            code_guichet=args.get("code_guichet", ""),
+            numero_compte=args.get("numero_compte", ""),
+            cle_rib=args.get("cle_rib", ""),
         ).model_dump(mode="json")
     else:
         raise ValueError(f"Outil inconnu : {tool_name}")
