@@ -20,7 +20,7 @@
 | E7 – Contribution communautaire | WAT-032 → 035 | 100 % |
 | E8 – Distribution & release | WAT-036 → 039 | 100 % |
 | E9 – Outils bonus | WAT-040 → 042 | 100 % |
-| E10 – Volet 2 (en ligne) | WAT-043 → 045 | 0 % |
+| E10 – Volet 2 (en ligne) | WAT-043 → 045 | 66 % |
 
 ---
 
@@ -322,13 +322,13 @@
 
 ### WAT-043 – Architecture de séparation volet 1 / volet 2
 - **Priorité / Taille** : P2 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (`wezas_core/rates_online.py`, activation par variable `WEZAS_ONLINE=1`, volet 1 100% autonome)
 - **Description** : Le volet 1 doit fonctionner seul. Volet 2 activé par extra (`pip install wezas-africa-toolkit[online]`) ou variable d'environnement.
 - **Skills** : architecture logicielle, packaging.
 
 ### WAT-044 – Rafraîchissement des taux de change en ligne
 - **Priorité / Taille** : P2 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (Frankfurter API / BCE sans clé requise, cache TTL 12h, timeout strict 2.5s, repli garanti sur `rates.yaml` avec avertissement)
 - **Description** : Récupération du taux USD/EUR via API publique, avec cache et repli sur les données hors ligne.
 - **Skills** : HTTP async, gestion de cache, résilience.
 

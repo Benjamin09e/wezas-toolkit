@@ -12,6 +12,7 @@ import yaml
 
 from wezas_core.envelope import Envelope, ErrorCode, Warning_, failure, success
 from wezas_core.i18n import t
+from wezas_core.rates_online import get_live_rate_provider
 
 # Unités de chaque devise pour 1 EUR (parité fixe, taux exact).
 FIXED_PER_EUR: dict[str, Fraction] = {
@@ -151,21 +152,31 @@ def convert(
                 confiance="haute",
             )
         else:
-            # Utilisation du taux de repli hors ligne
-            rates_data = _get_rates_data()
-            usd_info = rates_data.get("USD", {})
-            usd_per_eur = usd_info.get("per_eur", 1.0850)
-            date_taux = str(usd_info.get("date", "2026-10-21"))
-            source = usd_info.get("source", "Taux indicatif hors ligne")
-            rates_dict["USD"] = Fraction(str(usd_per_eur))
-            confiance = "moyenne"
+            # Vérification du mode en ligne (WAT-044) avec repli hors ligne garanti
+            live_provider = get_live_rate_provider()
+            live_rate = live_provider.get_live_usd_rate()
 
-            warnings.append(
-                Warning_(
-                    code="TAUX_INDICATIF_HORS_LIGNE",
-                    message=t("CURRENCY_RATE_OUTDATED", devise="USD", date=date_taux),
+            if live_rate is not None:
+                rates_dict["USD"] = Fraction(str(live_rate.rate))
+                date_taux = live_rate.date
+                source = live_rate.source
+                confiance = "haute"
+            else:
+                # Utilisation du taux de repli hors ligne
+                rates_data = _get_rates_data()
+                usd_info = rates_data.get("USD", {})
+                usd_per_eur = usd_info.get("per_eur", 1.0850)
+                date_taux = str(usd_info.get("date", "2026-10-21"))
+                source = usd_info.get("source", "Taux indicatif hors ligne")
+                rates_dict["USD"] = Fraction(str(usd_per_eur))
+                confiance = "moyenne"
+
+                warnings.append(
+                    Warning_(
+                        code="TAUX_INDICATIF_HORS_LIGNE",
+                        message=t("CURRENCY_RATE_OUTDATED", devise="USD", date=date_taux),
+                    )
                 )
-            )
 
     rate = rates_dict[dst] / rates_dict[src]
     exact = Fraction(value) * rate
