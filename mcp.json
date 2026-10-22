@@ -31,8 +31,13 @@
     "vat",
     "offline"
   ],
-  "runtime": "python",
+  "runtime": "node",
   "entrypoint": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["-y", "wezas-africa-toolkit"]
+  },
+  "alternative_entrypoint": {
     "type": "stdio",
     "command": "uvx",
     "args": ["wezas-africa-toolkit"]

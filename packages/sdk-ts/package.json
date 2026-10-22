@@ -1,14 +1,20 @@
 {
   "name": "wezas-africa-toolkit",
-  "version": "0.1.1",
-  "description": "Client SDK TypeScript officiel pour Wezas Africa Toolkit (validation téléphone, devises, TVA, pays africains).",
+  "version": "0.1.2",
+  "description": "Client SDK TypeScript officiel et serveur MCP pour Wezas Africa Toolkit (validation téléphone, devises, TVA, pays africains).",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "wezas-africa-toolkit": "./bin/cli.mjs",
-    "wezas-africa": "./bin/cli.mjs"
+    "wezas-africa-toolkit": "bin/cli.mjs",
+    "wezas-africa": "bin/cli.mjs"
   },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "test": "node --test dist/index.js"
