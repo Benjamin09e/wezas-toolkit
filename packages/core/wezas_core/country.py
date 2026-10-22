@@ -66,6 +66,12 @@ CURRENCY_INFO: dict[str, dict[str, str]] = {
         "symbole": "DH",
         "banque_centrale": "Bank Al-Maghrib",
     },
+    "GNF": {
+        "code": "GNF",
+        "nom": "Franc guinéen",
+        "symbole": "FG",
+        "banque_centrale": "Banque Centrale de la République de Guinée",
+    },
 }
 
 

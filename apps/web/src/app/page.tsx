@@ -471,7 +471,7 @@ function PlaygroundContent() {
           <div className="flex items-center space-x-2 sm:space-x-3 text-sm shrink-0">
             <span className="hidden lg:flex items-center gap-1.5 text-emerald-400 text-xs mr-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              19 Pays Couverts
+              20 Pays Couverts
             </span>
 
             {/* Bouton Partager URL profonde */}
@@ -757,7 +757,7 @@ function PlaygroundContent() {
                         className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-amber-500 min-h-[42px]"
                       >
                         {selectedTool.id === "lister_operateurs" && (
-                          <option value="">Tous les pays (19 pays)</option>
+                          <option value="">Tous les pays (20 pays)</option>
                         )}
                         {SUPPORTED_COUNTRIES.map((c) => (
                           <option key={c.iso2} value={c.iso2}>

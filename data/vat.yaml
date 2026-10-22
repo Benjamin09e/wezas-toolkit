@@ -127,3 +127,9 @@ vat_rates:
     nom_local: "TVA"
     source: "Direction Générale des Impôts du Maroc - Code Général des Impôts art. 89 (20%)"
     derniere_verification: "2026-10-21"
+  GN:
+    standard: 0.18   # 18% en Guinée
+    reduit: 0.00
+    nom_local: "TVA"
+    source: "Direction Nationale des Impôts (DNI Guinée) - Code Général des Impôts (18%)"
+    derniere_verification: "2026-10-22"

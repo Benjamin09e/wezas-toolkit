@@ -268,3 +268,17 @@ operators:
     nom: "inwi"
     pays: ["MA"]
     mobile_money: ["inwi money"]
+
+  # --- GUINÉE (GN) ---
+  orange-gn:
+    nom: "Orange Guinée"
+    pays: ["GN"]
+    mobile_money: ["Orange Money"]
+  mtn-gn:
+    nom: "MTN Guinée"
+    pays: ["GN"]
+    mobile_money: ["MTN Mobile Money"]
+  cellcom-gn:
+    nom: "Cellcom Guinée"
+    pays: ["GN"]
+    mobile_money: []

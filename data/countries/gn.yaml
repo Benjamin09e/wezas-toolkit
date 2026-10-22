@@ -1,0 +1,66 @@
+iso2: GN
+iso3: GIN
+name:
+  fr: Guinée
+  en: Guinea
+capital: Conakry
+dial_code: "+224"
+currency: GNF
+languages:
+  - fr
+timezones:
+  - Africa/Conakry
+numbering_plan:
+  national_length: 9
+  ranges:
+    - type: mobile
+      prefixes: ["620", "621", "622", "623", "624", "625", "626", "627", "628", "629"]
+      operator: orange-gn
+    - type: mobile
+      prefixes: ["660", "661", "662", "664", "666", "669"]
+      operator: mtn-gn
+    - type: mobile
+      prefixes: ["655", "656", "657"]
+      operator: cellcom-gn
+    - type: fixed
+      prefixes: ["30"]
+mobile_money:
+  - "Orange Money"
+  - "MTN Mobile Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "04-03"
+      name: {fr: "Fête de la Déclaration de la Deuxième République", en: "Second Republic Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "05-25"
+      name: {fr: "Journée de l'Afrique", en: "Africa Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption"}
+    - date: "10-02"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Korité (Aïd el-Fitr)", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Tabaski (Aïd al-Adha)", en: "Eid al-Adha"}
+      - date: 2026-08-25
+        name: {fr: "Maouloud", en: "Mawlid"}
+sources:
+  - label: "ARPT Guinée / Plan National de Numérotation"
+    url: "https://www.arpt.gov.gn"
+last_verified: 2026-10-22

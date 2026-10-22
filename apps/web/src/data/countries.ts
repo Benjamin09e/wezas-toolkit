@@ -16,6 +16,7 @@ export const SUPPORTED_COUNTRIES: CountryOption[] = [
   { iso2: "CI", name: "Côte d'Ivoire", flag: "🇨🇮", dialCode: "+225", currency: "XOF" },
   { iso2: "GA", name: "Gabon", flag: "🇬🇦", dialCode: "+241", currency: "XAF" },
   { iso2: "GH", name: "Ghana", flag: "🇬🇭", dialCode: "+233", currency: "GHS" },
+  { iso2: "GN", name: "Guinée", flag: "🇬🇳", dialCode: "+224", currency: "GNF" },
   { iso2: "GQ", name: "Guinée Équatoriale", flag: "🇬🇶", dialCode: "+240", currency: "XAF" },
   { iso2: "KE", name: "Kenya", flag: "🇰🇪", dialCode: "+254", currency: "KES" },
   { iso2: "MG", name: "Madagascar", flag: "🇲🇬", dialCode: "+261", currency: "MGA" },

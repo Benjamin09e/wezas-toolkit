@@ -153,3 +153,25 @@ banks:
     pays: "GA"
     bic: "BINGGAFF"
     zone: "CEMAC"
+
+  # GUINÉE (GN)
+  GN010:
+    nom: "Société Générale de Banques en Guinée (SGBG)"
+    pays: "GN"
+    bic: "SGBGGNCN"
+    zone: "BCRG"
+  GN014:
+    nom: "Ecobank Guinée"
+    pays: "GN"
+    bic: "ECOBGNCN"
+    zone: "BCRG"
+  GN017:
+    nom: "Vista Bank Guinée (ex-BICIGUI)"
+    pays: "GN"
+    bic: "BCIUGNCN"
+    zone: "BCRG"
+  GN022:
+    nom: "Banque Islamique de Guinée (BIG)"
+    pays: "GN"
+    bic: "BISLGNCN"
+    zone: "BCRG"
