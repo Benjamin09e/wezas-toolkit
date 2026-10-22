@@ -1,0 +1,22 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "wezas-africa-toolkit",
+  "description": "Boîte à outils open source & Serveur MCP pour développeurs et fintechs en Afrique (Télécoms, Fiscalité, Devises, Mobile Money, Jours fériés).",
+  "maintainers": [
+    "Benjamin09e"
+  ],
+  "categories": [
+    "developer-tools",
+    "finance"
+  ],
+  "keywords": [
+    "africa",
+    "mcp",
+    "fintech",
+    "mobile-money",
+    "xaf",
+    "xof",
+    "vat",
+    "tin"
+  ]
+}
