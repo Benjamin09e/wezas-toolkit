@@ -184,12 +184,12 @@ console.log(format.data.montant_formate);  // "1 500 000 FCFA"`}
                 <ExternalLink className="w-3 h-3" />
               </a>
               <a
-                href="https://smithery.ai/server/wezas-africa-toolkit"
+                href="https://glama.ai/mcp/servers/Benjamin09e/wezas-toolkit"
                 target="_blank"
                 rel="noreferrer"
                 className="text-[11px] text-slate-400 hover:text-amber-400 flex items-center gap-1 transition-all mr-2"
               >
-                <span>Fiche Smithery</span>
+                <span>Fiche Glama MCP</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
               <button

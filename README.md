@@ -7,7 +7,7 @@
     <a href="https://github.com/Benjamin09e/wezas-toolkit/actions/workflows/ci.yml"><img src="https://github.com/Benjamin09e/wezas-toolkit/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License MIT"></a>
     <a href="https://www.npmjs.com/package/wezas-africa-toolkit"><img src="https://img.shields.io/npm/v/wezas-africa-toolkit.svg?color=cb3837" alt="NPM Version"></a>
-    <a href="https://smithery.ai/server/wezas-africa-toolkit"><img src="https://smithery.ai/badge/wezas-africa-toolkit" alt="Smithery Badge"></a>
+    <a href="https://glama.ai/mcp/servers/Benjamin09e/wezas-toolkit"><img src="https://glama.ai/mcp/servers/Benjamin09e/wezas-toolkit/badge" alt="Glama MCP Badge"></a>
   </p>
 </div>
 
@@ -36,11 +36,9 @@ npx -y wezas-africa-toolkit
 uvx wezas-africa-toolkit
 ```
 
-### Option C : Installation en 1 clic via Smithery
-Pour installer automatiquement le serveur sur Claude Desktop :
-```bash
-npx -y @smithery/cli install wezas-africa-toolkit --client claude
-```
+### Option C : Découverte & Registre MCP via Glama
+Consultez la fiche et explorez les outils sur le registre Glama MCP :
+- **Registre Glama** : [glama.ai/mcp/servers/Benjamin09e/wezas-toolkit](https://glama.ai/mcp/servers/Benjamin09e/wezas-toolkit)
 
 ### Option D : Connexion distante via Server-Sent Events (SSE)
 Vous pouvez également connecter vos agents directement au serveur hébergé sur Render sans rien exécuter en local :
