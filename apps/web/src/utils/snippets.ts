@@ -107,6 +107,43 @@ if res.ok:
     for op in res.data["operateurs"]:
         print(f"- {op['nom']} : {', '.join(op['mobile_money'])}")`;
 
+    case "valider_identifiant_fiscal":
+      return `from wezas_core.tin import validate_tax_id
+
+# Validation et normalisation d'identifiant fiscal africain (NIF, TIN, NCC...)
+res = validate_tax_id(
+    pays="${args.pays || "CI"}",
+    identifiant="${args.identifiant || "1234567 A"}"
+)
+
+if res.ok:
+    print("Numéro formaté :", res.data["identifiant_formate"])
+    print("Autorité :", res.data["autorite_fiscale"])
+    print("Type :", res.data["type_identifiant"])
+else:
+    print("Erreur :", res.error.message.fr)`;
+
+    case "generer_paiement_mobile_money":
+      return `from wezas_core.payment import generate_payment_link
+
+# Génération de payload Mobile Money (Wave, Orange Money, MoMo...)
+res = generate_payment_link(
+    operateur="${args.operateur || "Wave"}",
+    pays="${args.pays || "SN"}",
+    telephone="${args.telephone || "771234567"}",
+    montant=${args.montant ?? 5000},
+    reference="${args.reference || "FACT-001"}"
+)
+
+if res.ok:
+    if res.data["deeplink"]:
+        print("Lien de paiement :", res.data["deeplink"])
+    if res.data["code_ussd"]:
+        print("Code USSD :", res.data["code_ussd"])
+    print("Payload QR :", res.data["qr_payload"])
+else:
+    print("Erreur :", res.error.message.fr)`;
+
     default:
       return `# Outil : ${toolId}\n`;
   }

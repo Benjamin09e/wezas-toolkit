@@ -30,9 +30,7 @@ def _index(countries: Mapping[str, Country]) -> dict[str, str]:
     return keys
 
 
-def resolve_country(
-    query: str, countries: Mapping[str, Country] | None = None
-) -> Country | None:
+def resolve_country(query: str, countries: Mapping[str, Country] | None = None) -> Country | None:
     """Retrouve un pays à partir de « Gabon », « gabon », « GA », « GAB », « Côte d'Ivoire »…"""
     pool = get_countries() if countries is None else countries
     iso2 = _index(pool).get(_fold(query)) if query and query.strip() else None

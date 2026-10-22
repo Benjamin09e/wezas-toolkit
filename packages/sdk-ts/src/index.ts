@@ -10,6 +10,8 @@ import {
   AmountFormatData,
   CountryInfoData,
   OperatorsListData,
+  TaxIdValidationData,
+  PaymentPayloadData,
 } from "./types.js";
 import { formatAmountOffline, FIXED_PARITY } from "./offline.js";
 
@@ -113,6 +115,32 @@ export class WezasClient {
     return this.call<OperatorsListData>("lister_operateurs", {
       pays,
       avec_mobile_money_seulement: avecMobileMoneySeulement,
+    });
+  }
+
+  /**
+   * Valide et normalise un numéro d'identifiant fiscal d'entreprise (NCC, NINEA, NIU, NIF, KRA PIN, TIN).
+   */
+  async validerIdentifiantFiscal(pays: string, identifiant: string): Promise<Envelope<TaxIdValidationData>> {
+    return this.call<TaxIdValidationData>("valider_identifiant_fiscal", { pays, identifiant });
+  }
+
+  /**
+   * Génère un lien profond, un code USSD et un QR payload pour déclencher un paiement Mobile Money.
+   */
+  async genererPaiementMobileMoney(
+    operateur: string,
+    telephone: string,
+    montant: number | string,
+    pays: string,
+    reference?: string
+  ): Promise<Envelope<PaymentPayloadData>> {
+    return this.call<PaymentPayloadData>("generer_paiement_mobile_money", {
+      operateur,
+      telephone,
+      montant,
+      pays,
+      reference,
     });
   }
 }

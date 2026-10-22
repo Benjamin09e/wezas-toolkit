@@ -51,13 +51,15 @@ def list_operators(
         if avec_mobile_money_seulement and not mm_services:
             continue
 
-        result_list.append({
-            "id": op_id,
-            "nom": op_info.get("nom", op_id),
-            "pays": countries,
-            "mobile_money": mm_services,
-            "a_mobile_money": len(mm_services) > 0,
-        })
+        result_list.append(
+            {
+                "id": op_id,
+                "nom": op_info.get("nom", op_id),
+                "pays": countries,
+                "mobile_money": mm_services,
+                "a_mobile_money": len(mm_services) > 0,
+            }
+        )
 
     out_data: dict[str, Any] = {
         "total": len(result_list),
@@ -71,6 +73,7 @@ def list_operators(
         }
 
     import datetime as dt
+
     verif_date = country_obj.last_verified if country_obj else dt.date(2026, 10, 21)
 
     return success(

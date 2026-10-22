@@ -106,3 +106,28 @@ export interface OperatorsListData {
     nom: string;
   };
 }
+
+export interface TaxIdValidationData {
+  valide: boolean;
+  pays: {
+    iso2: string;
+    nom: string;
+  };
+  type_identifiant: string;
+  autorite_fiscale: string;
+  identifiant_formate: string;
+  identifiant_brut: string;
+}
+
+export interface PaymentPayloadData {
+  operateur: string;
+  pays: string;
+  devise: string;
+  beneficiaire_e164: string;
+  montant: string;
+  reference: string | null;
+  deeplink: string | null;
+  code_ussd: string | null;
+  instruction: string;
+  qr_payload: string;
+}

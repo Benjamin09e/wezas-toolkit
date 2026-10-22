@@ -16,7 +16,12 @@ import {
   Scale,
   CalendarCheck2,
   Info,
-  AlertTriangle
+  AlertTriangle,
+  FileCheck2,
+  QrCode,
+  ExternalLink,
+  Copy,
+  Check
 } from "lucide-react";
 
 interface ResultCardProps {
@@ -468,6 +473,116 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
               </div>
             </div>
           ))}
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // 7. CARTE VALIDATION IDENTIFIANT FISCAL (NCC, NINEA, NIU, KRA PIN, TIN)
+  if (toolId === "valider_identifiant_fiscal") {
+    return (
+      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+        <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <FileCheck2 className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-white">Identifiant Fiscal Valide ({data.pays?.nom})</div>
+              <div className="text-[11px] text-slate-400">{data.autorite_fiscale}</div>
+            </div>
+          </div>
+          <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-medium">
+            Format Conforme
+          </span>
+        </div>
+
+        <div className="p-4 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div className="text-xs text-slate-400 mb-1">{data.type_identifiant}</div>
+            <div className="text-2xl font-bold font-mono text-amber-400 tracking-wider">
+              {data.identifiant_formate}
+            </div>
+          </div>
+          <div className="text-xs text-slate-400 md:text-right">
+            <div>Saisi : <code className="text-slate-300 font-mono">{data.identifiant_brut}</code></div>
+            <div className="text-[10px] text-emerald-400 mt-0.5">Clef de contrôle & structure vérifiées</div>
+          </div>
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // 8. CARTE PAIEMENT MOBILE MONEY
+  if (toolId === "generer_paiement_mobile_money") {
+    return (
+      <div className="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+        <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <QrCode className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-white">Intention de Paiement Mobile Money</div>
+              <div className="text-[11px] text-slate-400">{data.operateur} · {data.pays}</div>
+            </div>
+          </div>
+          <span className="text-sm font-bold font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+            {data.montant} {data.devise}
+          </span>
+        </div>
+
+        {/* Détails du paiement */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 space-y-2">
+            <div className="text-xs font-semibold text-slate-300">Bénéficiaire</div>
+            <div className="text-base font-mono font-bold text-slate-100">{data.beneficiaire_e164}</div>
+            {data.reference && (
+              <div className="text-xs text-slate-400">
+                Réf : <span className="text-amber-400 font-mono">{data.reference}</span>
+              </div>
+            )}
+            <p className="text-xs text-slate-400 leading-relaxed pt-1">{data.instruction}</p>
+          </div>
+
+          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between space-y-2">
+            <div>
+              <div className="text-xs font-semibold text-slate-300 mb-1.5">Mécanisme de déclenchement</div>
+              {data.deeplink && (
+                <a
+                  href={data.deeplink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-semibold transition-all mb-2 shadow-md shadow-emerald-500/10 cursor-pointer"
+                >
+                  <span>Lancer l'application ({data.operateur})</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {data.code_ussd && (
+                <div className="bg-slate-900 border border-slate-800 rounded-lg p-2 font-mono text-xs text-amber-300">
+                  Code USSD direct : <strong className="text-white">{data.code_ussd}</strong>
+                </div>
+              )}
+            </div>
+            <div className="text-[11px] font-mono text-slate-500 break-all bg-slate-900/50 p-2 rounded border border-slate-800/60">
+              Payload QR : {data.qr_payload}
+            </div>
+          </div>
         </div>
 
         <SourceFooter

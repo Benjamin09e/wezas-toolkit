@@ -101,9 +101,11 @@ def validate_phone(pays: str, numero: str) -> Envelope:
         for p in r.prefixes:
             if national_digits.startswith(p):
                 # Choisir la plage la plus spécifique (le préfixe le plus long)
-                matched_len = max(
-                    len(x) for x in matched_range.prefixes if national_digits.startswith(x)
-                ) if matched_range else -1
+                matched_len = (
+                    max(len(x) for x in matched_range.prefixes if national_digits.startswith(x))
+                    if matched_range
+                    else -1
+                )
                 if matched_range is None or len(p) > matched_len:
                     matched_range = r
 

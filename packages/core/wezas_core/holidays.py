@@ -36,12 +36,14 @@ def get_country_holidays(country: Country, year: int) -> list[dict[str, Any]]:
         try:
             month, day = map(int, fh.date.split("-"))
             d = dt.date(year, month, day)
-            holidays.append({
-                "date": d.isoformat(),
-                "nom": fh.name.fr,
-                "nom_en": fh.name.en,
-                "type": "fixe",
-            })
+            holidays.append(
+                {
+                    "date": d.isoformat(),
+                    "nom": fh.name.fr,
+                    "nom_en": fh.name.en,
+                    "type": "fixe",
+                }
+            )
         except ValueError:
             continue
 
@@ -49,22 +51,26 @@ def get_country_holidays(country: Country, year: int) -> list[dict[str, Any]]:
     easter = calculate_easter(year)
     for eb in country.holidays.easter_based:
         d = easter + dt.timedelta(days=eb.offset_days)
-        holidays.append({
-            "date": d.isoformat(),
-            "nom": eb.name.fr,
-            "nom_en": eb.name.en,
-            "type": "mobile_chretien",
-        })
+        holidays.append(
+            {
+                "date": d.isoformat(),
+                "nom": eb.name.fr,
+                "nom_en": eb.name.en,
+                "type": "mobile_chretien",
+            }
+        )
 
     # 3. Jours fériés musulmans enregistrés pour l'année
     if year in country.holidays.islamic:
         for ih in country.holidays.islamic[year]:
-            holidays.append({
-                "date": ih.date.isoformat(),
-                "nom": ih.name.fr,
-                "nom_en": ih.name.en,
-                "type": "mobile_islamique",
-            })
+            holidays.append(
+                {
+                    "date": ih.date.isoformat(),
+                    "nom": ih.name.fr,
+                    "nom_en": ih.name.en,
+                    "type": "mobile_islamique",
+                }
+            )
 
     # Trier chronologiquement par date
     holidays.sort(key=lambda x: x["date"])

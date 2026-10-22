@@ -67,17 +67,21 @@ def get_country_info(
             local_time = now_utc.astimezone(tz)
             offset = local_time.strftime("%z")
             formatted_offset = f"UTC{offset[:3]}:{offset[3:]}" if offset else "UTC+00:00"
-            timezones_info.append({
-                "fuseau": tz_name,
-                "decalage_utc": formatted_offset,
-                "heure_locale": local_time.strftime("%Y-%m-%d %H:%M:%S"),
-            })
+            timezones_info.append(
+                {
+                    "fuseau": tz_name,
+                    "decalage_utc": formatted_offset,
+                    "heure_locale": local_time.strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            )
         except Exception:
-            timezones_info.append({
-                "fuseau": tz_name,
-                "decalage_utc": "Inconnu",
-                "heure_locale": "Inconnue",
-            })
+            timezones_info.append(
+                {
+                    "fuseau": tz_name,
+                    "decalage_utc": "Inconnu",
+                    "heure_locale": "Inconnue",
+                }
+            )
 
     # Informations sur la devise
     curr_code = country.currency

@@ -7,7 +7,9 @@ from wezas_core.country import get_country_info
 from wezas_core.currency import convert
 from wezas_core.format_amount import format_amount
 from wezas_core.operators import list_operators
+from wezas_core.payment import generate_payment_link
 from wezas_core.phone import validate_phone
+from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
 
 
@@ -46,6 +48,19 @@ def execute_tool(tool_name: str, args: dict):
         return list_operators(
             pays=args.get("pays"),
             avec_mobile_money_seulement=args.get("avec_mobile_money_seulement", False),
+        ).model_dump(mode="json")
+    elif tool_name == "valider_identifiant_fiscal":
+        return validate_tax_id(
+            pays=args.get("pays", ""),
+            identifiant=args.get("identifiant", ""),
+        ).model_dump(mode="json")
+    elif tool_name == "generer_paiement_mobile_money":
+        return generate_payment_link(
+            operateur=args.get("operateur", "Wave"),
+            telephone=args.get("telephone", ""),
+            montant=args.get("montant", 0),
+            pays=args.get("pays", ""),
+            reference=args.get("reference"),
         ).model_dump(mode="json")
     else:
         raise ValueError(f"Outil inconnu : {tool_name}")

@@ -7,6 +7,7 @@ from fastmcp.client.transports import StdioTransport
 
 def test_mcp_stdio_real_session():
     """Vérifie le transport stdio réel via le binaire CLI."""
+
     async def run():
         transport = StdioTransport(
             command="uv",

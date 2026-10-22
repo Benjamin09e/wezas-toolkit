@@ -16,7 +16,9 @@ import {
   Layers,
   Code2,
   Package,
-  ExternalLink
+  ExternalLink,
+  FileCheck2,
+  QrCode
 } from "lucide-react";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -121,6 +123,31 @@ const TOOLS: ToolConfig[] = [
     defaultPayload: {
       pays: "SN",
       avec_mobile_money_seulement: true,
+    },
+  },
+  {
+    id: "valider_identifiant_fiscal",
+    name: "Identifiant Fiscal (NIF/TIN)",
+    category: "Fiscalité & B2B",
+    description: "Validation et normalisation des identifiants fiscaux (NCC, NINEA, NIU, NIF, KRA PIN, TIN).",
+    icon: FileCheck2,
+    defaultPayload: {
+      pays: "CI",
+      identifiant: "1234567 A",
+    },
+  },
+  {
+    id: "generer_paiement_mobile_money",
+    name: "Paiement Mobile Money",
+    category: "Fintech",
+    description: "Génération de liens profonds (deeplinks), syntaxes USSD et QR payloads de paiement.",
+    icon: QrCode,
+    defaultPayload: {
+      operateur: "Wave",
+      pays: "SN",
+      telephone: "77 123 45 67",
+      montant: 5000,
+      reference: "FACT-2026-001",
     },
   },
 ];
@@ -437,6 +464,66 @@ export default function Home() {
                     <label htmlFor="mm_only" className="text-xs text-slate-300">
                       Uniquement opérateurs avec Mobile Money
                     </label>
+                  </div>
+                )}
+
+                {/* Champ Identifiant Fiscal */}
+                {"identifiant" in currentArgs && (
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-medium text-slate-400">Numéro fiscal (NIF / NCC / NINEA / NIU / TIN) :</label>
+                    <input
+                      type="text"
+                      value={currentArgs.identifiant || ""}
+                      onChange={(e) => updateArg("identifiant", e.target.value)}
+                      placeholder="Ex: 1234567 A ou 001234567 2V2..."
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60 font-mono"
+                    />
+                  </div>
+                )}
+
+                {/* Sélecteur Opérateur Paiement */}
+                {"operateur" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">Réseau Mobile Money :</label>
+                    <select
+                      value={currentArgs.operateur || "Wave"}
+                      onChange={(e) => updateArg("operateur", e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    >
+                      <option value="Wave">Wave Mobile Money</option>
+                      <option value="Orange Money">Orange Money</option>
+                      <option value="MTN MoMo">MTN MoMo</option>
+                      <option value="M-Pesa">M-Pesa (Safaricom)</option>
+                      <option value="Airtel Money">Airtel Money</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Téléphone Bénéficiaire */}
+                {"telephone" in currentArgs && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-slate-400">Téléphone bénéficiaire :</label>
+                    <input
+                      type="text"
+                      value={currentArgs.telephone || ""}
+                      onChange={(e) => updateArg("telephone", e.target.value)}
+                      placeholder="Ex: 77 123 45 67"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    />
+                  </div>
+                )}
+
+                {/* Référence Paiement */}
+                {"reference" in currentArgs && (
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-medium text-slate-400">Référence de commande / facture (Optionnel) :</label>
+                    <input
+                      type="text"
+                      value={currentArgs.reference || ""}
+                      onChange={(e) => updateArg("reference", e.target.value)}
+                      placeholder="Ex: FACT-2026-001"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-amber-500/60"
+                    />
                   </div>
                 )}
               </div>

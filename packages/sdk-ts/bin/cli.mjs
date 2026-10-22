@@ -98,6 +98,33 @@ const TOOLS = [
       },
     },
   },
+  {
+    name: "valider_identifiant_fiscal",
+    description: "Valide et normalise un numéro d'identifiant fiscal d'entreprise (NCC en Côte d'Ivoire, NINEA au Sénégal, NIU au Cameroun, NIF au Gabon, KRA PIN au Kenya, TIN au Nigeria).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        pays: { type: "string", description: "Nom ou code ISO2 du pays (CI, SN, CM, GA, KE, NG...)" },
+        identifiant: { type: "string", description: "Numéro fiscal brut à valider (ex: 1234567 A, P051234567Z...)" },
+      },
+      required: ["pays", "identifiant"],
+    },
+  },
+  {
+    name: "generer_paiement_mobile_money",
+    description: "Génère un lien de paiement profond, une syntaxe USSD et un QR payload pour déclencher un règlement Mobile Money (Wave, Orange Money, MTN MoMo, M-Pesa, Airtel Money).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        operateur: { type: "string", description: "Nom du réseau Mobile Money (Wave, Orange Money, MTN MoMo, M-Pesa, Airtel Money)" },
+        telephone: { type: "string", description: "Numéro de téléphone du destinataire/marchand" },
+        montant: { type: "number", description: "Montant à régler" },
+        pays: { type: "string", description: "Code ou nom du pays (SN, CI, CM, KE...)" },
+        reference: { type: "string", description: "Référence facultative de commande ou facture" },
+      },
+      required: ["operateur", "telephone", "montant", "pays"],
+    },
+  },
 ];
 
 async function executeTool(name, args) {
