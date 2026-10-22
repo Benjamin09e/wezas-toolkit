@@ -1,0 +1,67 @@
+iso2: RW
+iso3: RWA
+name:
+  fr: Rwanda
+  en: Rwanda
+capital: Kigali
+dial_code: "+250"
+currency: RWF
+languages:
+  - rw
+  - en
+  - fr
+  - sw
+timezones:
+  - Africa/Kigali
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["78", "79"]
+      operator: mtn-rw
+    - type: mobile
+      prefixes: ["72", "73"]
+      operator: airtel-rw
+    - type: fixed
+      prefixes: ["25"]
+mobile_money:
+  - "MTN MoMo"
+  - "Airtel Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-02"
+      name: {fr: "Lendemain du Nouvel An", en: "Day after New Year's Day"}
+    - date: "02-01"
+      name: {fr: "Fête des Héros Nationaux", en: "National Heroes Day"}
+    - date: "04-07"
+      name: {fr: "Journée de Commémoration du Génocide", en: "Genocide Memorial Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "07-01"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "07-04"
+      name: {fr: "Fête de la Libération", en: "Liberation Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Boxing Day", en: "Boxing Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+sources:
+  - label: "RURA Rwanda Utilities Regulatory Authority / National Numbering Plan"
+    url: "https://www.rura.rw"
+last_verified: 2026-10-21

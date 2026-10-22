@@ -48,6 +48,36 @@ def test_get_country_info_senegal_with_fields_filtering():
     assert "jours_feries" not in data
 
 
+def test_get_country_info_rdc_congo():
+    res = get_country_info("CD", annee=2026).model_dump(mode="json")
+    assert res["ok"] is True
+    assert res["data"]["indicatif"] == "+243"
+    assert res["data"]["devise"]["code"] == "CDF"
+    assert "M-Pesa" in res["data"]["mobile_money"]
+
+
+def test_get_country_info_rwanda():
+    res = get_country_info("Rwanda", annee=2026).model_dump(mode="json")
+    assert res["ok"] is True
+    assert res["data"]["indicatif"] == "+250"
+    assert res["data"]["devise"]["code"] == "RWF"
+
+
+def test_get_country_info_madagascar():
+    res = get_country_info("Madagascar", annee=2026).model_dump(mode="json")
+    assert res["ok"] is True
+    assert res["data"]["indicatif"] == "+261"
+    assert res["data"]["devise"]["code"] == "MGA"
+    assert "Mvola" in res["data"]["mobile_money"]
+
+
+def test_get_country_info_maroc():
+    res = get_country_info("Maroc", annee=2026).model_dump(mode="json")
+    assert res["ok"] is True
+    assert res["data"]["indicatif"] == "+212"
+    assert res["data"]["devise"]["code"] == "MAD"
+
+
 def test_get_country_info_unknown_country():
     res = get_country_info("Atlantis").model_dump(mode="json")
     assert res["ok"] is False

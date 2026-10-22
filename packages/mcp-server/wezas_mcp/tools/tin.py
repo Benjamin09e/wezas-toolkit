@@ -1,4 +1,5 @@
 from typing import Any
+
 from fastmcp import FastMCP
 from wezas_core.tin import validate_tax_id
 

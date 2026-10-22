@@ -1,4 +1,5 @@
 from typing import Any
+
 from fastmcp import FastMCP
 from wezas_core.payment import generate_payment_link
 

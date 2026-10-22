@@ -64,7 +64,7 @@ export function InstallationSection() {
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
               OPEN SOURCE & MCP
             </span>
-            <span className="text-xs text-slate-400">Licence MIT · 15 pays couverts</span>
+            <span className="text-xs text-slate-400">Licence MIT · 19 pays couverts</span>
           </div>
           <h2 className="text-lg font-bold text-white mt-1">
             Intégrez Wezas Africa Toolkit dans vos projets & assistants IA

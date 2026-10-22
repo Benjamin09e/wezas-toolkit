@@ -60,6 +60,34 @@ DEFAULT_CURRENCY_CONFIG: dict[str, dict[str, Any]] = {
         "separateur_milliers": ",",
         "separateur_decimal": ".",
     },
+    "CDF": {
+        "symbole": "FC",
+        "position": "apres",
+        "decimales": 2,
+        "separateur_milliers": " ",
+        "separateur_decimal": ",",
+    },
+    "RWF": {
+        "symbole": "FRw",
+        "position": "apres",
+        "decimales": 0,
+        "separateur_milliers": " ",
+        "separateur_decimal": ",",
+    },
+    "MGA": {
+        "symbole": "Ar",
+        "position": "apres",
+        "decimales": 0,
+        "separateur_milliers": " ",
+        "separateur_decimal": ",",
+    },
+    "MAD": {
+        "symbole": "DH",
+        "position": "apres",
+        "decimales": 2,
+        "separateur_milliers": " ",
+        "separateur_decimal": ",",
+    },
 }
 
 SUPPORTED_CURRENCIES = list(DEFAULT_CURRENCY_CONFIG.keys())

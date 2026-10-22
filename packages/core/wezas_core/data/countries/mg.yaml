@@ -1,0 +1,67 @@
+iso2: MG
+iso3: MDG
+name:
+  fr: Madagascar
+  en: Madagascar
+capital: Antananarivo
+dial_code: "+261"
+currency: MGA
+languages:
+  - mg
+  - fr
+timezones:
+  - Indian/Antananarivo
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["34"]
+      operator: telma-mg
+    - type: mobile
+      prefixes: ["32", "37"]
+      operator: orange-mg
+    - type: mobile
+      prefixes: ["33"]
+      operator: airtel-mg
+    - type: fixed
+      prefixes: ["20"]
+mobile_money:
+  - "Mvola"
+  - "Orange Money"
+  - "Airtel Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "03-08"
+      name: {fr: "Journée Internationale des Femmes", en: "International Women's Day"}
+    - date: "03-29"
+      name: {fr: "Journée des Martyrs", en: "Martyrs' Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "06-26"
+      name: {fr: "Fête Nationale de l'Indépendance", en: "Independence Day"}
+    - date: "08-15"
+      name: {fr: "Assomption", en: "Assumption Day"}
+    - date: "11-01"
+      name: {fr: "Toussaint", en: "All Saints' Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+    - offset_days: 39
+      name: {fr: "Ascension", en: "Ascension Day"}
+    - offset_days: 50
+      name: {fr: "Lundi de Pentecôte", en: "Whit Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+sources:
+  - label: "ARTEC Autorité de Régulation des Technologies de Communication / Plan National de Numérotation"
+    url: "https://www.artec.mg"
+last_verified: 2026-10-21

@@ -101,3 +101,29 @@ vat_rates:
     nom_local: "VAT"
     source: "Kenya Revenue Authority (KRA) - Value Added Tax Act (16%)"
     derniere_verification: "2026-10-21"
+
+  # --- Nouveaux Hubs Tech & Régionaux ---
+  CD:
+    standard: 0.16   # 16% en RDC
+    reduit: 0.00
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts de RDC - Ordonnance-loi n° 10/001 portant institution de la TVA"
+    derniere_verification: "2026-10-21"
+  RW:
+    standard: 0.18   # 18% au Rwanda
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "Rwanda Revenue Authority (RRA) - Value Added Tax Law (18%)"
+    derniere_verification: "2026-10-21"
+  MG:
+    standard: 0.20   # 20% à Madagascar
+    reduit: 0.05
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts de Madagascar - Code Général des Impôts (20%)"
+    derniere_verification: "2026-10-21"
+  MA:
+    standard: 0.20   # 20% au Maroc
+    reduit: 0.10
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts du Maroc - Code Général des Impôts art. 89 (20%)"
+    derniere_verification: "2026-10-21"

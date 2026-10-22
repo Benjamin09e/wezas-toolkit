@@ -25,9 +25,7 @@ TAX_CONFIGS: dict[str, dict[str, Any]] = {
         "autorite": "Direction Générale des Impôts et des Domaines du Sénégal (DGID)",
         "pattern": r"^(\d{9})(?:\s*([0-9A-Za-z]{3}))?$",
         "description": "9 chiffres obligatoires, facultativement suivis du COFI (3 caractères)",
-        "format_func": lambda m: (
-            f"{m.group(1)}" + (f" {m.group(2).upper()}" if m.group(2) else "")
-        ),
+        "format_func": lambda m: f"{m.group(1)}" + (f" {m.group(2).upper()}" if m.group(2) else ""),
         "source": "DGID Sénégal / ANSD - Registre National des Entreprises",
         "exemples": ["001234567", "001234567 2V2"],
     },
@@ -75,6 +73,42 @@ TAX_CONFIGS: dict[str, dict[str, Any]] = {
         "format_func": lambda m: m.group(0).upper(),
         "source": "Ghana Revenue Authority (GRA) Revenue Administration Act",
         "exemples": ["GHA-123456789-1", "C0012345678"],
+    },
+    "CD": {
+        "nom_taxe": "NIF (Numéro d'Identification Fiscale)",
+        "autorite": "Direction Générale des Impôts de RDC (DGI)",
+        "pattern": r"^([A-Za-z])\s*(\d{7})\s*([A-Za-z])$",
+        "description": "1 lettre initiale, 7 chiffres, 1 lettre de contrôle",
+        "format_func": lambda m: f"{m.group(1).upper()}{m.group(2)}{m.group(3).upper()}",
+        "source": "Direction Générale des Impôts de RDC - Loi portant réforme fiscale",
+        "exemples": ["A0123456Z", "B7654321A"],
+    },
+    "RW": {
+        "nom_taxe": "TIN (Taxpayer Identification Number)",
+        "autorite": "Rwanda Revenue Authority (RRA)",
+        "pattern": r"^(\d{9})$",
+        "description": "9 chiffres attribués par la Rwanda Revenue Authority",
+        "format_func": lambda m: m.group(1),
+        "source": "Rwanda Revenue Authority (RRA) Tax Administration",
+        "exemples": ["123456789", "987654321"],
+    },
+    "MG": {
+        "nom_taxe": "NIF (Numéro d'Identification Fiscale)",
+        "autorite": "Direction Générale des Impôts de Madagascar (DGI)",
+        "pattern": r"^(\d{10})$",
+        "description": "10 chiffres délivrés par la Direction Générale des Impôts",
+        "format_func": lambda m: m.group(1),
+        "source": "Direction Générale des Impôts de Madagascar - CGI art. 20",
+        "exemples": ["1234567890", "9876543210"],
+    },
+    "MA": {
+        "nom_taxe": "ICE (Identifiant Commun de l'Entreprise) / IF",
+        "autorite": "Direction Générale des Impôts et OMPIC Maroc",
+        "pattern": r"^(?:(\d{15})|(\d{7,8}))$(?i)",
+        "description": "ICE officiel à 15 chiffres (ou IF à 7-8 chiffres)",
+        "format_func": lambda m: m.group(0),
+        "source": "Direction Générale des Impôts du Maroc / OMPIC - Décret relatif à l'ICE",
+        "exemples": ["001234567000089", "12345678"],
     },
 }
 

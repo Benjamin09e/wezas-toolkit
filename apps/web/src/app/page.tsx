@@ -221,7 +221,7 @@ export default function Home() {
           <div className="flex items-center space-x-3 text-sm">
             <span className="hidden md:flex items-center gap-1.5 text-emerald-400 text-xs mr-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              15 Pays Couverts (Zone Franc, NG, GH, KE)
+              19 Pays Couverts (Zone Franc, Maghreb, Hubs Tech)
             </span>
             <a
               href="https://www.npmjs.com/package/wezas-africa-toolkit"

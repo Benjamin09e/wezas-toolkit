@@ -72,6 +72,33 @@ def test_unreadable_phone_returns_error():
     assert res["error"]["code"] == "NUMERO_INVALIDE"
 
 
+def test_validate_phone_expansion_countries():
+    # RDC (CD) - Vodacom (81/82)
+    res_cd = validate_phone("CD", "081 123 4567").model_dump(mode="json")
+    assert res_cd["ok"] is True
+    assert res_cd["data"]["e164"] == "+243811234567"
+    assert res_cd["data"]["operateur_probable"] == "Vodacom RDC"
+    assert "M-Pesa" in res_cd["data"]["mobile_money"]
+
+    # Rwanda (RW) - MTN (78/79)
+    res_rw = validate_phone("RW", "078 123 4567").model_dump(mode="json")
+    assert res_rw["ok"] is True
+    assert res_rw["data"]["e164"] == "+250781234567"
+    assert res_rw["data"]["operateur_probable"] == "MTN Rwanda"
+
+    # Madagascar (MG) - Telma (34)
+    res_mg = validate_phone("MG", "034 12 345 67").model_dump(mode="json")
+    assert res_mg["ok"] is True
+    assert res_mg["data"]["e164"] == "+261341234567"
+    assert res_mg["data"]["operateur_probable"] == "Telma Madagascar"
+
+    # Maroc (MA) - Orange Maroc (66)
+    res_ma = validate_phone("MA", "066 12 34 567").model_dump(mode="json")
+    assert res_ma["ok"] is True
+    assert res_ma["data"]["e164"] == "+212661234567"
+    assert res_ma["data"]["operateur_probable"] == "Orange Maroc"
+
+
 def test_mcp_phone_tool_callable():
     async def run():
         async with Client(mcp) as client:

@@ -212,3 +212,59 @@ operators:
     nom: "Telkom Kenya"
     pays: ["KE"]
     mobile_money: ["T-Kash"]
+
+  # --- RÉPUBLIQUE DÉMOCRATIQUE DU CONGO (CD) ---
+  vodacom-cd:
+    nom: "Vodacom RDC"
+    pays: ["CD"]
+    mobile_money: ["M-Pesa"]
+  airtel-cd:
+    nom: "Airtel RDC"
+    pays: ["CD"]
+    mobile_money: ["Airtel Money"]
+  orange-cd:
+    nom: "Orange RDC"
+    pays: ["CD"]
+    mobile_money: ["Orange Money"]
+  africell-cd:
+    nom: "Africell RDC"
+    pays: ["CD"]
+    mobile_money: ["Afrimoney"]
+
+  # --- RWANDA (RW) ---
+  mtn-rw:
+    nom: "MTN Rwanda"
+    pays: ["RW"]
+    mobile_money: ["MTN MoMo"]
+  airtel-rw:
+    nom: "Airtel Rwanda"
+    pays: ["RW"]
+    mobile_money: ["Airtel Money"]
+
+  # --- MADAGASCAR (MG) ---
+  telma-mg:
+    nom: "Telma Madagascar"
+    pays: ["MG"]
+    mobile_money: ["Mvola"]
+  orange-mg:
+    nom: "Orange Madagascar"
+    pays: ["MG"]
+    mobile_money: ["Orange Money"]
+  airtel-mg:
+    nom: "Airtel Madagascar"
+    pays: ["MG"]
+    mobile_money: ["Airtel Money"]
+
+  # --- MAROC (MA) ---
+  iam-ma:
+    nom: "Maroc Telecom (IAM)"
+    pays: ["MA"]
+    mobile_money: ["MT Cash"]
+  orange-ma:
+    nom: "Orange Maroc"
+    pays: ["MA"]
+    mobile_money: ["Orange Money"]
+  inwi-ma:
+    nom: "inwi"
+    pays: ["MA"]
+    mobile_money: ["inwi money"]

@@ -42,6 +42,30 @@ CURRENCY_INFO: dict[str, dict[str, str]] = {
         "symbole": "KSh",
         "banque_centrale": "Central Bank of Kenya",
     },
+    "CDF": {
+        "code": "CDF",
+        "nom": "Franc congolais",
+        "symbole": "FC",
+        "banque_centrale": "Banque Centrale du Congo",
+    },
+    "RWF": {
+        "code": "RWF",
+        "nom": "Franc rwandais",
+        "symbole": "FRw",
+        "banque_centrale": "Banque Nationale du Rwanda",
+    },
+    "MGA": {
+        "code": "MGA",
+        "nom": "Ariary malgache",
+        "symbole": "Ar",
+        "banque_centrale": "Banky Foiben'i Madagasikara",
+    },
+    "MAD": {
+        "code": "MAD",
+        "nom": "Dirham marocain",
+        "symbole": "DH",
+        "banque_centrale": "Bank Al-Maghrib",
+    },
 }
 
 

@@ -1,0 +1,67 @@
+iso2: CD
+iso3: COD
+name:
+  fr: République Démocratique du Congo
+  en: Democratic Republic of the Congo
+capital: Kinshasa
+dial_code: "+243"
+currency: CDF
+languages:
+  - fr
+  - ln
+  - sw
+  - kg
+  - lu
+timezones:
+  - Africa/Kinshasa
+  - Africa/Lubumbashi
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["81", "82", "83"]
+      operator: vodacom-cd
+    - type: mobile
+      prefixes: ["97", "98", "99"]
+      operator: airtel-cd
+    - type: mobile
+      prefixes: ["80", "84", "85", "89"]
+      operator: orange-cd
+    - type: mobile
+      prefixes: ["90", "91"]
+      operator: africell-cd
+    - type: fixed
+      prefixes: ["1"]
+mobile_money:
+  - "M-Pesa"
+  - "Airtel Money"
+  - "Orange Money"
+  - "Afrimoney"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-04"
+      name: {fr: "Journée des Martyrs de l'Indépendance", en: "Martyrs of Independence Day"}
+    - date: "01-16"
+      name: {fr: "Journée des Héros Nationaux (Laurent-Désiré Kabila)", en: "Heroes' Day"}
+    - date: "01-17"
+      name: {fr: "Journée des Héros Nationaux (Patrice Lumumba)", en: "Lumumba Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "05-17"
+      name: {fr: "Journée de la Révolution et des FARDC", en: "Armed Forces Day"}
+    - date: "06-30"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "08-01"
+      name: {fr: "Fête des Parents", en: "Parents' Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+sources:
+  - label: "ARPTC République Démocratique du Congo / Plan National de Numérotation"
+    url: "https://www.arptc.cd"
+last_verified: 2026-10-21

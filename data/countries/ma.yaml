@@ -1,0 +1,68 @@
+iso2: MA
+iso3: MAR
+name:
+  fr: Maroc
+  en: Morocco
+capital: Rabat
+dial_code: "+212"
+currency: MAD
+languages:
+  - ar
+  - fr
+timezones:
+  - Africa/Casablanca
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["61", "62", "63", "64", "65", "68"]
+      operator: iam-ma
+    - type: mobile
+      prefixes: ["66", "67", "69"]
+      operator: orange-ma
+    - type: mobile
+      prefixes: ["60", "70", "71", "76", "77", "78"]
+      operator: inwi-ma
+    - type: fixed
+      prefixes: ["5"]
+mobile_money:
+  - "MT Cash"
+  - "Orange Money"
+  - "inwi money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-11"
+      name: {fr: "Manifeste de l'Indépendance", en: "Proclamation of Independence Day"}
+    - date: "01-14"
+      name: {fr: "Nouvel An Amazigh", en: "Yennayer (Amazigh New Year)"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "07-30"
+      name: {fr: "Fête du Trône", en: "Throne Day"}
+    - date: "08-14"
+      name: {fr: "Allégeance Oued Ed-Dahab", en: "Oued Ed-Dahab Allegiance Day"}
+    - date: "08-20"
+      name: {fr: "Révolution du Roi et du Peuple", en: "Revolution of the King and the People"}
+    - date: "08-21"
+      name: {fr: "Fête de la Jeunesse", en: "Youth Day"}
+    - date: "11-06"
+      name: {fr: "Anniversaire de la Marche Verte", en: "Green March Day"}
+    - date: "11-18"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+      - date: 2026-06-16
+        name: {fr: "1er Moharram (Nouvel An de l'Hégire)", en: "Islamic New Year"}
+      - date: 2026-08-25
+        name: {fr: "Aïd Al Mawlid Annabawi", en: "Mawlid"}
+sources:
+  - label: "ANRT Agence Nationale de Réglementation des Télécommunications / Décision PNN"
+    url: "https://www.anrt.ma"
+last_verified: 2026-10-21
