@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: packages/api/Dockerfile
+    container_name: wezas-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - WEZAS_ONLINE=1
+      - WEZAS_APP_ENV=development
+      - WEZAS_MONGODB_URI=mongodb://mongo:27017/wezas
+      - WEZAS_API_SECRET_SALT=dev_secret_salt_change_me
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7.0
+    container_name: wezas-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+    driver: local

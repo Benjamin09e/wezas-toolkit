@@ -9,11 +9,12 @@ dependencies = []
 dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.6", "mypy>=1.11", "types-pyyaml"]
 
 [tool.uv.workspace]
-members = ["packages/core", "packages/mcp-server"]
+members = ["packages/core", "packages/mcp-server", "packages/api"]
 
 [tool.uv.sources]
 wezas-core = { workspace = true }
 wezas-africa-toolkit = { workspace = true }
+wezas-api = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

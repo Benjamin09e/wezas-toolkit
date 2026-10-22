@@ -20,7 +20,7 @@
 | E7 – Contribution communautaire | WAT-032 → 035 | 100 % |
 | E8 – Distribution & release | WAT-036 → 039 | 100 % |
 | E9 – Outils bonus | WAT-040 → 042 | 100 % |
-| E10 – Volet 2 (en ligne) | WAT-043 → 045 | 66 % |
+| E10 – Volet 2 (en ligne) | WAT-043 → 045 | 100 % |
 
 ---
 
@@ -334,7 +334,7 @@
 
 ### WAT-045 – Définition du contenu du volet 2
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (Spécification détaillée formalisée dans `docs/spec-volet-2.md`, principes sécurité/clés API/confidentialité validés)
 - **Description** : Spécifier les outils en ligne (à définir avec le product owner) et leurs besoins en clés API.
 - **Skills** : product ownership, sécurité des secrets.
 
