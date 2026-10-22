@@ -22,7 +22,8 @@ import {
   History,
   RotateCcw,
   Check,
-  ChevronDown
+  ChevronDown,
+  Copy
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
@@ -50,6 +51,11 @@ import { VisualResultCard } from "@/components/VisualResultCard";
 import { SnippetGenerator } from "@/components/SnippetGenerator";
 import { InstallationSection } from "@/components/InstallationSection";
 
+export interface ToolPreset {
+  label: string;
+  args: Record<string, any>;
+}
+
 export interface ToolConfig {
   id: string;
   name: string;
@@ -58,6 +64,7 @@ export interface ToolConfig {
   description: string;
   icon: any;
   defaultPayload: Record<string, any>;
+  presets?: ToolPreset[];
 }
 
 export const TOOLS: ToolConfig[] = [
@@ -72,6 +79,12 @@ export const TOOLS: ToolConfig[] = [
       pays: "GA",
       numero: "077 12 34 56",
     },
+    presets: [
+      { label: "🇬🇦 Gabon (Airtel)", args: { pays: "GA", numero: "077 12 34 56" } },
+      { label: "🇸🇳 Sénégal (Wave)", args: { pays: "SN", numero: "77 123 45 67" } },
+      { label: "🇨🇮 Côte d'Ivoire (Orange)", args: { pays: "CI", numero: "07 08 12 34 56" } },
+      { label: "🇨🇲 Cameroun (MTN)", args: { pays: "CM", numero: "670 12 34 56" } },
+    ],
   },
   {
     id: "convertir_devise",
@@ -85,6 +98,11 @@ export const TOOLS: ToolConfig[] = [
       de: "EUR",
       vers: "XAF",
     },
+    presets: [
+      { label: "100 € ➔ XOF", args: { montant: 100, de: "EUR", vers: "XOF" } },
+      { label: "50 000 XAF ➔ EUR", args: { montant: 50000, de: "XAF", vers: "EUR" } },
+      { label: "250 USD ➔ XAF", args: { montant: 250, de: "USD", vers: "XAF" } },
+    ],
   },
   {
     id: "info_pays",
@@ -97,6 +115,12 @@ export const TOOLS: ToolConfig[] = [
       pays: "SN",
       annee: 2026,
     },
+    presets: [
+      { label: "🇸🇳 Sénégal (2026)", args: { pays: "SN", annee: 2026 } },
+      { label: "🇨🇮 Côte d'Ivoire", args: { pays: "CI", annee: 2026 } },
+      { label: "🇬🇦 Gabon", args: { pays: "GA", annee: 2026 } },
+      { label: "🇲🇦 Maroc", args: { pays: "MA", annee: 2026 } },
+    ],
   },
   {
     id: "formater_montant",
@@ -111,6 +135,11 @@ export const TOOLS: ToolConfig[] = [
       pays: "CI",
       inclure_symbole: true,
     },
+    presets: [
+      { label: "1.25M FCFA (Abidjan)", args: { montant: 1250000, devise: "XOF", pays: "CI", inclure_symbole: true } },
+      { label: "50 000 XAF (Libreville)", args: { montant: 50000, devise: "XAF", pays: "GA", inclure_symbole: true } },
+      { label: "10 000 MAD (Casablanca)", args: { montant: 10000, devise: "MAD", pays: "MA", inclure_symbole: true } },
+    ],
   },
   {
     id: "calculer_tva",
@@ -125,6 +154,11 @@ export const TOOLS: ToolConfig[] = [
       mode: "ht",
       type_taux: "standard",
     },
+    presets: [
+      { label: "🇨🇲 Cameroun (HT ➔ TTC)", args: { montant: 100000, pays: "CM", mode: "ht", type_taux: "standard" } },
+      { label: "🇨🇮 Côte d'Ivoire (TTC ➔ HT)", args: { montant: 118000, pays: "CI", mode: "ttc", type_taux: "standard" } },
+      { label: "🇬🇦 Gabon (HT ➔ TTC)", args: { montant: 100000, pays: "GA", mode: "ht", type_taux: "standard" } },
+    ],
   },
   {
     id: "lister_operateurs",
@@ -137,6 +171,12 @@ export const TOOLS: ToolConfig[] = [
       pays: "SN",
       avec_mobile_money_seulement: true,
     },
+    presets: [
+      { label: "🇸🇳 Opérateurs Sénégal", args: { pays: "SN", avec_mobile_money_seulement: true } },
+      { label: "🇬🇦 Opérateurs Gabon", args: { pays: "GA", avec_mobile_money_seulement: true } },
+      { label: "🇨🇮 Opérateurs Côte d'Ivoire", args: { pays: "CI", avec_mobile_money_seulement: true } },
+      { label: "🌍 Tous les pays", args: { pays: "", avec_mobile_money_seulement: false } },
+    ],
   },
   {
     id: "valider_identifiant_fiscal",
@@ -149,6 +189,12 @@ export const TOOLS: ToolConfig[] = [
       pays: "CI",
       identifiant: "1234567 A",
     },
+    presets: [
+      { label: "🇨🇮 Côte d'Ivoire (NCC)", args: { pays: "CI", identifiant: "1234567 A" } },
+      { label: "🇸🇳 Sénégal (NINEA)", args: { pays: "SN", identifiant: "001234567 2V2" } },
+      { label: "🇬🇦 Gabon (NIF)", args: { pays: "GA", identifiant: "012345A" } },
+      { label: "🇨🇲 Cameroun (NIU)", args: { pays: "CM", identifiant: "M012345678901A" } },
+    ],
   },
   {
     id: "generer_paiement_mobile_money",
@@ -164,6 +210,11 @@ export const TOOLS: ToolConfig[] = [
       montant: 5000,
       reference: "FACT-2026-001",
     },
+    presets: [
+      { label: "Wave Sénégal (5 000 F)", args: { operateur: "Wave", pays: "SN", telephone: "77 123 45 67", montant: 5000, reference: "FACT-2026-001" } },
+      { label: "Orange Money CI (10 000 F)", args: { operateur: "Orange Money", pays: "CI", telephone: "07 08 12 34 56", montant: 10000, reference: "COMMANDE-42" } },
+      { label: "MTN MoMo Cameroun", args: { operateur: "MTN MoMo", pays: "CM", telephone: "670 12 34 56", montant: 25000, reference: "SUB-889" } },
+    ],
   },
 ];
 
@@ -191,6 +242,7 @@ function PlaygroundContent() {
 
   // Deep Link copied state
   const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedResult, setCopiedResult] = useState(false);
 
   // Recent History
   const [history, setHistory] = useState<ExecutionHistoryItem[]>([]);
@@ -287,10 +339,44 @@ function PlaygroundContent() {
   };
 
   const updateArg = (key: string, value: any) => {
-    const updated = { ...currentArgs, [key]: value };
+    let updated = { ...currentArgs, [key]: value };
+
+    // Détection automatique du pays lors de la saisie d'un indicatif téléphonique
+    if (key === "numero" && typeof value === "string") {
+      const trimmed = value.trim();
+      if (trimmed.startsWith("+") || trimmed.startsWith("00")) {
+        const clean = trimmed.startsWith("00") ? "+" + trimmed.slice(2) : trimmed;
+        // Recherche du pays avec l'indicatif correspondant le plus long
+        const matchedCountry = [...SUPPORTED_COUNTRIES]
+          .sort((a, b) => b.dialCode.length - a.dialCode.length)
+          .find((c) => clean.startsWith(c.dialCode));
+
+        if (matchedCountry && updated.pays !== matchedCountry.iso2) {
+          updated = { ...updated, pays: matchedCountry.iso2 };
+        }
+      }
+    }
+
     setCurrentArgs(updated);
     setJsonText(JSON.stringify(updated, null, 2));
     updateUrlParams(selectedTool.id, updated);
+  };
+
+  const handleApplyPreset = (presetArgs: Record<string, any>) => {
+    setCurrentArgs(presetArgs);
+    setJsonText(JSON.stringify(presetArgs, null, 2));
+    updateUrlParams(selectedTool.id, presetArgs);
+  };
+
+  const handleCopyResult = async () => {
+    if (!response) return;
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(response, null, 2));
+      setCopiedResult(true);
+      setTimeout(() => setCopiedResult(false), 2000);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleCopyShareLink = async () => {
@@ -615,6 +701,28 @@ function PlaygroundContent() {
                 </div>
               </div>
 
+              {/* Exemples rapides / Presets pour l'outil sélectionné */}
+              {selectedTool.presets && selectedTool.presets.length > 0 && (
+                <div className="mb-4 pb-3 border-b border-slate-800/80">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-2 font-medium">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Exemples rapides :</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedTool.presets.map((preset, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => handleApplyPreset(preset.args)}
+                        className="px-2.5 py-1 rounded-lg bg-slate-950 hover:bg-slate-800/90 border border-slate-800 hover:border-amber-500/40 text-xs text-slate-300 hover:text-white transition-all cursor-pointer"
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Mode Formulaire Intuitif */}
               {viewMode === "form" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -833,11 +941,32 @@ function PlaygroundContent() {
                   )}
                   <span>Résultat & Intégration</span>
                 </div>
-                {response?.confiance && (
-                  <span className="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-md">
-                    Confiance : {response.confiance}
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {response?.confiance && (
+                    <span className="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-md">
+                      Confiance : {response.confiance}
+                    </span>
+                  )}
+                  {response && (
+                    <button
+                      onClick={handleCopyResult}
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:text-white transition-all cursor-pointer"
+                      title="Copier le JSON résultat"
+                    >
+                      {copiedResult ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400 font-medium">Copié</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-slate-400" />
+                          <span>Copier JSON</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Carte Visuelle Haute Fidélité */}
