@@ -13,7 +13,7 @@
 
 ---
 
-## 💡 Pourquoi Wezas Africa Toolkit ?
+## Pourquoi Wezas Africa Toolkit ?
 
 Dans des projets comme **MedRDV**, **StockR** ou **Gabozon**, nous retrouvons systématiquement les mêmes besoins :
 - Valider un numéro de téléphone africain avec les bons formats (8, 9 ou 10 chiffres selon les récentes réformes ARCEP), détecter l'opérateur et sa compatibilité Mobile Money.
@@ -24,7 +24,7 @@ Dans des projets comme **MedRDV**, **StockR** ou **Gabozon**, nous retrouvons sy
 
 ---
 
-## ⚡ Installation rapide & Connexion MCP
+## Installation rapide & Connexion MCP
 
 ### Option A : Directement via `npx` (Recommandé, Node.js / Claude Desktop)
 ```bash
@@ -47,7 +47,7 @@ Vous pouvez également connecter vos agents directement au serveur hébergé sur
 
 ---
 
-## 🔌 Configuration dans vos IDE & Clients IA
+## Configuration dans vos IDE & Clients IA
 
 ### 1. Claude Desktop
 
@@ -90,7 +90,7 @@ Dans votre fichier `~/.codeium/windsurf/mcp_config.json` :
 
 ---
 
-## 🛠️ Outils disponibles (Volet 1)
+## Outils disponibles (Volet 1)
 
 Tous les outils retournent une réponse enveloppée uniforme (`Envelope`) contenant `ok`, `data`, `source`, `derniere_verification`, `confiance` et d'éventuels `avertissements`.
 
@@ -136,7 +136,7 @@ Informations clés complètes et calendrier des jours fériés légaux.
 
 ---
 
-## 🌍 Couverture actuelle (v0.1)
+## Couverture actuelle (v0.1)
 
 | Zone | Pays couverts |
 |---|---|
@@ -145,7 +145,7 @@ Informations clés complètes et calendrier des jours fériés légaux.
 
 ---
 
-## 🤝 Contribuer
+## Contribuer
 
 Wezas Africa Toolkit est un projet communautaire. Vous pouvez facilement ajouter de nouveaux pays ou corriger des données télécoms :
 - Consultez le [Guide de Contribution (CONTRIBUTING.md)](CONTRIBUTING.md).
@@ -154,5 +154,5 @@ Wezas Africa Toolkit est un projet communautaire. Vous pouvez facilement ajouter
 
 ---
 
-## 📜 Licence
+## Licence
 Distribué sous licence open source [MIT](LICENSE).
