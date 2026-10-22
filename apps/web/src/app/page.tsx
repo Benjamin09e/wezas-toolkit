@@ -258,7 +258,8 @@ function PlaygroundContent() {
     setSelectedTool(matched);
     setCurrentArgs(newArgs);
     setJsonText(JSON.stringify(newArgs, null, 2));
-  }, [searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Update URL Query String silently without page reload
   const updateUrlParams = (toolId: string, args: Record<string, any>) => {
@@ -270,7 +271,10 @@ function PlaygroundContent() {
         params.set(k, String(v));
       }
     });
-    const newRelativePathQuery = window.location.pathname + "?" + params.toString();
+    const queryString = params.toString();
+    const newRelativePathQuery = queryString
+      ? window.location.pathname + "?" + queryString
+      : window.location.pathname;
     window.history.replaceState(null, "", newRelativePathQuery);
   };
 
