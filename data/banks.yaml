@@ -1,0 +1,155 @@
+# Référentiel des codes banques UEMOA (BCEAO) et CEMAC (BEAC)
+# Code banque : 5 caractères (ex: CI034, SN012, GA040, CM021...)
+
+banks:
+  # CÔTE D'IVOIRE (CI)
+  CI008:
+    nom: "Société Générale Côte d'Ivoire (SGCI)"
+    pays: "CI"
+    bic: "SGBICIAB"
+    zone: "UEMOA"
+  CI034:
+    nom: "Ecobank Côte d'Ivoire"
+    pays: "CI"
+    bic: "ECOBCIAB"
+    zone: "UEMOA"
+  CI062:
+    nom: "Bank of Africa Côte d'Ivoire (BOA)"
+    pays: "CI"
+    bic: "AFRICIAB"
+    zone: "UEMOA"
+  CI082:
+    nom: "Coris Bank International Côte d'Ivoire"
+    pays: "CI"
+    bic: "CORICIAB"
+    zone: "UEMOA"
+  CI032:
+    nom: "BNI (Banque Nationale d'Investissement)"
+    pays: "CI"
+    bic: "BNINCIAB"
+    zone: "UEMOA"
+  CI058:
+    nom: "Bridge Bank Group Côte d'Ivoire"
+    pays: "CI"
+    bic: "BBRICIAB"
+    zone: "UEMOA"
+
+  # SÉNÉGAL (SN)
+  SN012:
+    nom: "CBAO Groupe Attijariwafa bank"
+    pays: "SN"
+    bic: "CBAOSNDA"
+    zone: "UEMOA"
+  SN011:
+    nom: "Société Générale Sénégal (SGBS)"
+    pays: "SN"
+    bic: "SGBISNDA"
+    zone: "UEMOA"
+  SN048:
+    nom: "Ecobank Sénégal"
+    pays: "SN"
+    bic: "ECOBSNDA"
+    zone: "UEMOA"
+  SN093:
+    nom: "Bank of Africa Sénégal"
+    pays: "SN"
+    bic: "AFRISNDA"
+    zone: "UEMOA"
+  SN153:
+    nom: "Coris Bank International Sénégal"
+    pays: "SN"
+    bic: "CORISNDA"
+    zone: "UEMOA"
+  SN040:
+    nom: "BHS (Banque de l'Habitat du Sénégal)"
+    pays: "SN"
+    bic: "BHASSNDA"
+    zone: "UEMOA"
+
+  # BÉNIN (BJ)
+  BJ061:
+    nom: "Bank of Africa Bénin"
+    pays: "BJ"
+    bic: "AFRIBJBJ"
+    zone: "UEMOA"
+  BJ062:
+    nom: "Ecobank Bénin"
+    pays: "BJ"
+    bic: "ECOBBJBJ"
+    zone: "UEMOA"
+  BJ065:
+    nom: "Société Générale Bénin"
+    pays: "BJ"
+    bic: "SGBIBJBJ"
+    zone: "UEMOA"
+
+  # BURKINA FASO (BF)
+  BF084:
+    nom: "Coris Bank International Burkina Faso"
+    pays: "BF"
+    bic: "CORIBFBF"
+    zone: "UEMOA"
+  BF058:
+    nom: "Ecobank Burkina Faso"
+    pays: "BF"
+    bic: "ECOBBFBF"
+    zone: "UEMOA"
+  BF061:
+    nom: "Bank of Africa Burkina Faso"
+    pays: "BF"
+    bic: "AFRIBFBF"
+    zone: "UEMOA"
+
+  # CAMEROUN (CM)
+  CM021:
+    nom: "Afriland First Bank"
+    pays: "CM"
+    bic: "AFRICMCX"
+    zone: "CEMAC"
+  CM002:
+    nom: "Société Générale Cameroun"
+    pays: "CM"
+    bic: "SGBICMCX"
+    zone: "CEMAC"
+  CM006:
+    nom: "BICEC (Banque Internationale du Cameroun pour l'Épargne et le Crédit)"
+    pays: "CM"
+    bic: "BCECCMCX"
+    zone: "CEMAC"
+  CM024:
+    nom: "Ecobank Cameroun"
+    pays: "CM"
+    bic: "ECOBCMCX"
+    zone: "CEMAC"
+  CM033:
+    nom: "UBA Cameroon (United Bank for Africa)"
+    pays: "CM"
+    bic: "UNAFCMCX"
+    zone: "CEMAC"
+
+  # GABON (GA)
+  GA040:
+    nom: "BGFIBank Gabon"
+    pays: "GA"
+    bic: "BGFIGAFF"
+    zone: "CEMAC"
+  GA041:
+    nom: "BICIG (Banque Internationale pour le Commerce et l'Industrie du Gabon)"
+    pays: "GA"
+    bic: "BCEIGAFF"
+    zone: "CEMAC"
+  GA043:
+    nom: "Union Gabonaise de Banque (UGB - Groupe Attijariwafa)"
+    pays: "GA"
+    bic: "UGBLGAFF"
+    zone: "CEMAC"
+  GA047:
+    nom: "Ecobank Gabon"
+    pays: "GA"
+    bic: "ECOBGAFF"
+    zone: "CEMAC"
+  GA053:
+    nom: "Orabank Gabon"
+    pays: "GA"
+    bic: "BINGGAFF"
+    zone: "CEMAC"

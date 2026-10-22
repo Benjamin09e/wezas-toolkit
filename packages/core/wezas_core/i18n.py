@@ -55,6 +55,10 @@ MESSAGES: dict[str, tuple[str, str]] = {
         "Le taux personnalisé doit être un nombre strictement positif.",
         "The custom exchange rate must be a strictly positive number.",
     ),
+    "BANK_NOT_FOUND": (
+        "Code banque '{code}' non répertorié dans le référentiel local.",
+        "Bank code '{code}' not found in local registry.",
+    ),
 }
 
 

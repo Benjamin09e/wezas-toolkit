@@ -7,9 +7,17 @@ from wezas_core.currency import convert as convert_currency
 from wezas_core.country import get_country_info
 from wezas_core.vat import calculate_vat
 from wezas_core.format_amount import format_amount
+from wezas_core.rib import validate_rib
 from wezas_api.auth import verify_api_key
 
 router = APIRouter(prefix="/v1", tags=["Outils"])
+
+
+class RibValidationRequest(BaseModel):
+    code_banque: str = Field(..., description="Code banque à 5 caractères (ex: CI008, SN012, GA040)")
+    code_guichet: str = Field(..., description="Code guichet à 5 chiffres (ex: 01111)")
+    numero_compte: str = Field(..., description="Numéro de compte à 11 ou 12 caractères")
+    cle_rib: str = Field(..., description="Clé de contrôle à 2 chiffres")
 
 
 class PhoneValidationRequest(BaseModel):
@@ -86,5 +94,19 @@ async def api_format_amount(
         amount=req.montant,
         devise=req.devise,
         pays=req.pays,
+    )
+    return envelope.model_dump()
+
+
+@router.post("/bank/rib/validate")
+async def api_validate_rib(
+    req: RibValidationRequest,
+    api_key: Optional[str] = Depends(verify_api_key),
+):
+    envelope = validate_rib(
+        code_banque=req.code_banque,
+        code_guichet=req.code_guichet,
+        numero_compte=req.numero_compte,
+        cle_rib=req.cle_rib,
     )
     return envelope.model_dump()

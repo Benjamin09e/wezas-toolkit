@@ -12,6 +12,7 @@ from wezas_mcp.tools import format_amount as format_amount_tools
 from wezas_mcp.tools import operators as operators_tools
 from wezas_mcp.tools import payment as payment_tools
 from wezas_mcp.tools import phone as phone_tools
+from wezas_mcp.tools import rib as rib_tools
 from wezas_mcp.tools import tin as tin_tools
 from wezas_mcp.tools import vat as vat_tools
 
@@ -51,6 +52,7 @@ async def health_check(request: Any) -> Any:
                 "info_pays",
                 "formater_montant",
                 "calculer_tva",
+                "valider_rib",
                 "lister_operateurs",
                 "valider_identifiant_fiscal",
                 "generer_paiement_mobile_money",
@@ -99,6 +101,7 @@ vat_tools.register(mcp)
 operators_tools.register(mcp)
 tin_tools.register(mcp)
 payment_tools.register(mcp)
+rib_tools.register_tool(mcp)
 
 
 def main() -> None:

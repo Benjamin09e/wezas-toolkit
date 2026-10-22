@@ -39,3 +39,26 @@ def test_vat_endpoint():
     assert response.status_code == 200
     res = response.json()
     assert "18" in str(res["data"]["taux_pourcentage"])
+
+
+def test_rib_endpoint():
+    from wezas_core.rib import compute_rib_key
+
+    code_b = "CI008"
+    code_g = "01111"
+    compte = "01234567890"
+    cle = compute_rib_key(code_b, code_g, compte)
+
+    response = client.post(
+        "/v1/bank/rib/validate",
+        json={
+            "code_banque": code_b,
+            "code_guichet": code_g,
+            "numero_compte": compte,
+            "cle_rib": cle,
+        },
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["data"]["valide"] is True
+    assert res["data"]["banque"]["nom"] == "Société Générale Côte d'Ivoire (SGCI)"
