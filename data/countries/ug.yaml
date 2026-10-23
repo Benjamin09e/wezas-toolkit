@@ -1,0 +1,76 @@
+iso2: UG
+iso3: UGA
+name:
+  fr: Ouganda
+  en: Uganda
+capital: Kampala
+dial_code: "+256"
+currency: UGX
+languages:
+  - en
+  - sw
+timezones:
+  - Africa/Kampala
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["77", "78", "76"]
+      operator: mtn-ug
+    - type: mobile
+      prefixes: ["70", "75", "74"]
+      operator: airtel-ug
+    - type: mobile
+      prefixes: ["72"]
+      operator: utl-ug
+    - type: mobile
+      prefixes: ["79"]
+      operator: africell-ug
+    - type: mobile
+      prefixes: ["71"]
+      operator: smile-ug
+    - type: fixed
+      prefixes: ["41", "43", "44", "45", "46", "47", "48"]
+mobile_money:
+  - "MTN MoMo"
+  - "Airtel Money"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-26"
+      name: {fr: "Jour de la Libération du NRM", en: "NRM Liberation Day"}
+    - date: "02-16"
+      name: {fr: "Jour de l'Archevêque Janani Luwum", en: "Archbishop Janani Luwum Day"}
+    - date: "03-08"
+      name: {fr: "Journée Internationale de la Femme", en: "International Women's Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "06-03"
+      name: {fr: "Jour des Martyrs de l'Ouganda", en: "Uganda Martyrs Day"}
+    - date: "06-09"
+      name: {fr: "Jour des Héros Nationaux", en: "National Heroes Day"}
+    - date: "10-09"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Lendemain de Noël", en: "Boxing Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+sources:
+  - label: "Uganda Communications Commission (UCC) National Numbering Plan"
+    url: "https://www.ucc.co.ug"
+  - label: "Bank of Uganda (BOU) National Payment Systems"
+    url: "https://www.bou.or.ug"
+last_verified: 2026-10-24

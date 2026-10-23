@@ -175,3 +175,115 @@ banks:
     pays: "GN"
     bic: "BISLGNCN"
     zone: "BCRG"
+
+  # NIGERIA (NG) - Codes Banques CBN (3 chiffres CBN / NUBAN)
+  NG044:
+    nom: "Access Bank"
+    pays: "NG"
+    cbn_code: "044"
+    bic: "ACENNGMM"
+    zone: "CBN"
+  NG058:
+    nom: "Guaranty Trust Bank (GTBank)"
+    pays: "NG"
+    cbn_code: "058"
+    bic: "GTBINGLA"
+    zone: "CBN"
+  NG011:
+    nom: "First Bank of Nigeria (FBN)"
+    pays: "NG"
+    cbn_code: "011"
+    bic: "FBNINGLA"
+    zone: "CBN"
+  NG057:
+    nom: "Zenith Bank"
+    pays: "NG"
+    cbn_code: "057"
+    bic: "ZEIBNGLA"
+    zone: "CBN"
+  NG033:
+    nom: "United Bank for Africa (UBA)"
+    pays: "NG"
+    cbn_code: "033"
+    bic: "UBANNGMM"
+    zone: "CBN"
+  NG050:
+    nom: "Ecobank Nigeria"
+    pays: "NG"
+    cbn_code: "050"
+    bic: "ECOBNGLA"
+    zone: "CBN"
+  NG214:
+    nom: "First City Monument Bank (FCMB)"
+    pays: "NG"
+    cbn_code: "214"
+    bic: "FCMBNGLA"
+    zone: "CBN"
+  NG070:
+    nom: "Fidelity Bank"
+    pays: "NG"
+    cbn_code: "070"
+    bic: "FIDENGLA"
+    zone: "CBN"
+  NG221:
+    nom: "Stanbic IBTC Bank"
+    pays: "NG"
+    cbn_code: "221"
+    bic: "SBICNGLA"
+    zone: "CBN"
+  NG035:
+    nom: "Wema Bank (ALAT)"
+    pays: "NG"
+    cbn_code: "035"
+    bic: "WEMANGLA"
+    zone: "CBN"
+  NG090267:
+    nom: "Kuda Bank (Microfinance Bank)"
+    pays: "NG"
+    cbn_code: "090267"
+    bic: "KUDANGLA"
+    zone: "CBN"
+  NG090110:
+    nom: "OPay (PayCom MFB)"
+    pays: "NG"
+    cbn_code: "090110"
+    bic: "OPAYNGLA"
+    zone: "CBN"
+  NG090263:
+    nom: "PalmPay"
+    pays: "NG"
+    cbn_code: "090263"
+    bic: "PALMNGLA"
+    zone: "CBN"
+
+  # GHANA (GH) - Codes Banques BOG (BoG 2/3 chiffres)
+  GH010:
+    nom: "GCB Bank Limited"
+    pays: "GH"
+    cbn_code: "010"
+    bic: "GCBLGHAC"
+    zone: "BOG"
+  GH020:
+    nom: "Standard Chartered Bank Ghana"
+    pays: "GH"
+    cbn_code: "020"
+    bic: "SCBLGHAC"
+    zone: "BOG"
+  GH030:
+    nom: "Barclays Bank of Ghana / Absa Bank"
+    pays: "GH"
+    cbn_code: "030"
+    bic: "BARCGHAC"
+    zone: "BOG"
+  GH040:
+    nom: "Ecobank Ghana"
+    pays: "GH"
+    cbn_code: "040"
+    bic: "ECOBGHAC"
+    zone: "BOG"
+  GH060:
+    nom: "Stanbic Bank Ghana"
+    pays: "GH"
+    cbn_code: "060"
+    bic: "SBICGHAC"
+    zone: "BOG"

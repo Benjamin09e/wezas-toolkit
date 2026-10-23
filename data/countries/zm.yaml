@@ -1,0 +1,68 @@
+iso2: ZM
+iso3: ZMB
+name:
+  fr: Zambie
+  en: Zambia
+capital: Lusaka
+dial_code: "+260"
+currency: ZMW
+languages:
+  - en
+timezones:
+  - Africa/Lusaka
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["97", "77"]
+      operator: airtel-zm
+    - type: mobile
+      prefixes: ["96", "76"]
+      operator: mtn-zm
+    - type: mobile
+      prefixes: ["95", "75"]
+      operator: zamtel-zm
+    - type: fixed
+      prefixes: ["21"]
+mobile_money:
+  - "Airtel Money"
+  - "MTN MoMo"
+  - "Zamtel Kwacha"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "03-08"
+      name: {fr: "Journée Internationale de la Femme", en: "International Women's Day"}
+    - date: "03-12"
+      name: {fr: "Fête de la Jeunesse", en: "Youth Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "05-25"
+      name: {fr: "Journée de la Libération de l'Afrique", en: "Africa Freedom Day"}
+    - date: "07-06"
+      name: {fr: "Journée des Héros", en: "Heroes' Day"}
+    - date: "07-07"
+      name: {fr: "Journée de l'Unité", en: "Unity Day"}
+    - date: "08-03"
+      name: {fr: "Journée des Fermiers (Farmers' Day)", en: "Farmers' Day"}
+    - date: "10-18"
+      name: {fr: "Journée Nationale de Prière", en: "National Prayer Day"}
+    - date: "10-24"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: -1
+      name: {fr: "Samedi Saint", en: "Holy Saturday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+sources:
+  - label: "Zambia Information and Communications Technology Authority (ZICTA) National Numbering Plan"
+    url: "https://www.zicta.zm"
+  - label: "Bank of Zambia (BOZ) National Payment Systems"
+    url: "https://www.boz.zm"
+last_verified: 2026-10-24

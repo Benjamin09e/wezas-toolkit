@@ -1,0 +1,87 @@
+iso2: TZ
+iso3: TZA
+name:
+  fr: Tanzanie
+  en: Tanzania
+capital: Dodoma
+dial_code: "+255"
+currency: TZS
+languages:
+  - sw
+  - en
+timezones:
+  - Africa/Dar_es_Salaam
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["74", "75", "76"]
+      operator: vodacom-tz
+    - type: mobile
+      prefixes: ["68", "69", "78"]
+      operator: airtel-tz
+    - type: mobile
+      prefixes: ["65", "67", "71"]
+      operator: tigo-tz
+    - type: mobile
+      prefixes: ["62"]
+      operator: halotel-tz
+    - type: mobile
+      prefixes: ["73", "77"]
+      operator: zantel-tz
+    - type: mobile
+      prefixes: ["72"]
+      operator: ttcl-tz
+    - type: fixed
+      prefixes: ["22", "23", "24", "25", "26", "27", "28"]
+mobile_money:
+  - "M-Pesa"
+  - "Airtel Money"
+  - "Tigo Pesa"
+  - "HaloPesa"
+  - "Ezypesa"
+  - "T-Pesa"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-12"
+      name: {fr: "Fête de la Révolution de Zanzibar", en: "Zanzibar Revolution Day"}
+    - date: "04-07"
+      name: {fr: "Jour des Héros de Karume", en: "Karume Day"}
+    - date: "04-26"
+      name: {fr: "Fête de l'Union", en: "Union Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "07-07"
+      name: {fr: "Saba Saba (Jour de l'Industrie)", en: "Saba Saba Day"}
+    - date: "08-08"
+      name: {fr: "Nane Nane (Fête des Agriculteurs)", en: "Farmers' Day"}
+    - date: "10-14"
+      name: {fr: "Jour de Nyerere", en: "Nyerere Day"}
+    - date: "12-09"
+      name: {fr: "Fête de l'Indépendance et de la République", en: "Independence and Republic Day"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Lendemain de Noël", en: "Boxing Day"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Lundi de Pâques", en: "Easter Monday"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+      - date: 2026-08-26
+        name: {fr: "Mawlid", en: "Maulid Day"}
+sources:
+  - label: "Tanzania Communications Regulatory Authority (TCRA) National Numbering Plan"
+    url: "https://www.tcra.go.tz"
+  - label: "Bank of Tanzania (BOT) National Payment Systems"
+    url: "https://www.bot.go.tz"
+last_verified: 2026-10-24

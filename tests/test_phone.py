@@ -99,6 +99,53 @@ def test_validate_phone_expansion_countries():
     assert res_ma["data"]["operateur_probable"] == "Orange Maroc"
 
 
+    # Tanzanie (TZ) - Vodacom (75)
+    res_tz = validate_phone("TZ", "0754 12 34 56").model_dump(mode="json")
+    assert res_tz["ok"] is True
+    assert res_tz["data"]["e164"] == "+255754123456"
+    assert "Vodacom" in res_tz["data"]["operateur_probable"]
+    assert "M-Pesa" in res_tz["data"]["mobile_money"]
+
+    # Ouganda (UG) - MTN (77)
+    res_ug = validate_phone("UG", "0772 12 34 56").model_dump(mode="json")
+    assert res_ug["ok"] is True
+    assert res_ug["data"]["e164"] == "+256772123456"
+    assert "MTN" in res_ug["data"]["operateur_probable"]
+    assert "MTN MoMo" in res_ug["data"]["mobile_money"]
+
+    # Afrique du Sud (ZA) - Vodacom (82)
+    res_za = validate_phone("ZA", "082 123 4567").model_dump(mode="json")
+    assert res_za["ok"] is True
+    assert res_za["data"]["e164"] == "+27821234567"
+    assert "Vodacom" in res_za["data"]["operateur_probable"]
+    assert "Vodapay" in res_za["data"]["mobile_money"]
+
+    # Zambie (ZM) - Airtel (97)
+    res_zm = validate_phone("ZM", "097 123 4567").model_dump(mode="json")
+    assert res_zm["ok"] is True
+    assert res_zm["data"]["e164"] == "+260971234567"
+    assert "Airtel" in res_zm["data"]["operateur_probable"]
+    assert "Airtel Money" in res_zm["data"]["mobile_money"]
+
+    # Tunisie (TN) - Ooredoo (2)
+    res_tn = validate_phone("TN", "20 123 456").model_dump(mode="json")
+    assert res_tn["ok"] is True
+    assert res_tn["data"]["e164"] == "+21620123456"
+    assert "Ooredoo" in res_tn["data"]["operateur_probable"]
+
+    # Algérie (DZ) - Mobilis (6)
+    res_dz = validate_phone("DZ", "0661 12 34 56").model_dump(mode="json")
+    assert res_dz["ok"] is True
+    assert res_dz["data"]["e164"] == "+213661123456"
+    assert "Mobilis" in res_dz["data"]["operateur_probable"]
+
+    # Égypte (EG) - Vodafone (10)
+    res_eg = validate_phone("EG", "0100 123 4567").model_dump(mode="json")
+    assert res_eg["ok"] is True
+    assert res_eg["data"]["e164"] == "+201001234567"
+    assert "Vodafone" in res_eg["data"]["operateur_probable"]
+
+
 def test_mcp_phone_tool_callable():
     async def run():
         async with Client(mcp) as client:

@@ -282,3 +282,133 @@ operators:
     nom: "Cellcom Guinée"
     pays: ["GN"]
     mobile_money: []
+
+  # --- TANZANIE (TZ) ---
+  vodacom-tz:
+    nom: "Vodacom Tanzania"
+    pays: ["TZ"]
+    mobile_money: ["M-Pesa"]
+  airtel-tz:
+    nom: "Airtel Tanzania"
+    pays: ["TZ"]
+    mobile_money: ["Airtel Money"]
+  tigo-tz:
+    nom: "Tigo Tanzania (Yas)"
+    pays: ["TZ"]
+    mobile_money: ["Tigo Pesa"]
+  halotel-tz:
+    nom: "Halotel Tanzania"
+    pays: ["TZ"]
+    mobile_money: ["HaloPesa"]
+  zantel-tz:
+    nom: "Zantel"
+    pays: ["TZ"]
+    mobile_money: ["Ezypesa"]
+  ttcl-tz:
+    nom: "TTCL Corporation"
+    pays: ["TZ"]
+    mobile_money: ["T-Pesa"]
+
+  # --- OUGANDA (UG) ---
+  mtn-ug:
+    nom: "MTN Uganda"
+    pays: ["UG"]
+    mobile_money: ["MTN MoMo"]
+  airtel-ug:
+    nom: "Airtel Uganda"
+    pays: ["UG"]
+    mobile_money: ["Airtel Money"]
+  utl-ug:
+    nom: "Uganda Telecom (UTEL)"
+    pays: ["UG"]
+    mobile_money: []
+  africell-ug:
+    nom: "Africell Uganda"
+    pays: ["UG"]
+    mobile_money: []
+  smile-ug:
+    nom: "Smile Communications Uganda"
+    pays: ["UG"]
+    mobile_money: []
+
+  # --- AFRIQUE DU SUD (ZA) ---
+  vodacom-za:
+    nom: "Vodacom South Africa"
+    pays: ["ZA"]
+    mobile_money: ["Vodapay"]
+  mtn-za:
+    nom: "MTN South Africa"
+    pays: ["ZA"]
+    mobile_money: ["MTN MoMo"]
+  cell-c-za:
+    nom: "Cell C"
+    pays: ["ZA"]
+    mobile_money: []
+  telkom-za:
+    nom: "Telkom South Africa"
+    pays: ["ZA"]
+    mobile_money: []
+  rain-za:
+    nom: "rain South Africa"
+    pays: ["ZA"]
+    mobile_money: []
+
+  # --- ZAMBIE (ZM) ---
+  airtel-zm:
+    nom: "Airtel Zambia"
+    pays: ["ZM"]
+    mobile_money: ["Airtel Money"]
+  mtn-zm:
+    nom: "MTN Zambia"
+    pays: ["ZM"]
+    mobile_money: ["MTN MoMo"]
+  zamtel-zm:
+    nom: "Zamtel"
+    pays: ["ZM"]
+    mobile_money: ["Zamtel Kwacha"]
+
+  # --- TUNISIE (TN) ---
+  ooredoo-tn:
+    nom: "Ooredoo Tunisie"
+    pays: ["TN"]
+    mobile_money: ["Mobicash"]
+  orange-tn:
+    nom: "Orange Tunisie"
+    pays: ["TN"]
+    mobile_money: ["Orange Money"]
+  tunisie-telecom-tn:
+    nom: "Tunisie Telecom"
+    pays: ["TN"]
+    mobile_money: []
+
+  # --- ALGÉRIE (DZ) ---
+  mobilis-dz:
+    nom: "Mobilis (ATM)"
+    pays: ["DZ"]
+    mobile_money: []
+  djezzy-dz:
+    nom: "Djezzy (OTA)"
+    pays: ["DZ"]
+    mobile_money: []
+  ooredoo-dz:
+    nom: "Ooredoo Algérie (WTA)"
+    pays: ["DZ"]
+    mobile_money: []
+
+  # --- ÉGYPTE (EG) ---
+  vodafone-eg:
+    nom: "Vodafone Egypt"
+    pays: ["EG"]
+    mobile_money: ["Vodafone Cash"]
+  orange-eg:
+    nom: "Orange Egypt"
+    pays: ["EG"]
+    mobile_money: ["Orange Cash"]
+  etisalat-eg:
+    nom: "Etisalat Egypt (e&)"
+    pays: ["EG"]
+    mobile_money: ["Etisalat Cash"]
+  we-eg:
+    nom: "WE (Telecom Egypt)"
+    pays: ["EG"]
+    mobile_money: ["WE Pay"]

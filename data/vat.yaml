@@ -133,3 +133,45 @@ vat_rates:
     nom_local: "TVA"
     source: "Direction Nationale des Impôts (DNI Guinée) - Code Général des Impôts (18%)"
     derniere_verification: "2026-10-22"
+  TZ:
+    standard: 0.18   # 18% en Tanzanie
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "Tanzania Revenue Authority (TRA) - Value Added Tax Act (18%)"
+    derniere_verification: "2026-10-24"
+  UG:
+    standard: 0.18   # 18% en Ouganda
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "Uganda Revenue Authority (URA) - Value Added Tax Act (18%)"
+    derniere_verification: "2026-10-24"
+  ZA:
+    standard: 0.15   # 15% en Afrique du Sud
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "South African Revenue Service (SARS) - Value-Added Tax Act (15%)"
+    derniere_verification: "2026-10-24"
+  ZM:
+    standard: 0.16   # 16% en Zambie
+    reduit: 0.00
+    nom_local: "VAT"
+    source: "Zambia Revenue Authority (ZRA) - Value Added Tax Act (16%)"
+    derniere_verification: "2026-10-24"
+  TN:
+    standard: 0.19   # 19% en Tunisie
+    reduit: 0.07     # 7% taux réduit (santé, hôtellerie, informatique...)
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts de Tunisie - Code de la TVA (19%)"
+    derniere_verification: "2026-10-24"
+  DZ:
+    standard: 0.19   # 19% en Algérie
+    reduit: 0.09     # 9% taux réduit (produits de base, matières premières)
+    nom_local: "TVA"
+    source: "Direction Générale des Impôts d'Algérie - Code des Taxes sur le Chiffre d'Affaires (19%)"
+    derniere_verification: "2026-10-24"
+  EG:
+    standard: 0.14   # 14% en Égypte
+    reduit: 0.05     # 5% pour les machines industrielles / équipements
+    nom_local: "VAT"
+    source: "Egyptian Tax Authority (ETA) - Value Added Tax Law No. 67 (14%)"
+    derniere_verification: "2026-10-24"

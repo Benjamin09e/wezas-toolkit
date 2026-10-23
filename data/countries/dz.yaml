@@ -1,0 +1,62 @@
+iso2: DZ
+iso3: DZA
+name:
+  fr: Algérie
+  en: Algeria
+capital: Alger
+dial_code: "+213"
+currency: DZD
+languages:
+  - ar
+  - fr
+  - ber
+timezones:
+  - Africa/Algiers
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["5"]
+      operator: ooredoo-dz
+    - type: mobile
+      prefixes: ["6"]
+      operator: mobilis-dz
+    - type: mobile
+      prefixes: ["7"]
+      operator: djezzy-dz
+    - type: fixed
+      prefixes: ["21", "23", "24", "25", "26", "27", "29", "31", "32", "33", "34", "35", "36", "37", "38", "41", "43", "45", "46", "48", "49"]
+mobile_money:
+  - "BaridiMob (Algérie Poste)"
+  - "Wimpay"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "01-12"
+      name: {fr: "Yennayer (Nouvel An Berbère)", en: "Yennayer"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "07-05"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "11-01"
+      name: {fr: "Anniversaire de la Révolution", en: "Revolution Day"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+      - date: 2026-06-17
+        name: {fr: "Awal Mouharram (Nouvel An Hégirien)", en: "Islamic New Year"}
+      - date: 2026-06-26
+        name: {fr: "Achoura", en: "Ashura"}
+      - date: 2026-08-26
+        name: {fr: "Mawlid Ennabawi", en: "Mawlid"}
+sources:
+  - label: "Autorité de Régulation de la Poste et des Télécommunications Électroniques (ARPCE Algérie)"
+    url: "https://www.arpce.dz"
+  - label: "Banque d'Algérie"
+    url: "https://www.bank-of-algeria.dz"
+last_verified: 2026-10-24

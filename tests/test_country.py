@@ -84,6 +84,49 @@ def test_get_country_info_unknown_country():
     assert res["error"]["code"] == "PAYS_INCONNU"
 
 
+def test_get_country_info_tanzania_and_uganda():
+    res_tz = get_country_info("TZ", annee=2026).model_dump(mode="json")
+    assert res_tz["ok"] is True
+    assert res_tz["data"]["indicatif"] == "+255"
+    assert res_tz["data"]["devise"]["code"] == "TZS"
+    assert "M-Pesa" in res_tz["data"]["mobile_money"]
+
+    res_ug = get_country_info("UG", annee=2026).model_dump(mode="json")
+    assert res_ug["ok"] is True
+    assert res_ug["data"]["indicatif"] == "+256"
+    assert res_ug["data"]["devise"]["code"] == "UGX"
+    assert "MTN MoMo" in res_ug["data"]["mobile_money"]
+
+    res_za = get_country_info("ZA", annee=2026).model_dump(mode="json")
+    assert res_za["ok"] is True
+    assert res_za["data"]["indicatif"] == "+27"
+    assert res_za["data"]["devise"]["code"] == "ZAR"
+    assert "Vodapay" in res_za["data"]["mobile_money"]
+
+    res_zm = get_country_info("ZM", annee=2026).model_dump(mode="json")
+    assert res_zm["ok"] is True
+    assert res_zm["data"]["indicatif"] == "+260"
+    assert res_zm["data"]["devise"]["code"] == "ZMW"
+    assert "Airtel Money" in res_zm["data"]["mobile_money"]
+
+    # Tunisie (TN), Algérie (DZ), Égypte (EG)
+    res_tn = get_country_info("TN", annee=2026).model_dump(mode="json")
+    assert res_tn["ok"] is True
+    assert res_tn["data"]["indicatif"] == "+216"
+    assert res_tn["data"]["devise"]["code"] == "TND"
+
+    res_dz = get_country_info("DZ", annee=2026).model_dump(mode="json")
+    assert res_dz["ok"] is True
+    assert res_dz["data"]["indicatif"] == "+213"
+    assert res_dz["data"]["devise"]["code"] == "DZD"
+
+    res_eg = get_country_info("EG", annee=2026).model_dump(mode="json")
+    assert res_eg["ok"] is True
+    assert res_eg["data"]["indicatif"] == "+20"
+    assert res_eg["data"]["devise"]["code"] == "EGP"
+    assert "Vodafone Cash" in res_eg["data"]["mobile_money"]
+
+
 def test_missing_lunar_year_adds_warning():
     # 2040 n'est pas tabulé pour les fêtes musulmanes
     res = get_country_info("Sénégal", annee=2040).model_dump(mode="json")

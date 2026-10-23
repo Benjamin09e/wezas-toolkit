@@ -21,6 +21,10 @@
 | E8 – Distribution & release | WAT-036 → 039 | 100 % |
 | E9 – Outils bonus | WAT-040 → 042 | 100 % |
 | E10 – Volet 2 (en ligne) | WAT-043 → 045 | 100 % |
+| E11 – Expansion régionale (Afrique de l'Est/Nord/Australe) | WAT-046 → 049 | 100 % |
+| E12 – Validation bancaire étendue (NUBAN & IBAN) | WAT-050 → 052 | 100 % |
+| E13 – Volet 2 : Auth & Rate Limiting API | WAT-053 → 055 | 0 % |
+| E14 – Écosystème SDK & MCP Registry | WAT-056 → 058 | 0 % |
 
 ---
 
@@ -340,6 +344,100 @@
 
 ---
 
+## E11 – Expansion régionale
+
+### WAT-046 – Données pays : Tanzanie (TZ) et Ouganda (UG)
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Tanzanie TZ et Ouganda UG intégrés, numérotation TCRA/UCC, devises TZS/UGX, Mobile Money M-Pesa/Airtel/MTN MoMo, TVA 18%, jours fériés 2026 et tests validés)
+- **Description** : Collecter et formaliser les métadonnées (devises TZS/UGX, plans de numérotation TCRA/UCC, Mobile Money M-Pesa/Airtel/MTN, TVA, jours fériés) pour la Tanzanie et l'Ouganda.
+- **Skills** : recherche documentaire, télécoms africains, validation de données.
+
+### WAT-047 – Données pays : Afrique du Sud (ZA) et Zambie (ZM)
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Afrique du Sud ZA et Zambie ZM intégrés, numérotation ICASA/ZICTA, devises ZAR/ZMW, Mobile Money Vodapay/MTN/Capitec/Airtel/Zamtel, TVA 15% SARS et 16% ZRA, jours fériés 2026 et tests validés)
+- **Description** : Données sourcées pour l'Afrique du Sud et la Zambie (ZAR, ZMW, plans de numérotation ICASA/ZICTA, opérateurs Vodacom/MTN/Airtel/Zamtel).
+- **Skills** : recherche documentaire, plans E.164.
+
+### WAT-048 – Données pays : Afrique du Nord (Tunisie TN, Algérie DZ, Égypte EG)
+- **Priorité / Taille** : P2 / L
+- **Avancement** : Terminé (Tunisie TN, Algérie DZ et Égypte EG intégrés, numérotation INT/ARPCE/NTRA, devises TND/DZD/EGP, portefeuilles D17/Flouci/BaridiMob/Vodafone Cash/InstaPay, TVA locale, jours fériés 2026 et tests validés)
+- **Description** : Intégration des pays nord-africains (TND, DZD, EGP, indicatifs +216, +213, +20, TVA et formats locaux).
+- **Skills** : collecte de données, fiscalité maghrébine et égyptienne.
+
+### WAT-049 – Endpoint API info fiscale & TIN
+- **Priorité / Taille** : P1 / S
+- **Avancement** : Terminé (Endpoint POST `/v1/tax/tin/validate` exposé dans `wezas-api`, validation schémas/modèles Pydantic, tests d'intégration API validés)
+- **Description** : Exposer la validation des identifiants fiscaux (TIN/NIF/NCC/NINEA/KRA PIN déjà présents dans `wezas_core/tin.py`) dans l'API REST `wezas-api` et dans le serveur MCP.
+- **Skills** : FastAPI, MCP, validation de données.
+
+---
+
+## E12 – Validation bancaire étendue (NUBAN & IBAN)
+
+### WAT-050 – Algorithme NUBAN (Nigeria & Ghana)
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Algorithme officiel CBN modulo 10 pondéré implémenté dans `wezas_core/nuban.py`, support DMB 3 chiffres et OFI/MFB 6 chiffres, référentiel banques nigérianes/ghanéennes et tests unitaires validés)
+- **Description** : Implémenter l'algorithme officiel CBN (Central Bank of Nigeria) modulo 10 avec poids pondérés pour les comptes NUBAN 10 chiffres (Nigeria & Ghana) et lookup codes banques CBN.
+- **Skills** : algorithmes bancaires, tests unitaires.
+
+### WAT-051 – Validation IBAN pour pays africains
+- **Priorité / Taille** : P2 / M
+- **Avancement** : Terminé (Module `wezas_core/iban.py` implémentant l'algorithme MOD 97-10 standard ISO 7064 / 13616, décomposition BBAN et clés pour le Maroc MA, la Tunisie TN, la Mauritanie MR, l'Égypte EG, Maurice MU, et tests validés)
+- **Description** : Validation et extraction BIC pour les pays africains ayant adopté l'IBAN (Maroc, Tunisie, Mauritanie, etc.) selon la norme ISO 13616.
+- **Skills** : normes ISO 13616 / MOD-97-10.
+
+### WAT-052 – Intégration NUBAN & IBAN dans les outils MCP, API et Web
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (NUBAN et IBAN intégrés comme outils MCP dans `wezas_mcp`, endpoints REST `/v1/bank/nuban/validate` et `/v1/bank/iban/validate` dans `wezas-api`, intégration runner `scripts/exec_tool.py`, carte interactive de résultat dans le portail web React et build Next.js validé)
+- **Description** : Exposer la validation NUBAN/IBAN dans `valider_rib` / `valider_compte_bancaire` (MCP, FastAPI et composant web React).
+- **Skills** : Fullstack, FastMCP, React.
+
+---
+
+## E13 – Volet 2 : Auth & Rate Limiting API
+
+### WAT-053 – Middleware Rate Limiting (Token Bucket / Sliding Window)
+- **Priorité / Taille** : P1 / M
+- **Avancement** : À faire
+- **Description** : Mettre en place un rate limiter en mémoire (avec support Redis optionnel) selon les specs du Volet 2 (30 req/min sans clé, 600 req/min avec clé) avec en-têtes HTTP `X-RateLimit-*`.
+- **Skills** : FastAPI middlewares, async Python, sécurité réseau.
+
+### WAT-054 – Gestion et persistance des clés API
+- **Priorité / Taille** : P1 / M
+- **Avancement** : À faire
+- **Description** : Modèle de persistance et validation de clés API (MongoDB / SQLite) avec hachage SHA-256 et scopes de permissions (`read:tools`, `contrib:write`, `admin`).
+- **Skills** : MongoDB/Beanie, cryptographie, FastAPI dependencies.
+
+### WAT-055 – Endpoints de métriques & Swagger enrichi
+- **Priorité / Taille** : P2 / S
+- **Avancement** : À faire
+- **Description** : Documentation interactive avec Scalar ou Swagger UI personnalisé, métriques agrégées anonymisées sur `/metrics`.
+- **Skills** : OpenAPI, monitoring.
+
+---
+
+## E14 – Écosystème SDK & MCP Registry
+
+### WAT-056 – Complétion du SDK TypeScript
+- **Priorité / Taille** : P1 / M
+- **Avancement** : À faire
+- **Description** : Couvrir l'intégralité des outils core en TypeScript pur (`validatePhone`, `convertCurrency`, `validateRib`, `getCountryInfo`) et préparer le packaging npm.
+- **Skills** : TypeScript, npm packaging, vitest.
+
+### WAT-057 – Enregistrement aux registres MCP (Smithery, Glama, PulseMCP)
+- **Priorité / Taille** : P1 / S
+- **Avancement** : À faire
+- **Description** : Finaliser et tester les manifestes `smithery.yaml` et `glama.json` pour référence en 1 clic.
+- **Skills** : MCP, CI/CD, documentation.
+
+### WAT-058 – Interface d'administration et de gestion des clés dans le portail Web
+- **Priorité / Taille** : P2 / L
+- **Avancement** : À faire
+- **Description** : Espace développeur dans `apps/web` permettant de générer une clé test/live et de suivre sa consommation.
+- **Skills** : Next.js / React, Tailwind, UX développeur.
+
+---
+
 ## Jalons
 
 | Version | Contenu | Tickets |
@@ -347,3 +445,5 @@
 | **v0.1** | 3 outils, 12 pays, CI, publication | P0 + P1 des epics E0-E8 |
 | **v0.2** | Outils bonus, outils de contribution | E9, WAT-034, 035 |
 | **v1.0** | Volet 2, Docker, annuaires | E10, WAT-038, 039 |
+| **v1.1** | Expansion Afrique de l'Est & NUBAN, SDK TS | E11, E12, WAT-056 |
+| **v1.2** | Auth avancée, Rate Limiter, Portail clés | E13, E14 |

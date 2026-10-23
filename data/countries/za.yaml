@@ -1,0 +1,73 @@
+iso2: ZA
+iso3: ZAF
+name:
+  fr: Afrique du Sud
+  en: South Africa
+capital: Pretoria
+dial_code: "+27"
+currency: ZAR
+languages:
+  - en
+  - af
+  - zu
+  - xh
+timezones:
+  - Africa/Johannesburg
+numbering_plan:
+  national_length: 9
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["82", "72", "76", "79", "71"]
+      operator: vodacom-za
+    - type: mobile
+      prefixes: ["83", "73", "78", "81"]
+      operator: mtn-za
+    - type: mobile
+      prefixes: ["84", "74", "61"]
+      operator: cell-c-za
+    - type: mobile
+      prefixes: ["81", "67"]
+      operator: telkom-za
+    - type: mobile
+      prefixes: ["60"]
+      operator: rain-za
+    - type: fixed
+      prefixes: ["10", "11", "12", "21", "31", "41", "51"]
+mobile_money:
+  - "Vodapay"
+  - "MTN MoMo"
+  - "Capitec Pay"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "03-21"
+      name: {fr: "Jour des Droits de l'Homme", en: "Human Rights Day"}
+    - date: "04-27"
+      name: {fr: "Fête de la Liberté", en: "Freedom Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail (Workers' Day)", en: "Workers' Day"}
+    - date: "06-16"
+      name: {fr: "Journée de la Jeunesse", en: "Youth Day"}
+    - date: "08-09"
+      name: {fr: "Journée Nationale de la Femme", en: "National Women's Day"}
+    - date: "09-24"
+      name: {fr: "Jour du Patrimoine (Heritage Day)", en: "Heritage Day"}
+    - date: "12-16"
+      name: {fr: "Jour de la Réconciliation", en: "Day of Reconciliation"}
+    - date: "12-25"
+      name: {fr: "Noël", en: "Christmas Day"}
+    - date: "12-26"
+      name: {fr: "Jour de la Bonne Volonté (Day of Goodwill)", en: "Day of Goodwill"}
+  easter_based:
+    - offset_days: -2
+      name: {fr: "Vendredi Saint", en: "Good Friday"}
+    - offset_days: 1
+      name: {fr: "Jour de la Famille (Lundi de Pâques)", en: "Family Day"}
+sources:
+  - label: "Independent Communications Authority of South Africa (ICASA) National Numbering Plan"
+    url: "https://www.icasa.org.za"
+  - label: "South African Reserve Bank (SARB) National Payment System"
+    url: "https://www.resbank.co.za"
+last_verified: 2026-10-24

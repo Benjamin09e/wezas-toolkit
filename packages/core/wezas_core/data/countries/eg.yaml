@@ -1,0 +1,72 @@
+iso2: EG
+iso3: EGY
+name:
+  fr: Égypte
+  en: Egypt
+capital: Le Caire
+dial_code: "+20"
+currency: EGP
+languages:
+  - ar
+  - en
+timezones:
+  - Africa/Cairo
+numbering_plan:
+  national_length: 10
+  trunk_prefix: "0"
+  ranges:
+    - type: mobile
+      prefixes: ["10"]
+      operator: vodafone-eg
+    - type: mobile
+      prefixes: ["11"]
+      operator: etisalat-eg
+    - type: mobile
+      prefixes: ["12"]
+      operator: orange-eg
+    - type: mobile
+      prefixes: ["15"]
+      operator: we-eg
+    - type: fixed
+      prefixes: ["2", "3", "13", "40", "45", "47", "48", "50", "55", "57", "62", "64", "65", "66", "68", "69", "82", "84", "86", "88", "92", "93", "95", "96", "97"]
+mobile_money:
+  - "Vodafone Cash"
+  - "InstaPay"
+  - "Orange Cash"
+  - "Etisalat Cash"
+  - "WE Pay"
+holidays:
+  fixed:
+    - date: "01-07"
+      name: {fr: "Noël Copte", en: "Coptic Christmas Day"}
+    - date: "01-25"
+      name: {fr: "Fête de la Révolution du 25 Janvier / Fête de la Police", en: "Revolution Day / Police Day"}
+    - date: "04-25"
+      name: {fr: "Fête de la Libération du Sinaï", en: "Sinai Liberation Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "06-30"
+      name: {fr: "Révolution du 30 Juin", en: "30 June Day"}
+    - date: "07-23"
+      name: {fr: "Fête de la Révolution de 1952", en: "Revolution Day"}
+    - date: "10-06"
+      name: {fr: "Jour des Forces Armées (6 Octobre)", en: "Armed Forces Day"}
+  easter_based:
+    - offset_days: 1
+      name: {fr: "Cham el-Nessim (Lundi de Pâques Copte)", en: "Sham El Nessim"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+      - date: 2026-06-17
+        name: {fr: "Nouvel An Hégirien", en: "Islamic New Year"}
+      - date: 2026-08-26
+        name: {fr: "Mawlid al-Nabi", en: "Prophet's Birthday"}
+sources:
+  - label: "National Telecommunications Regulatory Authority (NTRA Egypt) - National Numbering Plan"
+    url: "https://www.tra.gov.eg"
+  - label: "Central Bank of Egypt (CBE) National Payment Systems"
+    url: "https://www.cbe.org.eg"
+last_verified: 2026-10-24

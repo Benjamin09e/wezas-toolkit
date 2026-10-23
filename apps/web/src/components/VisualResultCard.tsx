@@ -665,5 +665,134 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
     );
   }
 
+  // --- Outil : valider_nuban ---
+  if (toolId === "valider_nuban") {
+    return (
+      <div className="bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl shadow-emerald-500/5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="p-2 sm:p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400">
+              <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-slate-100 flex items-center gap-2">
+                <span>{data.banque?.nom || "Banque Nigériane / Ghanéenne"}</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                  {data.banque?.zone || "CBN NUBAN"}
+                </span>
+              </div>
+              <div className="text-xs text-slate-400">
+                Code CBN : <strong className="text-slate-200 font-mono">{data.code_banque}</strong>
+                {data.banque?.bic && (
+                  <span> · BIC : <strong className="text-emerald-400 font-mono">{data.banque.bic}</strong></span>
+                )}
+              </div>
+            </div>
+          </div>
+          <span className="self-start sm:self-auto text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-medium shrink-0">
+            Check Digit Conforme ({data.cle_fournie})
+          </span>
+        </div>
+
+        <div className="bg-slate-950/80 rounded-xl border border-slate-800 p-3 sm:p-4 space-y-3">
+          <div className="text-[11px] font-medium text-slate-400">Numéro de Compte NUBAN (10 chiffres) :</div>
+          <div className="text-base sm:text-xl font-bold font-mono text-emerald-400 tracking-wider break-all bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+            {data.compte_complet}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-center font-mono">
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Code Banque</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.code_banque}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Série (9)</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.numero_serie}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800 col-span-2 sm:col-span-1">
+              <div className="text-[10px] text-slate-500 font-sans">Clé de contrôle</div>
+              <div className="text-xs sm:text-sm font-bold text-emerald-400 truncate">{data.cle_fournie}</div>
+            </div>
+          </div>
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // --- Outil : valider_iban_afrique ---
+  if (toolId === "valider_iban_afrique") {
+    return (
+      <div className="bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl shadow-emerald-500/5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="p-2 sm:p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400">
+              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-slate-100 flex items-center gap-2">
+                <span>{data.banque?.nom || `Banque ${data.code_banque}`}</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                  {data.pays?.nom || data.pays?.iso2} (IBAN ISO 13616)
+                </span>
+              </div>
+              <div className="text-xs text-slate-400">
+                Code banque : <strong className="text-slate-200 font-mono">{data.code_banque}</strong>
+                {data.code_guichet && (
+                  <span> · Guichet : <strong className="text-slate-300 font-mono">{data.code_guichet}</strong></span>
+                )}
+                {data.banque?.bic && (
+                  <span> · BIC : <strong className="text-emerald-400 font-mono">{data.banque.bic}</strong></span>
+                )}
+              </div>
+            </div>
+          </div>
+          <span className="self-start sm:self-auto text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-medium shrink-0">
+            Checksum ISO MOD 97-10 OK ({data.cle_iban})
+          </span>
+        </div>
+
+        <div className="bg-slate-950/80 rounded-xl border border-slate-800 p-3 sm:p-4 space-y-3">
+          <div className="text-[11px] font-medium text-slate-400">IBAN Format International Officiel :</div>
+          <div className="text-base sm:text-xl font-bold font-mono text-amber-400 tracking-wider break-all bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+            {data.iban_formate}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-center font-mono">
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Pays</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.pays?.iso2}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Clé IBAN</div>
+              <div className="text-xs sm:text-sm font-bold text-emerald-400 truncate">{data.cle_iban}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Banque</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.code_banque}</div>
+            </div>
+            <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Numéro Compte</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.numero_compte}</div>
+            </div>
+          </div>
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
   return null;
 }

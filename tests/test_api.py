@@ -62,3 +62,45 @@ def test_rib_endpoint():
     res = response.json()
     assert res["data"]["valide"] is True
     assert res["data"]["banque"]["nom"] == "Société Générale Côte d'Ivoire (SGCI)"
+
+
+def test_tax_id_endpoint():
+    response = client.post(
+        "/v1/tax/tin/validate",
+        json={"pays": "CI", "identifiant": "1234567 A"},
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["ok"] is True
+    assert res["data"]["identifiant_formate"] == "1234567 A"
+    assert "DGI" in res["data"]["autorite_fiscale"]
+
+
+def test_nuban_endpoint():
+    response = client.post(
+        "/v1/bank/nuban/validate",
+        json={"code_banque": "044", "numero_compte": "0000014579", "pays": "NG"},
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["ok"] is True
+    assert res["data"]["valide"] is True
+    assert res["data"]["banque"]["nom"] == "Access Bank"
+
+
+def test_iban_endpoint():
+    # Maroc valide
+    bban = "011780000012345678901234"
+    pre_num = bban + "221000"
+    check = 98 - (int(pre_num) % 97)
+    valid_iban = f"MA{check:02d}{bban}"
+
+    response = client.post(
+        "/v1/bank/iban/validate",
+        json={"iban": valid_iban},
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["ok"] is True
+    assert res["data"]["valide"] is True
+    assert res["data"]["pays"]["iso2"] == "MA"

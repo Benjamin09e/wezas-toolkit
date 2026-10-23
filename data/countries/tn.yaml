@@ -1,0 +1,65 @@
+iso2: TN
+iso3: TUN
+name:
+  fr: Tunisie
+  en: Tunisia
+capital: Tunis
+dial_code: "+216"
+currency: TND
+languages:
+  - ar
+  - fr
+timezones:
+  - Africa/Tunis
+numbering_plan:
+  national_length: 8
+  ranges:
+    - type: mobile
+      prefixes: ["2", "4"]
+      operator: ooredoo-tn
+    - type: mobile
+      prefixes: ["5"]
+      operator: orange-tn
+    - type: mobile
+      prefixes: ["9"]
+      operator: tunisie-telecom-tn
+    - type: fixed
+      prefixes: ["7"]
+mobile_money:
+  - "D17 (Poste Tunisienne)"
+  - "Flouci"
+  - "Sobflous"
+holidays:
+  fixed:
+    - date: "01-01"
+      name: {fr: "Jour de l'An", en: "New Year's Day"}
+    - date: "03-20"
+      name: {fr: "Fête de l'Indépendance", en: "Independence Day"}
+    - date: "04-09"
+      name: {fr: "Journée des Martyrs", en: "Martyrs' Day"}
+    - date: "05-01"
+      name: {fr: "Fête du Travail", en: "Labour Day"}
+    - date: "07-25"
+      name: {fr: "Fête de la République", en: "Republic Day"}
+    - date: "08-13"
+      name: {fr: "Fête de la Femme", en: "Women's Day"}
+    - date: "10-15"
+      name: {fr: "Fête de l'Évacuation", en: "Evacuation Day"}
+    - date: "12-17"
+      name: {fr: "Fête de la Révolution", en: "Revolution Day"}
+  islamic:
+    2026:
+      - date: 2026-03-20
+        name: {fr: "Aïd el-Fitr", en: "Eid al-Fitr"}
+      - date: 2026-05-27
+        name: {fr: "Aïd al-Adha", en: "Eid al-Adha"}
+      - date: 2026-06-17
+        name: {fr: "Nouvel An Hégirien (Ras el Am)", en: "Islamic New Year"}
+      - date: 2026-08-26
+        name: {fr: "Mawlid (Mouled)", en: "Mawlid"}
+sources:
+  - label: "Instance Nationale des Télécommunications (INT Tunisie) - Plan National de Numérotation"
+    url: "https://www.intt.tn"
+  - label: "Banque Centrale de Tunisie (BCT)"
+    url: "https://www.bct.gov.tn"
+last_verified: 2026-10-24
