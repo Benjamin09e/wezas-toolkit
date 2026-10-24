@@ -1,4 +1,6 @@
 
+from typing import Literal
+
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 from wezas_core.country import get_country_info
@@ -11,9 +13,21 @@ from wezas_core.rib import validate_rib
 from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
 
-from wezas_api.auth import verify_api_key
+from wezas_api.auth import require_scope, verify_api_key
+from wezas_api.keys import ApiKeyRecord, ScopeType, api_key_repo
 
 router = APIRouter(prefix="/v1", tags=["Outils"])
+admin_required = Depends(require_scope("admin"))
+
+
+class CreateApiKeyRequest(BaseModel):
+    name: str = Field(..., description="Nom de l'application ou développeur")
+    environment: Literal["live", "test"] = Field("live", description="'live' ou 'test'")
+    scopes: list[ScopeType] = Field(default_factory=lambda: ["read:tools"])
+
+
+class RevokeApiKeyRequest(BaseModel):
+    key_id: str = Field(..., description="Identifiant public de la clé (wz_key_...)")
 
 
 class TaxIdValidationRequest(BaseModel):
@@ -171,3 +185,38 @@ async def api_validate_iban(
 ):
     envelope = validate_african_iban(iban_str=req.iban)
     return envelope.model_dump()
+
+
+@router.post("/keys/create", tags=["Gestion Clés API"])
+async def api_create_api_key(
+    req: CreateApiKeyRequest,
+):
+    """
+    Génère une nouvelle clé API Wezas (Volet 2).
+    La clé secrète n'est retournée qu'une seule fois.
+    """
+    secret_key, record = api_key_repo.create_key(
+        name=req.name,
+        environment=req.environment,
+        scopes=req.scopes,
+    )
+    return {
+        "ok": True,
+        "api_key": secret_key,
+        "key_id": record.key_id,
+        "name": record.name,
+        "environment": record.environment,
+        "scopes": record.scopes,
+        "created_at": record.created_at,
+        "message": "Conservez précieusement votre clé API. Elle ne pourra plus être réaffichée.",
+    }
+
+
+@router.post("/keys/revoke", tags=["Gestion Clés API"])
+async def api_revoke_api_key(
+    req: RevokeApiKeyRequest,
+    current_admin: ApiKeyRecord = admin_required,
+):
+    """Révoque une clé API existante (requiert scope admin)."""
+    success = api_key_repo.revoke_key(req.key_id)
+    return {"ok": success, "key_id": req.key_id}

@@ -12,6 +12,9 @@ import {
   OperatorsListData,
   TaxIdValidationData,
   PaymentPayloadData,
+  RibValidationData,
+  NubanValidationData,
+  IbanValidationData,
 } from "./types.js";
 import { formatAmountOffline, FIXED_PARITY } from "./offline.js";
 
@@ -20,15 +23,18 @@ export { formatAmountOffline, FIXED_PARITY };
 
 export interface WezasClientConfig {
   baseUrl?: string;
+  apiKey?: string;
   fetch?: typeof fetch;
 }
 
 export class WezasClient {
   private baseUrl: string;
+  private apiKey?: string;
   private customFetch: typeof fetch;
 
   constructor(config?: WezasClientConfig) {
     this.baseUrl = (config?.baseUrl || "https://wezas-backend.onrender.com").replace(/\/$/, "");
+    this.apiKey = config?.apiKey;
     this.customFetch = config?.fetch || (typeof fetch !== "undefined" ? fetch.bind(globalThis) : (null as any));
   }
 
@@ -37,9 +43,14 @@ export class WezasClient {
       throw new Error("Environnement fetch non disponible. Passez une implémentation fetch dans la configuration.");
     }
 
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (this.apiKey) {
+      headers["X-API-Key"] = this.apiKey;
+    }
+
     const response = await this.customFetch(`${this.baseUrl}/api/execute`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({ tool, arguments: args }),
     });
 
@@ -141,6 +152,49 @@ export class WezasClient {
       montant,
       pays,
       reference,
+    });
+  }
+
+  /**
+   * Valide et décode les composantes d'un RIB bancaire (UEMOA / CEMAC).
+   */
+  async validerRib(
+    codeBanque: string,
+    codeGuichet: string,
+    numeroCompte: string,
+    cleRib: string
+  ): Promise<Envelope<RibValidationData>> {
+    return this.call<RibValidationData>("valider_rib", {
+      code_banque: codeBanque,
+      code_guichet: codeGuichet,
+      numero_compte: numeroCompte,
+      cle_rib: cleRib,
+    });
+  }
+
+  /**
+   * Valide un numéro de compte NUBAN à 10 chiffres (Nigeria / Ghana).
+   */
+  async validerNuban(
+    codeBanque: string,
+    numeroCompte: string,
+    pays: string = "NG"
+  ): Promise<Envelope<NubanValidationData>> {
+    return this.call<NubanValidationData>("valider_nuban", {
+      code_banque: codeBanque,
+      numero_compte: numeroCompte,
+      pays,
+    });
+  }
+
+  /**
+   * Valide et extrait les composants d'un IBAN pour les pays africains (ISO 13616).
+   */
+  async validerIban(
+    iban: string
+  ): Promise<Envelope<IbanValidationData>> {
+    return this.call<IbanValidationData>("valider_iban_afrique", {
+      iban,
     });
   }
 }

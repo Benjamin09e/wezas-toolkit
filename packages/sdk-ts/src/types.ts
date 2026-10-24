@@ -131,3 +131,55 @@ export interface PaymentPayloadData {
   instruction: string;
   qr_payload: string;
 }
+
+export interface RibValidationData {
+  valide: boolean;
+  cle_fournie: string;
+  cle_calculee: string;
+  rib_complet: string;
+  code_banque: string;
+  code_guichet: string;
+  numero_compte: string;
+  banque: {
+    nom: string;
+    bic: string | null;
+    pays: string | null;
+    zone: string | null;
+  };
+}
+
+export interface NubanValidationData {
+  valide: boolean;
+  compte_complet: string;
+  code_banque: string;
+  numero_serie: string;
+  cle_fournie: string;
+  cle_calculee: string;
+  norme: string;
+  banque: {
+    nom: string;
+    bic: string | null;
+    pays: string;
+    zone: string;
+  };
+}
+
+export interface IbanValidationData {
+  valide: boolean;
+  iban_formate: string;
+  iban_brut: string;
+  pays: {
+    iso2: string;
+    nom: string;
+  };
+  cle_iban: string;
+  code_banque: string;
+  code_guichet: string | null;
+  numero_compte: string | null;
+  cle_rib_nationale: string | null;
+  banque: {
+    nom: string;
+    bic: string | null;
+    zone: string;
+  };
+}

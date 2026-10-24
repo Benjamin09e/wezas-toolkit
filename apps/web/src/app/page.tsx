@@ -51,6 +51,7 @@ import { SUPPORTED_COUNTRIES } from "@/data/countries";
 import { VisualResultCard } from "@/components/VisualResultCard";
 import { SnippetGenerator } from "@/components/SnippetGenerator";
 import { InstallationSection } from "@/components/InstallationSection";
+import { ApiKeyManager } from "@/components/ApiKeyManager";
 
 export interface ToolPreset {
   label: string;
@@ -1077,6 +1078,11 @@ function PlaygroundContent() {
                 <SnippetGenerator toolId={selectedTool.id} args={currentArgs} />
               </div>
             </div>
+          </div>
+
+          {/* Section Gestionnaire de clés API (Volet 2) */}
+          <div className="mt-8">
+            <ApiKeyManager />
           </div>
         </div>
       </main>

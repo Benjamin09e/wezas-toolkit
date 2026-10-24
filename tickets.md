@@ -23,8 +23,8 @@
 | E10 – Volet 2 (en ligne) | WAT-043 → 045 | 100 % |
 | E11 – Expansion régionale (Afrique de l'Est/Nord/Australe) | WAT-046 → 049 | 100 % |
 | E12 – Validation bancaire étendue (NUBAN & IBAN) | WAT-050 → 052 | 100 % |
-| E13 – Volet 2 : Auth & Rate Limiting API | WAT-053 → 055 | 0 % |
-| E14 – Écosystème SDK & MCP Registry | WAT-056 → 058 | 0 % |
+| E13 – Volet 2 : Auth & Rate Limiting API | WAT-053 → 055 | 100 % |
+| E14 – Écosystème SDK & MCP Registry | WAT-056 → 058 | 100 % |
 
 ---
 
@@ -398,19 +398,19 @@
 
 ### WAT-053 – Middleware Rate Limiting (Token Bucket / Sliding Window)
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (Middleware `RateLimitMiddleware` implémenté dans `wezas_api/rate_limit.py`, quotas 30 req/min anonyme par IP et 600 req/min authentifié par clé, en-têtes standard `X-RateLimit-*`, code HTTP 429 et tests unitaires validés)
 - **Description** : Mettre en place un rate limiter en mémoire (avec support Redis optionnel) selon les specs du Volet 2 (30 req/min sans clé, 600 req/min avec clé) avec en-têtes HTTP `X-RateLimit-*`.
 - **Skills** : FastAPI middlewares, async Python, sécurité réseau.
 
 ### WAT-054 – Gestion et persistance des clés API
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (Module de persistance SQLite sécurisé `wezas_api/keys.py`, stockage par hash HMAC SHA-256 avec sel, gestion des environnements `live`/`test`, permissions à granularité fine par scopes `read:tools`, `contrib:write`, `admin`, endpoints `/v1/keys/create` et `/v1/keys/revoke`, tests du cycle de vie validés)
 - **Description** : Modèle de persistance et validation de clés API (MongoDB / SQLite) avec hachage SHA-256 et scopes de permissions (`read:tools`, `contrib:write`, `admin`).
 - **Skills** : MongoDB/Beanie, cryptographie, FastAPI dependencies.
 
 ### WAT-055 – Endpoints de métriques & Swagger enrichi
 - **Priorité / Taille** : P2 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (Collecteur de métriques anonymes et agrégées en mémoire `wezas_api/metrics.py`, endpoint `/metrics` avec latences et top pays, documentation interactive moderne `/scalar` via `@scalar/api-reference`, et tests d'intégration validés)
 - **Description** : Documentation interactive avec Scalar ou Swagger UI personnalisé, métriques agrégées anonymisées sur `/metrics`.
 - **Skills** : OpenAPI, monitoring.
 
@@ -420,19 +420,19 @@
 
 ### WAT-056 – Complétion du SDK TypeScript
 - **Priorité / Taille** : P1 / M
-- **Avancement** : À faire
+- **Avancement** : Terminé (SDK TypeScript `packages/sdk-ts` mis à niveau : support `validerRib`, `validerNuban`, `validerIban`, configuration `apiKey` avec en-tête `X-API-Key`, build ESM/CJS/DTS via `tsup`, et tests unitaires validés)
 - **Description** : Couvrir l'intégralité des outils core en TypeScript pur (`validatePhone`, `convertCurrency`, `validateRib`, `getCountryInfo`) et préparer le packaging npm.
 - **Skills** : TypeScript, npm packaging, vitest.
 
 ### WAT-057 – Enregistrement aux registres MCP (Smithery, Glama, PulseMCP)
 - **Priorité / Taille** : P1 / S
-- **Avancement** : À faire
+- **Avancement** : Terminé (Manifestes `smithery.yaml`, `glama.json` et `mcp.json` mis à jour avec la liste complète des 10 outils MCP dont NUBAN, IBAN, RIB, TIN et parités, conformes aux schémas des registres publics)
 - **Description** : Finaliser et tester les manifestes `smithery.yaml` et `glama.json` pour référence en 1 clic.
 - **Skills** : MCP, CI/CD, documentation.
 
 ### WAT-058 – Interface d'administration et de gestion des clés dans le portail Web
 - **Priorité / Taille** : P2 / L
-- **Avancement** : À faire
+- **Avancement** : Terminé (Composant React `apps/web/src/components/ApiKeyManager.tsx` créé et intégré dans la page principale, permettant de générer des clés `wz_live_` et `wz_test_`, sélectionner les scopes, copier le secret et afficher/masquer la clé avec build Next.js validé)
 - **Description** : Espace développeur dans `apps/web` permettant de générer une clé test/live et de suivre sa consommation.
 - **Skills** : Next.js / React, Tailwind, UX développeur.
 

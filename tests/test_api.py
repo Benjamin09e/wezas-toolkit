@@ -104,3 +104,79 @@ def test_iban_endpoint():
     assert res["ok"] is True
     assert res["data"]["valide"] is True
     assert res["data"]["pays"]["iso2"] == "MA"
+
+
+def test_rate_limiting_headers_and_exceeded():
+    from wezas_api.rate_limit import RateLimiter
+
+    # Test avec un limiteur dédié pour tester le comportement d'épuisement
+    test_limiter = RateLimiter(limit_per_minute=2)
+    ok1, rem1, _ = test_limiter.is_allowed("test_client")
+    assert ok1 is True
+    assert rem1 == 1
+
+    ok2, rem2, _ = test_limiter.is_allowed("test_client")
+    assert ok2 is True
+    assert rem2 == 0
+
+    ok3, rem3, reset_in = test_limiter.is_allowed("test_client")
+    assert ok3 is False
+    assert rem3 == 0
+    assert reset_in > 0
+
+    # Test des en-têtes HTTP réels via le middleware
+    resp = client.get("/v1/country/CI")
+    assert resp.status_code == 200
+    assert "X-RateLimit-Limit" in resp.headers
+    assert "X-RateLimit-Remaining" in resp.headers
+    assert "X-RateLimit-Reset" in resp.headers
+
+
+def test_api_key_lifecycle_create_validate_revoke():
+    # 1. Création d'une clé API admin
+    create_resp = client.post(
+        "/v1/keys/create",
+        json={"name": "Test App", "environment": "live", "scopes": ["read:tools", "admin"]},
+    )
+    assert create_resp.status_code == 200
+    key_data = create_resp.json()
+    secret_key = key_data["api_key"]
+    key_id = key_data["key_id"]
+    assert secret_key.startswith("wz_live_")
+
+    # 2. Utilisation de la clé valide
+    call_resp = client.get("/v1/country/GA", headers={"X-API-Key": secret_key})
+    assert call_resp.status_code == 200
+
+    # 3. Révocation de la clé (avec autorisation admin)
+    revoke_resp = client.post(
+        "/v1/keys/revoke",
+        json={"key_id": key_id},
+        headers={"X-API-Key": secret_key},
+    )
+    assert revoke_resp.status_code == 200
+    assert revoke_resp.json()["ok"] is True
+
+    # 4. Appel avec la clé désormais révoquée -> 401
+    revoked_call = client.get("/v1/country/GA", headers={"X-API-Key": secret_key})
+    assert revoked_call.status_code == 401
+    assert revoked_call.json()["detail"]["code"] == "API_KEY_REVOKED_OR_UNKNOWN"
+
+
+def test_metrics_and_scalar_endpoints():
+    # Appel de quelques routes pour peupler les métriques
+    client.get("/v1/country/SN")
+    client.get("/v1/country/CI")
+
+    metrics_resp = client.get("/metrics")
+    assert metrics_resp.status_code == 200
+    metrics_data = metrics_resp.json()
+    assert metrics_data["ok"] is True
+    assert metrics_data["metrics"]["total_requests"] >= 2
+    assert "SN" in metrics_data["metrics"]["requests_by_country"]
+    assert "CI" in metrics_data["metrics"]["requests_by_country"]
+
+    # Test documentation Scalar
+    scalar_resp = client.get("/scalar")
+    assert scalar_resp.status_code == 200
+    assert "@scalar/api-reference" in scalar_resp.text

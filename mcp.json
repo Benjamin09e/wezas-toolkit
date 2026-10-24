@@ -70,6 +70,22 @@
     {
       "name": "lister_operateurs",
       "description": "Catalogue des opérateurs de téléphonie mobile et services Mobile Money par pays (MoMo, Wave, M-Pesa, Airtel Money)."
+    },
+    {
+      "name": "valider_rib",
+      "description": "Valide et décode un Relevé d'Identité Bancaire (RIB) pour les pays de la zone UEMOA et CEMAC (modulo 97)."
+    },
+    {
+      "name": "valider_nuban",
+      "description": "Valide un compte bancaire NUBAN à 10 chiffres pour le Nigeria (CBN) ou le Ghana (BoG) par algorithme Modulo 10 pondéré."
+    },
+    {
+      "name": "valider_iban_afrique",
+      "description": "Valide et extrait les composants d'un IBAN pour les pays africains sous la norme ISO 13616 (Maroc, Tunisie, Égypte...)."
+    },
+    {
+      "name": "valider_identifiant_fiscal",
+      "description": "Valide et normalise les identifiants fiscaux d'entreprises (NCC, NINEA, NIU, NIF, KRA PIN, ICE, TIN)."
     }
   ]
 }
