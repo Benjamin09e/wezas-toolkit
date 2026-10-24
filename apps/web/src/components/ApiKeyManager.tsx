@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Key, ShieldCheck, Copy, Check, Plus, AlertCircle, Trash2, Eye, EyeOff } from "lucide-react";
+import { Key, Copy, Check, Plus, AlertCircle, Eye, EyeOff } from "lucide-react";
 
 interface GeneratedKey {
   key_id: string;
@@ -187,13 +187,13 @@ export function ApiKeyManager() {
             {keys.map((k) => (
               <div
                 key={k.key_id}
-                className="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm"
+                className="bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm"
               >
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-slate-100">{k.name}</span>
+                <div className="space-y-1.5 min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-sm font-bold text-slate-100 truncate">{k.name}</span>
                     <span
-                      className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${
+                      className={`text-[10px] font-mono px-2 py-0.5 rounded-full border shrink-0 ${
                         k.environment === "live"
                           ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
                           : "bg-sky-500/10 border-sky-500/30 text-sky-400"
@@ -201,10 +201,10 @@ export function ApiKeyManager() {
                     >
                       {k.environment}
                     </span>
-                    <span className="text-xs text-slate-400 font-mono">({k.key_id})</span>
+                    <span className="text-xs text-slate-500 font-mono shrink-0">({k.key_id})</span>
                   </div>
-                  <div className="flex items-center gap-2 font-mono text-xs">
-                    <span className="text-slate-300 bg-slate-900 px-2 py-1 rounded-lg border border-slate-800">
+                  <div className="flex items-center gap-2 font-mono text-xs max-w-full overflow-hidden">
+                    <span className="text-slate-300 bg-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-800 truncate select-all">
                       {showKey[k.key_id] ? k.api_key : `${k.api_key.slice(0, 10)}••••••••••••••••`}
                     </span>
                     <button
@@ -212,22 +212,22 @@ export function ApiKeyManager() {
                       onClick={() =>
                         setShowKey((prev) => ({ ...prev, [k.key_id]: !prev[k.key_id] }))
                       }
-                      className="p-1 text-slate-400 hover:text-slate-200"
+                      className="p-1.5 text-slate-400 hover:text-slate-200 shrink-0"
                       title={showKey[k.key_id] ? "Masquer" : "Afficher"}
                     >
-                      {showKey[k.key_id] ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                      {showKey[k.key_id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 self-end sm:self-auto">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
                     type="button"
                     onClick={() => copyToClipboard(k.api_key, k.key_id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-xl transition-colors"
+                    className="w-full sm:w-auto justify-center flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl transition-colors cursor-pointer min-h-[36px]"
                   >
                     {copiedId === k.key_id ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedId === k.key_id ? "Copié !" : "Copier"}</span>
+                    <span>{copiedId === k.key_id ? "Copié !" : "Copier la clé"}</span>
                   </button>
                 </div>
               </div>

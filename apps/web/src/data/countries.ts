@@ -27,4 +27,11 @@ export const SUPPORTED_COUNTRIES: CountryOption[] = [
   { iso2: "SN", name: "Sénégal", flag: "🇸🇳", dialCode: "+221", currency: "XOF" },
   { iso2: "TD", name: "Tchad", flag: "🇹🇩", dialCode: "+235", currency: "XAF" },
   { iso2: "TG", name: "Togo", flag: "🇹🇬", dialCode: "+228", currency: "XOF" },
+  { iso2: "TZ", name: "Tanzanie", flag: "🇹🇿", dialCode: "+255", currency: "TZS" },
+  { iso2: "UG", name: "Ouganda", flag: "🇺🇬", dialCode: "+256", currency: "UGX" },
+  { iso2: "ZA", name: "Afrique du Sud", flag: "🇿🇦", dialCode: "+27", currency: "ZAR" },
+  { iso2: "ZM", name: "Zambie", flag: "🇿🇲", dialCode: "+260", currency: "ZMW" },
+  { iso2: "TN", name: "Tunisie", flag: "🇹🇳", dialCode: "+216", currency: "TND" },
+  { iso2: "DZ", name: "Algérie", flag: "🇩🇿", dialCode: "+213", currency: "DZD" },
+  { iso2: "EG", name: "Égypte", flag: "🇪🇬", dialCode: "+20", currency: "EGP" },
 ];

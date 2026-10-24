@@ -238,6 +238,40 @@ export const TOOLS: ToolConfig[] = [
       { label: "🇨🇲 Afriland First Bank", args: { code_banque: "CM021", code_guichet: "00001", numero_compte: "01234567890", cle_rib: "24" } },
     ],
   },
+  {
+    id: "valider_nuban",
+    name: "Validation NUBAN (Nigeria / Ghana)",
+    shortName: "NUBAN",
+    category: "Fintech & Banque",
+    description: "Validation des comptes bancaires NUBAN à 10 chiffres (CBN Nigeria / BoG Ghana) par Modulo 10.",
+    icon: Building2,
+    defaultPayload: {
+      code_banque: "044",
+      numero_compte: "0000014579",
+      pays: "NG",
+    },
+    presets: [
+      { label: "🇳🇬 Access Bank (Nigeria)", args: { code_banque: "044", numero_compte: "0000014579", pays: "NG" } },
+      { label: "🇳🇬 GTBank (Nigeria)", args: { code_banque: "058", numero_compte: "0123456789", pays: "NG" } },
+      { label: "🇳🇬 Kuda Bank (Fintech MFB)", args: { code_banque: "090267", numero_compte: "1100012344", pays: "NG" } },
+    ],
+  },
+  {
+    id: "valider_iban_afrique",
+    name: "Validation IBAN Africain",
+    shortName: "IBAN",
+    category: "Fintech & Banque",
+    description: "Validation et extraction BIC pour les IBAN africains ISO 13616 (Maroc, Tunisie, Égypte...).",
+    icon: Building2,
+    defaultPayload: {
+      iban: "MA64011780000012345678901234",
+    },
+    presets: [
+      { label: "🇲🇦 Maroc (28 caractères)", args: { iban: "MA64011780000012345678901234" } },
+      { label: "🇹🇳 Tunisie (24 caractères)", args: { iban: "TN5910001000123456789012" } },
+      { label: "🇪🇬 Égypte (29 caractères)", args: { iban: "EG800002000100000012345678901" } },
+    ],
+  },
 ];
 
 interface ExecutionHistoryItem {
@@ -472,7 +506,7 @@ function PlaygroundContent() {
           <div className="flex items-center space-x-2 sm:space-x-3 text-sm shrink-0">
             <span className="hidden lg:flex items-center gap-1.5 text-emerald-400 text-xs mr-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              20 Pays Couverts
+              27 Pays Couverts
             </span>
 
             {/* Bouton Partager URL profonde */}
@@ -988,6 +1022,20 @@ function PlaygroundContent() {
                         onChange={(e) => updateArg("cle_rib", e.target.value)}
                         placeholder="Ex: 28"
                         maxLength={2}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 font-mono focus:outline-none focus:border-amber-500 min-h-[42px]"
+                      />
+                    </div>
+                  )}
+
+                  {/* Champ IBAN */}
+                  {"iban" in currentArgs && (
+                    <div className="space-y-1.5 md:col-span-2">
+                      <label className="text-xs font-medium text-slate-400">Numéro IBAN International :</label>
+                      <input
+                        type="text"
+                        value={currentArgs.iban || ""}
+                        onChange={(e) => updateArg("iban", e.target.value.toUpperCase())}
+                        placeholder="Ex: MA64011780000012345678901234 ou TN59..."
                         className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 font-mono focus:outline-none focus:border-amber-500 min-h-[42px]"
                       />
                     </div>
