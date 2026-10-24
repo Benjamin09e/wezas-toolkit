@@ -655,12 +655,12 @@ function PlaygroundContent() {
         )}
 
         {/* Layout Principal Desktop & Tablette */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Colonne Gauche Desktop : Liste des Outils (visible >= lg) */}
-          <div className="hidden lg:block lg:col-span-4 space-y-3">
+          <div className="hidden lg:block lg:col-span-4 xl:col-span-4 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1 space-y-3 scrollbar-thin scrollbar-thumb-slate-800">
             <div className="flex items-center justify-between px-1 mb-2">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Boîte à outils
+                Boîte à outils ({TOOLS.length})
               </span>
               {history.length > 0 && (
                 <button
@@ -714,7 +714,7 @@ function PlaygroundContent() {
           </div>
 
           {/* Colonne Droite : Formulaire & Réponses */}
-          <div className="lg:col-span-8 flex flex-col space-y-6">
+          <div className="lg:col-span-8 xl:col-span-8 flex flex-col space-y-6">
             {/* Panneau Paramètres / Formulaire */}
             <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800">
@@ -1127,11 +1127,11 @@ function PlaygroundContent() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Section Gestionnaire de clés API (Volet 2) */}
-          <div className="mt-8">
-            <ApiKeyManager />
-          </div>
+        {/* Section Gestionnaire de clés API (Volet 2) en pleine largeur Desktop */}
+        <div className="pt-2">
+          <ApiKeyManager />
         </div>
       </main>
     </div>
