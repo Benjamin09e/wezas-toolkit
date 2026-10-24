@@ -1,7 +1,7 @@
 {
   "name": "wezas-africa-toolkit",
-  "version": "0.1.2",
-  "description": "Client SDK TypeScript officiel et serveur MCP pour Wezas Africa Toolkit (validation téléphone, devises, TVA, pays africains).",
+  "version": "0.2.0",
+  "description": "Client SDK TypeScript officiel et serveur MCP pour Wezas Africa Toolkit (validation téléphone, RIB/IBAN/NUBAN, devises, TVA, pays africains).",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

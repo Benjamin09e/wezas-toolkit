@@ -80,7 +80,33 @@ if (conv.ok && conv.data) {
 }
 ```
 
-### 4. Formatage monétaire local hors ligne immédiat
+### 4. Validation Bancaire Africaine (RIB, NUBAN, IBAN)
+```typescript
+import { wezas } from "wezas-africa-toolkit";
+
+// RIB UEMOA / CEMAC (ex: Côte d'Ivoire, Cameroun, Sénégal, Gabon...)
+const rib = await wezas.validerRib("CI034", "01001", "01234567890", "85");
+if (rib.ok && rib.data) {
+  console.log(rib.data.valide);       // true
+  console.log(rib.data.nom_banque);   // "Ecobank Côte d'Ivoire"
+}
+
+// NUBAN Nigeria (CBN modulo 10)
+const nuban = await wezas.validerNuban("058", "0123456789", "NG");
+if (nuban.ok && nuban.data) {
+  console.log(nuban.data.valide);     // true
+  console.log(nuban.data.nom_banque); // "Guaranty Trust Bank (GTBank)"
+}
+
+// IBAN ISO 13616 (Tunisie, Algérie, Égypte, Madagascar...)
+const iban = await wezas.validerIban("TN5910001000123456789012");
+if (iban.ok && iban.data) {
+  console.log(iban.data.valide);      // true
+  console.log(iban.data.pays);        // "TN"
+}
+```
+
+### 5. Formatage monétaire local hors ligne immédiat
 ```typescript
 import { formatAmountOffline } from "wezas-africa-toolkit";
 
@@ -90,15 +116,16 @@ console.log(format.data?.montant_formate); // "1 500 000 FCFA"
 
 ---
 
-## 🛠️ Configuration d'un backend personnalisé
+## 🛠️ Configuration d'un backend et clé d'API (Production)
 
-Par défaut, le client contacte l'API Render haute disponibilité. Vous pouvez pointer vers votre propre instance ou serveur local :
+Par défaut, le client contacte l'API Render publique en mode invité (30 req/min). Vous pouvez spécifier une clé d'API `wz_live_...` (600 req/min) ou pointer vers votre propre instance :
 
 ```typescript
 import { WezasClient } from "wezas-africa-toolkit";
 
 const wezas = new WezasClient({
-  baseUrl: "https://votre-backend.onrender.com"
+  baseUrl: "https://votre-backend.onrender.com", // optionnel
+  apiKey: "wz_live_votre_cle_secrete"            // optionnel
 });
 ```
 

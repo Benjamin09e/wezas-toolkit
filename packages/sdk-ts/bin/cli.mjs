@@ -7,7 +7,7 @@
 
 import readline from "readline";
 
-const VERSION = "0.1.1";
+const VERSION = "0.2.0";
 const REMOTE_BACKEND = process.env.WEZAS_BACKEND_URL || "https://wezas-backend.onrender.com";
 
 const TOOLS = [
@@ -100,7 +100,7 @@ const TOOLS = [
   },
   {
     name: "valider_identifiant_fiscal",
-    description: "Valide et normalise un numéro d'identifiant fiscal d'entreprise (NCC en Côte d'Ivoire, NINEA au Sénégal, NIU au Cameroun, NIF au Gabon, KRA PIN au Kenya, TIN au Nigeria).",
+    description: "Valide et normalise un numéro d'identifiant fiscal d'entreprise (NCC en Côte d'Ivoire, NINEA au Sénégal, NIU au Cameroun, NIF au Gabon, KRA PIN au Kenya, TIN au Nigeria...).",
     inputSchema: {
       type: "object",
       properties: {
@@ -123,6 +123,44 @@ const TOOLS = [
         reference: { type: "string", description: "Référence facultative de commande ou facture" },
       },
       required: ["operateur", "telephone", "montant", "pays"],
+    },
+  },
+  {
+    name: "valider_rib",
+    description: "Valide un Relevé d'Identité Bancaire (RIB) UEMOA ou CEMAC avec contrôle de clé modulo 97 et identification de l'établissement bancaire.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        code_banque: { type: "string", description: "Code banque officiel à 5 chiffres (ex: CI034, CM021)" },
+        code_guichet: { type: "string", description: "Code guichet ou agence à 5 chiffres" },
+        numero_compte: { type: "string", description: "Numéro de compte client (11 à 12 caractères)" },
+        cle_rib: { type: "string", description: "Clé de contrôle à 2 chiffres (01 à 97)" },
+      },
+      required: ["code_banque", "code_guichet", "numero_compte", "cle_rib"],
+    },
+  },
+  {
+    name: "valider_nuban",
+    description: "Valide un NUBAN (Nigeria / Ghana Uniform Bank Account Number, 10 chiffres) d'après l'algorithme modulo 10 CBN et l'identification de la banque.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        code_banque: { type: "string", description: "Code de la banque (ex: 058 pour GTBank, 011 pour First Bank)" },
+        numero_compte: { type: "string", description: "Numéro de compte NUBAN à 10 chiffres" },
+        pays: { type: "string", description: "Code pays ('NG' pour Nigeria, 'GH' pour Ghana)", default: "NG" },
+      },
+      required: ["code_banque", "numero_compte"],
+    },
+  },
+  {
+    name: "valider_iban_afrique",
+    description: "Valide un IBAN pour les pays africains adoptant la norme ISO 13616 (Tunisie, Algérie, Égypte, Madagascar, etc.) avec vérification de longueur et checksum MOD 97-10.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        iban: { type: "string", description: "IBAN complet (ex: TN59..., MU..., MR...)" },
+      },
+      required: ["iban"],
     },
   },
 ];
