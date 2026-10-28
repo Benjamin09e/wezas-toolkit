@@ -98,7 +98,6 @@ def test_validate_phone_expansion_countries():
     assert res_ma["data"]["e164"] == "+212661234567"
     assert res_ma["data"]["operateur_probable"] == "Orange Maroc"
 
-
     # Tanzanie (TZ) - Vodacom (75)
     res_tz = validate_phone("TZ", "0754 12 34 56").model_dump(mode="json")
     assert res_tz["ok"] is True

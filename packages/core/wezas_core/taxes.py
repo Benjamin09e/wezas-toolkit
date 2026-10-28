@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from typing import Any
 
 from wezas_core.envelope import Envelope, ErrorCode, Warning_, failure, success
-from wezas_core.i18n import t
 from wezas_core.models import LocalizedName
 from wezas_core.normalize import country_not_found, resolve_country
 

@@ -3,11 +3,8 @@
 from __future__ import annotations
 
 from decimal import Decimal, InvalidOperation
-import re
-from typing import Any
 
 from wezas_core.envelope import Envelope, ErrorCode, failure, success
-from wezas_core.i18n import t
 from wezas_core.normalize import country_not_found, resolve_country
 
 # Devises ISO 4217 numériques courantes pour EMVCo (Tag 53)

@@ -45,7 +45,12 @@ def test_transaction_tax_endpoint():
     # E-Levy Ghana
     response = client.post(
         "/v1/tax/transaction/calculate",
-        json={"pays": "GH", "montant": 200, "type_taxe": "e_levy", "cumul_journalier_precedent": 100},
+        json={
+            "pays": "GH",
+            "montant": 200,
+            "type_taxe": "e_levy",
+            "cumul_journalier_precedent": 100,
+        },
     )
     assert response.status_code == 200
     res = response.json()

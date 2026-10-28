@@ -5,7 +5,9 @@ from wezas_core.taxes import calculate_transaction_tax
 
 def test_calculate_e_levy_ghana_with_daily_exemption():
     # Premier transfert de 150 GHS : 100 GHS exonérés, 50 GHS taxables à 1% = 0.50 GHS
-    env = calculate_transaction_tax(pays="GH", montant=150, type_taxe="e_levy", cumul_journalier_precedent=0)
+    env = calculate_transaction_tax(
+        pays="GH", montant=150, type_taxe="e_levy", cumul_journalier_precedent=0
+    )
     assert env.ok is True
     data = env.data
     assert data["taxe"]["code"] == "e_levy"
@@ -17,7 +19,9 @@ def test_calculate_e_levy_ghana_with_daily_exemption():
 
 def test_calculate_e_levy_ghana_exemption_exhausted():
     # Si le cumul précédent est déjà de 100 GHS, les 200 GHS sont taxables à 1% = 2.00 GHS
-    env = calculate_transaction_tax(pays="GH", montant=200, type_taxe="e_levy", cumul_journalier_precedent=100)
+    env = calculate_transaction_tax(
+        pays="GH", montant=200, type_taxe="e_levy", cumul_journalier_precedent=100
+    )
     assert env.ok is True
     assert env.data["calcul"]["base_imposable"] == 200.0
     assert env.data["calcul"]["montant_taxe"] == 2.0

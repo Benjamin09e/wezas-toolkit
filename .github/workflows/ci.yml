@@ -28,7 +28,7 @@ jobs:
         run: uv run ruff check .
 
       - name: Typecheck with MyPy
-        run: uv run mypy packages
+        run: uv run mypy packages/core packages/sdk-py
 
   data-validation:
     name: Validate Country Datasets

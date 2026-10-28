@@ -6,7 +6,9 @@ from wezas_core.qrcode import compute_crc16_ccitt, decode_payment_qr, generate_e
 def test_compute_crc16_ccitt():
     # Test vector standard EMVCo
     # Pour un payload se terminant par '6304'
-    payload = "0002010102122612012345678901520400005303952540815000.005802CI5910SUPERMARCH6007ABIDJAN6304"
+    payload = (
+        "0002010102122612012345678901520400005303952540815000.005802CI5910SUPERMARCH6007ABIDJAN6304"
+    )
     crc = compute_crc16_ccitt(payload)
     assert len(crc) == 4
     assert crc.isalnum()

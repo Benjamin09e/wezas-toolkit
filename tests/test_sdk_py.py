@@ -1,8 +1,8 @@
 """Tests unitaires et d'intégration pour le SDK Python Wezas."""
 
-import pytest
 import httpx
-from wezas import WezasClient, AsyncWezasClient
+import pytest
+from wezas import AsyncWezasClient, WezasClient
 from wezas_api.main import app
 
 

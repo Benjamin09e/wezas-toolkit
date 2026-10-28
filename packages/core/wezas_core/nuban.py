@@ -116,7 +116,7 @@ def validate_nuban(
             "nom": found_bank.get("nom") if found_bank else "Banque inconnue",
             "bic": found_bank.get("bic") if found_bank else None,
             "pays": country.upper(),
-            "zone": found_bank.get("zone", "CBN"),
+            "zone": found_bank.get("zone", "CBN") if found_bank else "CBN",
         },
     }
 
