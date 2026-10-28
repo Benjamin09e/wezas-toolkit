@@ -41,6 +41,19 @@ def test_vat_endpoint():
     assert "18" in str(res["data"]["taux_pourcentage"])
 
 
+def test_transaction_tax_endpoint():
+    # E-Levy Ghana
+    response = client.post(
+        "/v1/tax/transaction/calculate",
+        json={"pays": "GH", "montant": 200, "type_taxe": "e_levy", "cumul_journalier_precedent": 100},
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["ok"] is True
+    assert res["data"]["calcul"]["montant_taxe"] == 2.0
+    assert res["data"]["taxe"]["code"] == "e_levy"
+
+
 def test_rib_endpoint():
     from wezas_core.rib import compute_rib_key
 

@@ -12,6 +12,7 @@ from wezas_core.nuban import validate_nuban
 from wezas_core.phone import validate_phone
 from wezas_core.qrcode import decode_payment_qr, generate_emv_qr
 from wezas_core.rib import validate_rib
+from wezas_core.taxes import calculate_transaction_tax
 from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
 
@@ -105,6 +106,13 @@ class VatRequest(BaseModel):
     taux_type: str = Field("normal", description="'normal' ou 'reduit'")
 
 
+class TransactionTaxRequest(BaseModel):
+    pays: str = Field(..., description="Code pays ISO (ex: GH, CM, CI, SN, KE, NG)")
+    montant: float = Field(..., gt=0, description="Montant de la transaction ou de la prestation")
+    type_taxe: str | None = Field(None, description="Type de taxe spécifique (ex: e_levy, brs_services, emtl)")
+    cumul_journalier_precedent: float = Field(0.0, ge=0, description="Cumul déjà effectué aujourd'hui")
+
+
 class FormatAmountRequest(BaseModel):
     montant: float = Field(..., description="Montant à formater")
     devise: str = Field(..., description="Code devise (ex: XOF, XAF, EUR)")
@@ -148,6 +156,20 @@ async def api_calculate_vat(
         pays=req.pays,
         type_taux="standard" if req.taux_type == "normal" else req.taux_type,
         mode="ht" if req.type_calcul == "HT_VERS_TTC" else "ttc",
+    )
+    return envelope.model_dump()
+
+
+@router.post("/tax/transaction/calculate")
+async def api_calculate_transaction_tax(
+    req: TransactionTaxRequest,
+    api_key: str | None = Depends(verify_api_key),
+):
+    envelope = calculate_transaction_tax(
+        pays=req.pays,
+        montant=req.montant,
+        type_taxe=req.type_taxe,
+        cumul_journalier_precedent=req.cumul_journalier_precedent,
     )
     return envelope.model_dump()
 

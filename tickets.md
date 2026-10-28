@@ -29,6 +29,7 @@
 | E16 – QR Codes de paiement unifiés (EMVCo & Mobile Money) | WAT-061 → 062 | 100 % |
 | E17 – SDK Python Officiel (`wezas-sdk`) | WAT-063 → 064 | 100 % |
 | E18 – Portail Web & Playground Fintech Interactif | WAT-065 → 066 | 100 % |
+| E19 – Fiscalité Spécifique & Compliance Numérique (E-Levy, WHT, DST) | WAT-067 → 068 | 100 % |
 
 ---
 
@@ -506,6 +507,22 @@
 
 ---
 
+## E19 – Fiscalité Spécifique & Compliance Numérique (E-Levy, WHT, DST)
+
+### WAT-067 – Moteur de calcul de taxes transactionnelles et retenues à la source
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Module `wezas_core/taxes.py` implémentant le calcul de l'E-Levy au Ghana avec franchise journalière de 100 GHS, taxe spéciale sur les transferts d'argent au Cameroun, EMTL Nigeria, retenues BRS Côte d'Ivoire/Sénégal, WHT et Digital Service Tax Kenya avec 7 tests unitaires validés)
+- **Description** : Calculer avec précision en arithmétique `Decimal` les prélèvements transactionnels spécifiques et les retenues à la source obligatoires sur les prestations de services en Afrique.
+- **Skills** : Droit fiscal africain, E-Levy, retenue à la source, Python Decimal, TDD.
+
+### WAT-068 – Intégration de `calculer_taxe_transaction` dans FastMCP, API REST et SDKs
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Outil FastMCP `calculer_taxe_transaction`, endpoint REST `/v1/tax/transaction/calculate`, méthodes synchrone et asynchrone dans `wezas-sdk` Python et méthode client `calculerTaxeTransaction` dans le SDK TypeScript avec build et tests E2E validés)
+- **Description** : Exposer le calcul de taxes dans l'ensemble des canaux de distribution (serveur MCP, API FastAPI, SDK TS et SDK Python).
+- **Skills** : FastMCP, FastAPI, TypeScript, Python SDK, CI/CD.
+
+---
+
 ## Jalons
 
 | Version | Contenu | Tickets |
@@ -519,3 +536,4 @@
 | **v1.4** | QR Codes EMVCo (GHQR/NQR) & Décodeur multi-standards | E16, WAT-061, 062 |
 | **v1.5** | SDK Python officiel (`wezas-sdk` PyPI) | E17, WAT-063, 064 |
 | **v1.6** | Playground interactif Cartes bancaires & QR Codes EMVCo | E18, WAT-065, 066 |
+| **v1.7** | Fiscalité Spécifique, E-Levy, WHT & Taxes Numériques | E19, WAT-067, 068 |

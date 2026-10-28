@@ -52,6 +52,7 @@ async def health_check(request: Any) -> Any:
                 "info_pays",
                 "formater_montant",
                 "calculer_tva",
+                "calculer_taxe_transaction",
                 "valider_rib",
                 "valider_nuban",
                 "valider_iban_afrique",

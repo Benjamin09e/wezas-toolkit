@@ -77,6 +77,22 @@ class WezasClient(BaseClient):
             {"montant": float(montant), "pays": pays, "type_calcul": type_calcul, "taux_type": taux_type},
         )
 
+    def calculer_taxe_transaction(
+        self,
+        pays: str,
+        montant: float | str,
+        type_taxe: str | None = None,
+        cumul_journalier_precedent: float | str = 0,
+    ) -> WezasResponse[dict[str, Any]]:
+        payload: dict[str, Any] = {
+            "pays": pays,
+            "montant": float(montant),
+            "cumul_journalier_precedent": float(cumul_journalier_precedent),
+        }
+        if type_taxe:
+            payload["type_taxe"] = type_taxe
+        return self._post("/v1/tax/transaction/calculate", payload)
+
     def valider_identifiant_fiscal(self, pays: str, identifiant: str) -> WezasResponse[dict[str, Any]]:
         return self._post("/v1/tax/tin/validate", {"pays": pays, "identifiant": identifiant})
 
@@ -153,6 +169,22 @@ class AsyncWezasClient(BaseClient):
 
     async def valider_telephone(self, pays: str, numero: str) -> WezasResponse[dict[str, Any]]:
         return await self._post("/v1/phone/validate", {"pays": pays, "numero": numero})
+
+    async def calculer_taxe_transaction(
+        self,
+        pays: str,
+        montant: float | str,
+        type_taxe: str | None = None,
+        cumul_journalier_precedent: float | str = 0,
+    ) -> WezasResponse[dict[str, Any]]:
+        payload: dict[str, Any] = {
+            "pays": pays,
+            "montant": float(montant),
+            "cumul_journalier_precedent": float(cumul_journalier_precedent),
+        }
+        if type_taxe:
+            payload["type_taxe"] = type_taxe
+        return await self._post("/v1/tax/transaction/calculate", payload)
 
     async def valider_carte(self, numero_carte: str) -> WezasResponse[dict[str, Any]]:
         return await self._post("/v1/bank/card/validate", {"numero_carte": numero_carte})

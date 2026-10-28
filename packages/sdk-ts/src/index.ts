@@ -7,6 +7,7 @@ import {
   PhoneValidationData,
   CurrencyConversionData,
   VatCalculationData,
+  TransactionTaxData,
   AmountFormatData,
   CountryInfoData,
   OperatorsListData,
@@ -120,6 +121,23 @@ export class WezasClient {
     options?: { mode?: "ht" | "ttc"; type_taux?: "standard" | "reduit" | "super_reduit"; taux_personnalise?: number | string }
   ): Promise<Envelope<VatCalculationData>> {
     return this.call<VatCalculationData>("calculer_tva", { montant, pays, ...options });
+  }
+
+  /**
+   * Calcule les taxes transactionnelles (E-Levy Ghana, TSTA Cameroun, EMTL Nigeria)
+   * et retenues à la source (BRS Côte d'Ivoire / Sénégal, WHT, Digital Service Tax Kenya).
+   */
+  async calculerTaxeTransaction(
+    pays: string,
+    montant: number | string,
+    options?: { type_taxe?: string; cumul_journalier_precedent?: number | string }
+  ): Promise<Envelope<TransactionTaxData>> {
+    return this.call<TransactionTaxData>("calculer_taxe_transaction", {
+      pays,
+      montant,
+      type_taxe: options?.type_taxe,
+      cumul_journalier_precedent: options?.cumul_journalier_precedent,
+    });
   }
 
   /**

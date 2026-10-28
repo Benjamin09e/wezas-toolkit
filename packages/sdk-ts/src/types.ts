@@ -59,6 +59,30 @@ export interface VatCalculationData {
   montant_ttc: string;
 }
 
+export interface TransactionTaxData {
+  pays: {
+    iso2: string;
+    nom: string;
+  };
+  taxe: {
+    code: string;
+    nom: string;
+    description: string;
+    type_prelevement: string;
+    taux_pourcentage?: number | null;
+    forfait_fixe?: number | null;
+    devise: string;
+  };
+  calcul: {
+    montant_brut: number;
+    base_imposable: number;
+    montant_taxe: number;
+    montant_apres_taxe: number;
+    libelle_resultat: string;
+  };
+  disponibles_dans_le_pays: string[];
+}
+
 export interface AmountFormatData {
   montant_brut: string;
   montant_formate: string;
