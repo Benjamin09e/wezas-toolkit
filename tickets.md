@@ -25,6 +25,8 @@
 | E12 – Validation bancaire étendue (NUBAN & IBAN) | WAT-050 → 052 | 100 % |
 | E13 – Volet 2 : Auth & Rate Limiting API | WAT-053 → 055 | 100 % |
 | E14 – Écosystème SDK & MCP Registry | WAT-056 → 058 | 100 % |
+| E15 – Cartes bancaires régionales & pan-africaines | WAT-059 → 060 | 100 % |
+| E16 – QR Codes de paiement unifiés (EMVCo & Mobile Money) | WAT-061 → 062 | 100 % |
 
 ---
 
@@ -220,7 +222,7 @@
 
 ### WAT-028 – Tests unitaires et jeux de cas réels
 - **Priorité / Taille** : P0 / L
-- **Avancement** : Terminé (127 tests unitaires, 97% de couverture de code)
+- **Avancement** : Terminé (190 tests unitaires et intégration end-to-end Python validés avec pytest, plus 4 tests SDK TypeScript validés)
 - **Description** : pytest, cas valides/invalides par pays, cas limites, couverture ≥ 90 % sur la logique.
 - **Skills** : pytest, TDD, connaissance du domaine.
 
@@ -236,11 +238,11 @@
 - **Description** : Job qui valide chaque fichier pays contre le schéma, vérifie `sources` non vide et `derniere_verification` présent.
 - **Skills** : JSON Schema, CI.
 
-### WAT-031 – Tests d'intégration MCP
+### WAT-031 – Tests d'intégration MCP & End-to-End
 - **Priorité / Taille** : P1 / M
-- **Avancement** : Terminé (tests/test_mcp_integration.py avec transport stdio réel)
-- **Description** : Tests via client MCP (stdio) vérifiant listing et appels des 3 outils, et garantie d'absence d'accès réseau.
-- **Skills** : protocole MCP, tests d'intégration.
+- **Avancement** : Terminé (tests/test_mcp_integration.py avec transport stdio réel sous sous-processus client MCP, et tests/test_api.py couvrant l'ensemble des endpoints REST end-to-end)
+- **Description** : Tests via client MCP (stdio) vérifiant listing et appels des outils, cycle de vie API REST, et garantie d'absence d'accès réseau non désiré.
+- **Skills** : protocole MCP, tests d'intégration, API end-to-end.
 
 ---
 
@@ -438,6 +440,38 @@
 
 ---
 
+## E15 – Cartes bancaires régionales & pan-africaines
+
+### WAT-059 – Moteur de détection et validation de cartes bancaires (GIMAC, GIM-UEMOA, Verve)
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Module `wezas_core/card.py` implémentant l'algorithme Luhn ISO/IEC 7812-1, masquage PCI-DSS, détection des BIN GIMAC CEMAC, GIM-UEMOA, Verve Nigeria, Visa et Mastercard avec 10 tests unitaires validés)
+- **Description** : Identifier le réseau émetteur de la carte bancaire via les plages BIN africaines et universelles, vérifier la somme de contrôle Luhn, masquer le PAN et retourner les métadonnées régionales.
+- **Skills** : ISO/IEC 7812, Luhn, Fintech Afrique, tests unitaires.
+
+### WAT-060 – Exposition de `valider_carte_bancaire` dans MCP, API REST et SDK TypeScript
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Outil FastMCP `valider_carte_bancaire` enregistré, endpoint API `/v1/bank/card/validate` implémenté avec tests E2E passants, et méthode client `wezas.validerCarte(...)` ajoutée et testée dans le SDK TypeScript)
+- **Description** : Exposer la validation de cartes dans l'outil FastMCP, créer l'endpoint FastAPI correspondant et enrichir le SDK TypeScript officiel.
+- **Skills** : FastMCP, FastAPI, TypeScript, packaging SDK.
+
+---
+
+## E16 – QR Codes de paiement unifiés (EMVCo & Mobile Money)
+
+### WAT-061 – Moteur de génération EMVCo et décodeur multi-standards
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Module `wezas_core/qrcode.py` avec calcul de checksum CRC16-CCITT officiel, génération EMVCo Merchant-Presented TLV statique/dynamique et décodeur supportant EMVCo, Wave, Orange Money et MTN MoMo avec tests unitaires validés)
+- **Description** : Produire des chaînes QR codes marchands normalisées EMVCo (ISO/IEC 18004, GHQR, NQR) et décoder les QR codes de paiement bancaires et Mobile Money.
+- **Skills** : EMVCo specifications, TLV parsing, CRC16, Python, TDD.
+
+### WAT-062 – Exposition des outils QR dans FastMCP, API REST et SDK TypeScript
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Outils FastMCP `generer_qr_emvco` et `decoder_qr_paiement`, endpoints REST `/v1/payment/qr/emvco/generate` et `/v1/payment/qr/decode`, méthodes client `genererQrEmvco` et `decoderQrPaiement` dans le SDK TS avec build et tests validés)
+- **Description** : Intégrer la génération et le décodage de QR de paiement dans le serveur MCP, l'API FastAPI et le SDK TypeScript.
+- **Skills** : FastMCP, FastAPI, TypeScript, REST API.
+
+---
+
 ## Jalons
 
 | Version | Contenu | Tickets |
@@ -447,3 +481,5 @@
 | **v1.0** | Volet 2, Docker, annuaires | E10, WAT-038, 039 |
 | **v1.1** | Expansion Afrique de l'Est & NUBAN, SDK TS | E11, E12, WAT-056 |
 | **v1.2** | Auth avancée, Rate Limiter, Portail clés | E13, E14 |
+| **v1.3** | Cartes régionales GIMAC / GIM-UEMOA / Verve | E15, WAT-059, 060 |
+| **v1.4** | QR Codes EMVCo (GHQR/NQR) & Décodeur multi-standards | E16, WAT-061, 062 |

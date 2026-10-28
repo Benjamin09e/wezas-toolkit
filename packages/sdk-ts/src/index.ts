@@ -15,6 +15,9 @@ import {
   RibValidationData,
   NubanValidationData,
   IbanValidationData,
+  CardValidationData,
+  EmvQrData,
+  DecodedQrData,
 } from "./types.js";
 import { formatAmountOffline, FIXED_PARITY } from "./offline.js";
 
@@ -195,6 +198,52 @@ export class WezasClient {
   ): Promise<Envelope<IbanValidationData>> {
     return this.call<IbanValidationData>("valider_iban_afrique", {
       iban,
+    });
+  }
+
+  /**
+   * Valide un numéro de carte bancaire (PAN), identifie le réseau émetteur
+   * (GIMAC, GIM-UEMOA, Verve, Visa, Mastercard) et applique l'algorithme Luhn.
+   */
+  async validerCarte(
+    numeroCarte: string
+  ): Promise<Envelope<CardValidationData>> {
+    return this.call<CardValidationData>("valider_carte_bancaire", {
+      numero_carte: numeroCarte,
+    });
+  }
+
+  /**
+   * Génère un payload QR Code standard EMVCo Merchant-Presented Mode (GHQR, NQR).
+   */
+  async genererQrEmvco(
+    nomMarchand: string,
+    villeMarchand: string,
+    pays: string,
+    compteMarchand: string,
+    devise: string,
+    montant?: number | string,
+    reference?: string
+  ): Promise<Envelope<EmvQrData>> {
+    return this.call<EmvQrData>("generer_qr_emvco", {
+      nom_marchand: nomMarchand,
+      ville_marchand: villeMarchand,
+      pays,
+      compte_marchand: compteMarchand,
+      devise,
+      montant,
+      reference,
+    });
+  }
+
+  /**
+   * Décode et analyse un QR Code de paiement (EMVCo avec CRC16 ou Mobile Money).
+   */
+  async decoderQrPaiement(
+    payload: string
+  ): Promise<Envelope<DecodedQrData>> {
+    return this.call<DecodedQrData>("decoder_qr_paiement", {
+      payload,
     });
   }
 }

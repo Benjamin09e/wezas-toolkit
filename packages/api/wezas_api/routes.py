@@ -3,12 +3,14 @@ from typing import Literal
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
+from wezas_core.card import validate_card
 from wezas_core.country import get_country_info
 from wezas_core.currency import convert as convert_currency
 from wezas_core.format_amount import format_amount
 from wezas_core.iban import validate_african_iban
 from wezas_core.nuban import validate_nuban
 from wezas_core.phone import validate_phone
+from wezas_core.qrcode import decode_payment_qr, generate_emv_qr
 from wezas_core.rib import validate_rib
 from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
@@ -28,6 +30,13 @@ class CreateApiKeyRequest(BaseModel):
 
 class RevokeApiKeyRequest(BaseModel):
     key_id: str = Field(..., description="Identifiant public de la clé (wz_key_...)")
+
+
+class CardValidationRequest(BaseModel):
+    numero_carte: str = Field(
+        ...,
+        description="Numéro de carte bancaire PAN (ex: GIMAC, GIM-UEMOA, Verve, Visa, Mastercard)",
+    )
 
 
 class TaxIdValidationRequest(BaseModel):
@@ -62,6 +71,20 @@ class IbanValidationRequest(BaseModel):
         ...,
         description="Numéro IBAN complet (ex: MA64011780000012345678901234)",
     )
+
+
+class GenerateEmvQrRequest(BaseModel):
+    nom_marchand: str = Field(..., description="Nom du marchand ou entreprise (ex: Supermarché)")
+    ville_marchand: str = Field(..., description="Ville du marchand (ex: Dakar, Abidjan)")
+    pays: str = Field(..., description="Code pays ISO (ex: SN, CI, GH, NG)")
+    compte_marchand: str = Field(..., description="Identifiant/compte de règlement du marchand")
+    devise: str = Field(..., description="Code devise ISO alphabétique (ex: XOF, XAF, GHS, NGN)")
+    montant: float | None = Field(None, gt=0, description="Montant (pour QR dynamique)")
+    reference: str | None = Field(None, description="Référence de commande ou facture")
+
+
+class DecodePaymentQrRequest(BaseModel):
+    payload: str = Field(..., description="Chaîne de données brute issue du QR code scanné")
 
 
 class PhoneValidationRequest(BaseModel):
@@ -184,6 +207,41 @@ async def api_validate_iban(
     api_key: str | None = Depends(verify_api_key),
 ):
     envelope = validate_african_iban(iban_str=req.iban)
+    return envelope.model_dump()
+
+
+@router.post("/bank/card/validate")
+async def api_validate_card(
+    req: CardValidationRequest,
+    api_key: str | None = Depends(verify_api_key),
+):
+    envelope = validate_card(pan=req.numero_carte)
+    return envelope.model_dump()
+
+
+@router.post("/payment/qr/emvco/generate")
+async def api_generate_emv_qr(
+    req: GenerateEmvQrRequest,
+    api_key: str | None = Depends(verify_api_key),
+):
+    envelope = generate_emv_qr(
+        merchant_name=req.nom_marchand,
+        merchant_city=req.ville_marchand,
+        country=req.pays,
+        merchant_account=req.compte_marchand,
+        currency=req.devise,
+        amount=req.montant,
+        reference=req.reference,
+    )
+    return envelope.model_dump()
+
+
+@router.post("/payment/qr/decode")
+async def api_decode_payment_qr(
+    req: DecodePaymentQrRequest,
+    api_key: str | None = Depends(verify_api_key),
+):
+    envelope = decode_payment_qr(payload=req.payload)
     return envelope.model_dump()
 
 

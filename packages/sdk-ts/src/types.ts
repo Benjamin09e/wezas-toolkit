@@ -183,3 +183,55 @@ export interface IbanValidationData {
     zone: string;
   };
 }
+
+export interface CardValidationData {
+  valide: boolean;
+  pan_masque: string;
+  bin: string;
+  derniers_chiffres: string;
+  longueur: number;
+  reseau: {
+    id: string;
+    nom: string;
+    type: string;
+    region: string | null;
+    pays_associes: string[];
+  };
+  luhn_valide: boolean;
+}
+
+export interface EmvQrData {
+  payload: string;
+  norme: string;
+  crc: string;
+  marchand: {
+    nom: string;
+    ville: string;
+    compte: string;
+    pays: string;
+  };
+  devise: string;
+  code_devise_iso: string;
+  montant?: string | null;
+  reference?: string | null;
+  type_initiation: "dynamic" | "static";
+}
+
+export interface DecodedQrData {
+  type: "emvco" | "mobile_money_direct";
+  norme?: string;
+  operateur?: string;
+  valide_crc?: boolean;
+  telephone?: string;
+  montant?: string | null;
+  reference?: string | null;
+  marchand?: {
+    nom: string;
+    ville: string;
+    compte: string;
+    pays: string;
+  };
+  devise?: string;
+  tags_bruts?: Record<string, string>;
+  payload_brut?: string;
+}

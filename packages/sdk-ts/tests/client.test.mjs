@@ -61,6 +61,16 @@ test("WezasClient bank methods call correct tools", async () => {
   await client.validerRib("CI008", "01111", "01234567890", "12");
   await client.validerNuban("044", "0000014579");
   await client.validerIban("MA64011780000012345678901234");
+  await client.validerCarte("5054851234567899");
+  await client.genererQrEmvco("Boutique", "Dakar", "SN", "ACC123", "XOF", 5000);
+  await client.decoderQrPaiement("WAVE:+221770000000:2000");
 
-  assert.deepEqual(toolsCalled, ["valider_rib", "valider_nuban", "valider_iban_afrique"]);
+  assert.deepEqual(toolsCalled, [
+    "valider_rib",
+    "valider_nuban",
+    "valider_iban_afrique",
+    "valider_carte_bancaire",
+    "generer_qr_emvco",
+    "decoder_qr_paiement",
+  ]);
 });

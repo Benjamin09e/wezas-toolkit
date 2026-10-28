@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from wezas_core.card import validate_card
 from wezas_core.iban import validate_african_iban
 from wezas_core.nuban import validate_nuban
 from wezas_core.rib import validate_rib
@@ -86,4 +87,24 @@ def register_tool(mcp: Any) -> None:
             iban: Numéro de compte IBAN complet (ex: MA64011780000012345678901234).
         """
         envelope = validate_african_iban(iban_str=iban)
+        return envelope.model_dump()
+
+    @mcp.tool(
+        name="valider_carte_bancaire",
+        description=(
+            "Valide un numéro de carte bancaire (PAN), identifie le réseau émetteur "
+            "(GIMAC Afrique Centrale, GIM-UEMOA Afrique de l'Ouest, Verve Nigéria, Visa, Mastercard) "
+            "et contrôle la conformité algorithmique Luhn (Mod 10 / ISO 7812)."
+        ),
+    )
+    def tool_valider_carte(
+        numero_carte: str,
+    ) -> dict[str, Any]:
+        """
+        Valide une carte bancaire africaine ou internationale.
+
+        Args:
+            numero_carte: Numéro PAN de la carte (avec ou sans espaces/tirets).
+        """
+        envelope = validate_card(pan=numero_carte)
         return envelope.model_dump()

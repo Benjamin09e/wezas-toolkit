@@ -106,6 +106,67 @@ def test_iban_endpoint():
     assert res["data"]["pays"]["iso2"] == "MA"
 
 
+def test_card_endpoint():
+    # Test validation carte GIMAC
+    response = client.post(
+        "/v1/bank/card/validate",
+        json={"numero_carte": "5054851234567899"},
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["ok"] is True
+    assert res["data"]["valide"] is True
+    assert res["data"]["reseau"]["id"] == "gimac"
+    assert "CEMAC" in res["data"]["reseau"]["region"]
+    assert res["data"]["pan_masque"] == "505485******7899"
+
+
+def test_qr_payment_endpoints():
+    # 1. Génération EMVCo
+    gen_resp = client.post(
+        "/v1/payment/qr/emvco/generate",
+        json={
+            "nom_marchand": "Pharmacie Centrale",
+            "ville_marchand": "Dakar",
+            "pays": "SN",
+            "compte_marchand": "ACC789",
+            "devise": "XOF",
+            "montant": 4500,
+            "reference": "FAC-1234",
+        },
+    )
+    assert gen_resp.status_code == 200
+    gen_data = gen_resp.json()
+    assert gen_data["ok"] is True
+    payload = gen_data["data"]["payload"]
+    assert payload.startswith("000201")
+    assert gen_data["data"]["crc"] is not None
+
+    # 2. Décodage du QR EMVCo généré
+    dec_resp = client.post(
+        "/v1/payment/qr/decode",
+        json={"payload": payload},
+    )
+    assert dec_resp.status_code == 200
+    dec_data = dec_resp.json()
+    assert dec_data["ok"] is True
+    assert dec_data["data"]["type"] == "emvco"
+    assert dec_data["data"]["valide_crc"] is True
+    assert dec_data["data"]["marchand"]["nom"] == "Pharmacie Centrale"
+    assert dec_data["data"]["montant"] == "4500.00"
+
+    # 3. Décodage QR Wave
+    wave_resp = client.post(
+        "/v1/payment/qr/decode",
+        json={"payload": "WAVE:+221770001122:3000:REF1"},
+    )
+    assert wave_resp.status_code == 200
+    wave_data = wave_resp.json()
+    assert wave_data["ok"] is True
+    assert wave_data["data"]["type"] == "mobile_money_direct"
+    assert wave_data["data"]["operateur"] == "Wave"
+
+
 def test_rate_limiting_headers_and_exceeded():
     from wezas_api.rate_limit import RateLimiter
 
