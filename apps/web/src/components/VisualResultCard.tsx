@@ -21,7 +21,9 @@ import {
   QrCode,
   ExternalLink,
   Copy,
-  Check
+  Check,
+  CreditCard,
+  ScanLine
 } from "lucide-react";
 
 interface ResultCardProps {
@@ -782,6 +784,215 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
               <div className="text-xs sm:text-sm font-bold text-slate-200 truncate">{data.numero_compte}</div>
             </div>
           </div>
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // --- CARTE BANCAIRE (GIMAC, GIM-UEMOA, VERVE, VISA, MASTERCARD) ---
+  if (toolId === "valider_carte_bancaire") {
+    const isValide = data.valide === true;
+    const reseau = data.reseau || {};
+
+    const networkBgGradient = 
+      reseau.id === "gimac" ? "from-emerald-950/80 via-slate-900 to-emerald-900/40 border-emerald-500/40" :
+      reseau.id === "gim_uemoa" ? "from-amber-950/80 via-slate-900 to-amber-900/40 border-amber-500/40" :
+      reseau.id === "verve" ? "from-blue-950/80 via-slate-900 to-blue-900/40 border-blue-500/40" :
+      reseau.id === "mastercard" ? "from-red-950/80 via-slate-900 to-orange-900/40 border-red-500/40" :
+      "from-indigo-950/80 via-slate-900 to-blue-900/40 border-indigo-500/40";
+
+    return (
+      <div className="space-y-4">
+        {/* Visualisation interactive de la carte */}
+        <div className={`relative p-5 rounded-2xl bg-gradient-to-br ${networkBgGradient} border text-white shadow-xl overflow-hidden`}>
+          <div className="flex justify-between items-start mb-6">
+            <div className="flex items-center gap-2">
+              <CreditCard className="w-6 h-6 text-slate-300" />
+              <span className="text-xs font-mono tracking-widest uppercase text-slate-400">Carte Bancaire</span>
+            </div>
+            <div className="flex flex-col items-end">
+              <span className="text-base sm:text-lg font-black tracking-wider px-3 py-0.5 rounded-lg bg-black/40 border border-white/10 uppercase">
+                {reseau.nom || "CARTE"}
+              </span>
+              <span className="text-[10px] text-slate-400 mt-1">{reseau.region || "Interbancaire"}</span>
+            </div>
+          </div>
+
+          {/* Numéro masqué */}
+          <div className="font-mono text-lg sm:text-2xl font-bold tracking-widest my-4 text-slate-100">
+            {data.pan_masque || "**** **** **** ****"}
+          </div>
+
+          <div className="flex justify-between items-end text-xs text-slate-300 pt-2 border-t border-white/10">
+            <div>
+              <div className="text-[10px] text-slate-400 uppercase font-sans">BIN Préfixe</div>
+              <div className="font-mono font-bold text-slate-200">{data.bin}</div>
+            </div>
+            <div className="text-right">
+              <div className="text-[10px] text-slate-400 uppercase font-sans">Algorithme Luhn</div>
+              <div className={`font-mono font-bold ${data.luhn_valide ? "text-emerald-400" : "text-rose-400"}`}>
+                {data.luhn_valide ? "✓ Valide Mod-10" : "✗ Invalide"}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Détails et pays associés */}
+        <div className="bg-slate-950/80 rounded-xl border border-slate-800 p-4 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-slate-400">Statut de conformité :</span>
+            <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${isValide ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/10 text-rose-400 border border-rose-500/30"}`}>
+              {isValide ? "Carte Valide & Conforme" : "Carte Invalide ou Hors-Norme"}
+            </span>
+          </div>
+
+          {reseau.pays_associes && reseau.pays_associes.length > 0 && (
+            <div className="pt-2 border-t border-slate-800/60">
+              <span className="text-[11px] text-slate-400 block mb-1.5">Pays membres du réseau :</span>
+              <div className="flex flex-wrap gap-1.5">
+                {reseau.pays_associes.map((p: string) => (
+                  <span key={p} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // --- GÉNÉRATEUR QR EMVCO ---
+  if (toolId === "generer_qr_emvco") {
+    const marchand = data.marchand || {};
+    const payload = data.payload || "";
+
+    return (
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-950/80 rounded-2xl border border-slate-800 p-5">
+          {/* Aperçu QR Code Visuel */}
+          <div className="shrink-0 p-3 bg-white rounded-xl shadow-lg border border-slate-700 text-center">
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(payload)}`}
+              alt="QR Code Paiement EMVCo"
+              className="w-36 h-36 mx-auto rounded"
+            />
+            <span className="text-[10px] text-slate-800 font-bold block mt-1">EMVCo {marchand.pays}</span>
+          </div>
+
+          <div className="space-y-2.5 flex-1 text-left w-full">
+            <div className="flex items-center gap-2">
+              <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono font-medium">
+                Standard {data.norme || "EMVCo"}
+              </span>
+              <span className="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-mono">
+                CRC16 : {data.crc}
+              </span>
+            </div>
+
+            <div className="text-lg font-bold text-slate-100">{marchand.nom}</div>
+            <div className="text-xs text-slate-400">
+              {marchand.ville} ({marchand.pays}) · Compte : <strong className="text-slate-200 font-mono">{marchand.compte}</strong>
+            </div>
+
+            {data.montant && (
+              <div className="text-xl font-bold font-mono text-emerald-400 pt-1">
+                {data.montant} {data.devise}
+              </div>
+            )}
+            {data.reference && (
+              <div className="text-xs text-slate-400 font-mono">
+                Réf : <span className="text-slate-300">{data.reference}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Payload brut copiable */}
+        <div className="bg-slate-900/60 p-3 rounded-xl border border-slate-800 space-y-1.5">
+          <div className="text-[11px] font-medium text-slate-400">Payload EMVCo TLV Brut :</div>
+          <div className="font-mono text-xs text-amber-300 bg-slate-950 p-2.5 rounded-lg break-all border border-slate-800">
+            {payload}
+          </div>
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
+  // --- DÉCODEUR QR PAIEMENT ---
+  if (toolId === "decoder_qr_paiement") {
+    const isEmv = data.type === "emvco";
+    const marchand = data.marchand || {};
+
+    return (
+      <div className="space-y-4">
+        <div className="bg-slate-950/80 rounded-2xl border border-slate-800 p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono uppercase text-slate-400">Type de QR Détecté</span>
+            <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-medium">
+              {isEmv ? "Standard EMVCo (Banque / GHQR / NQR)" : `Direct ${data.operateur || "Mobile Money"}`}
+            </span>
+          </div>
+
+          {isEmv ? (
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span className="text-xs text-slate-400">Intégrité Checksum CRC16 :</span>
+                <span className={`text-xs font-mono font-bold ${data.valide_crc ? "text-emerald-400" : "text-rose-400"}`}>
+                  {data.valide_crc ? `✓ Valide (${data.crc})` : "✗ Checksum Échoué"}
+                </span>
+              </div>
+              <div className="text-sm font-medium text-slate-200">
+                Marchand : <strong className="text-white">{marchand.nom || "Inconnu"}</strong> ({marchand.ville}, {marchand.pays})
+              </div>
+              {data.montant && (
+                <div className="text-lg font-bold font-mono text-emerald-400">
+                  {data.montant} {data.devise}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-2 pt-2">
+              <div className="text-sm text-slate-300">
+                Opérateur : <strong className="text-emerald-400">{data.operateur}</strong>
+              </div>
+              <div className="text-sm text-slate-300">
+                Téléphone récepteur : <strong className="font-mono text-slate-100">{data.telephone}</strong>
+              </div>
+              {data.montant && (
+                <div className="text-base font-bold font-mono text-amber-400">
+                  Montant : {data.montant}
+                </div>
+              )}
+              {data.reference && (
+                <div className="text-xs text-slate-400">
+                  Référence : <strong className="text-slate-200">{data.reference}</strong>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <SourceFooter

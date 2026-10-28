@@ -3,6 +3,7 @@
 import json
 import sys
 
+from wezas_core.card import validate_card
 from wezas_core.country import get_country_info
 from wezas_core.currency import convert
 from wezas_core.format_amount import format_amount
@@ -11,6 +12,7 @@ from wezas_core.nuban import validate_nuban
 from wezas_core.operators import list_operators
 from wezas_core.payment import generate_payment_link
 from wezas_core.phone import validate_phone
+from wezas_core.qrcode import decode_payment_qr, generate_emv_qr
 from wezas_core.rib import validate_rib
 from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
@@ -81,6 +83,24 @@ def execute_tool(tool_name: str, args: dict):
     elif tool_name == "valider_iban_afrique":
         return validate_african_iban(
             iban_str=args.get("iban", ""),
+        ).model_dump(mode="json")
+    elif tool_name == "valider_carte_bancaire":
+        return validate_card(
+            pan=args.get("numero_carte", ""),
+        ).model_dump(mode="json")
+    elif tool_name == "generer_qr_emvco":
+        return generate_emv_qr(
+            merchant_name=args.get("nom_marchand", ""),
+            merchant_city=args.get("ville_marchand", ""),
+            country=args.get("pays", ""),
+            merchant_account=args.get("compte_marchand", ""),
+            currency=args.get("devise", ""),
+            amount=args.get("montant"),
+            reference=args.get("reference"),
+        ).model_dump(mode="json")
+    elif tool_name == "decoder_qr_paiement":
+        return decode_payment_qr(
+            payload=args.get("payload", ""),
         ).model_dump(mode="json")
     else:
         raise ValueError(f"Outil inconnu : {tool_name}")

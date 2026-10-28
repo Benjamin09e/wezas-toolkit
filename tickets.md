@@ -28,6 +28,7 @@
 | E15 – Cartes bancaires régionales & pan-africaines | WAT-059 → 060 | 100 % |
 | E16 – QR Codes de paiement unifiés (EMVCo & Mobile Money) | WAT-061 → 062 | 100 % |
 | E17 – SDK Python Officiel (`wezas-sdk`) | WAT-063 → 064 | 100 % |
+| E18 – Portail Web & Playground Fintech Interactif | WAT-065 → 066 | 100 % |
 
 ---
 
@@ -489,6 +490,22 @@
 
 ---
 
+## E18 – Portail Web & Playground Fintech Interactif
+
+### WAT-065 – Intégration des cartes bancaires et QR codes dans le catalogue du Playground
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Ajout des outils `valider_carte_bancaire`, `generer_qr_emvco` et `decoder_qr_paiement` dans `apps/web/src/app/page.tsx`, avec presets Afrique Centrale/Ouest/Nigeria/Ghana, route `/api/mcp` et runner `scripts/exec_tool.py` connectés)
+- **Description** : Permettre aux développeurs de tester les nouveaux outils directement depuis l'interface web sans rien installer.
+- **Skills** : Next.js, React, Tailwind CSS, UX développeur.
+
+### WAT-066 – Rendu visuel interactif de carte bancaire et affichage QR Code scannable
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Composant `VisualResultCard.tsx` enrichi : carte bancaire dynamique avec dégradé thématique par réseau GIMAC/UEMOA/Verve/Visa, contrôle visuel Luhn, aperçu du QR code EMVCo scannable en temps réel et décodeur de payload)
+- **Description** : Créer les cartes de visualisation enrichies pour transformer les données brutes JSON en interfaces graphiques modernes.
+- **Skills** : React, SVG/Canvas, UI/UX Fintech.
+
+---
+
 ## Jalons
 
 | Version | Contenu | Tickets |
@@ -501,3 +518,4 @@
 | **v1.3** | Cartes régionales GIMAC / GIM-UEMOA / Verve | E15, WAT-059, 060 |
 | **v1.4** | QR Codes EMVCo (GHQR/NQR) & Décodeur multi-standards | E16, WAT-061, 062 |
 | **v1.5** | SDK Python officiel (`wezas-sdk` PyPI) | E17, WAT-063, 064 |
+| **v1.6** | Playground interactif Cartes bancaires & QR Codes EMVCo | E18, WAT-065, 066 |

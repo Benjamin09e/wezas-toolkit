@@ -24,7 +24,9 @@ import {
   RotateCcw,
   Check,
   ChevronDown,
-  Copy
+  Copy,
+  CreditCard,
+  ScanLine
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
@@ -270,6 +272,63 @@ export const TOOLS: ToolConfig[] = [
       { label: "🇲🇦 Maroc (28 caractères)", args: { iban: "MA64011780000012345678901234" } },
       { label: "🇹🇳 Tunisie (24 caractères)", args: { iban: "TN5910001000123456789012" } },
       { label: "🇪🇬 Égypte (29 caractères)", args: { iban: "EG800002000100000012345678901" } },
+    ],
+  },
+  {
+    id: "valider_carte_bancaire",
+    name: "Validation Carte Bancaire",
+    shortName: "Carte Bancaire",
+    category: "Fintech & Banque",
+    description: "Détection du réseau (GIMAC, GIM-UEMOA, Verve, Visa, Mastercard) et conformité Luhn ISO 7812.",
+    icon: CreditCard,
+    defaultPayload: {
+      numero_carte: "5054851234567899",
+    },
+    presets: [
+      { label: "💳 GIMAC Afrique Centrale (CEMAC)", args: { numero_carte: "5054851234567899" } },
+      { label: "💳 GIM-UEMOA Afrique de l'Ouest", args: { numero_carte: "5058011234567896" } },
+      { label: "💳 Verve Nigeria / Ghana", args: { numero_carte: "5061011234567891" } },
+      { label: "💳 Visa International", args: { numero_carte: "4000001234567899" } },
+    ],
+  },
+  {
+    id: "generer_qr_emvco",
+    name: "Générateur QR EMVCo",
+    shortName: "QR EMVCo",
+    category: "Fintech",
+    description: "Génération de QR codes marchands EMVCo officiels (GHQR, NQR) avec checksum CRC16 CCITT.",
+    icon: QrCode,
+    defaultPayload: {
+      nom_marchand: "Boutique Dakar",
+      ville_marchand: "Dakar",
+      pays: "SN",
+      compte_marchand: "ACC1234567",
+      devise: "XOF",
+      montant: 5000,
+      reference: "CMD-2026-001",
+    },
+    presets: [
+      { label: "🇸🇳 Dakar XOF (5 000 F)", args: { nom_marchand: "Boutique Dakar", ville_marchand: "Dakar", pays: "SN", compte_marchand: "ACC1234567", devise: "XOF", montant: 5000, reference: "CMD-2026-001" } },
+      { label: "🇨🇮 Abidjan XOF (15 000 F)", args: { nom_marchand: "Supermarché Ivoire", ville_marchand: "Abidjan", pays: "CI", compte_marchand: "CI0018899", devise: "XOF", montant: 15000, reference: "FAC-994" } },
+      { label: "🇳🇬 Lagos NGN (NQR 10,000 ₦)", args: { nom_marchand: "Tech Hub Lagos", ville_marchand: "Lagos", pays: "NG", compte_marchand: "0440001234", devise: "NGN", montant: 10000, reference: "INV-77" } },
+      { label: "🇬🇭 Accra GHS (GHQR 50 GH₵)", args: { nom_marchand: "Accra Market", ville_marchand: "Accra", pays: "GH", compte_marchand: "GH93600123", devise: "GHS", montant: 50, reference: "TICKET-1" } },
+    ],
+  },
+  {
+    id: "decoder_qr_paiement",
+    name: "Décodeur QR Paiement",
+    shortName: "Décodeur QR",
+    category: "Fintech",
+    description: "Analyse et vérification d'intégrité de QR codes EMVCo ou direct Mobile Money (Wave, OM, MoMo).",
+    icon: ScanLine,
+    defaultPayload: {
+      payload: "0002010102122606ACC12352040000530395254075000.005802SN5914Boutique Dakar6005Dakar63047212",
+    },
+    presets: [
+      { label: "📱 QR EMVCo Standard", args: { payload: "0002010102122606ACC12352040000530395254075000.005802SN5914Boutique Dakar6005Dakar63047212" } },
+      { label: "🌊 QR Wave Mobile Money", args: { payload: "WAVE:+221771234567:2500:Facture42" } },
+      { label: "🟠 QR Orange Money", args: { payload: "OM:+2250700000000:10000:CMD1" } },
+      { label: "🟡 QR MTN MoMo", args: { payload: "MOMO:+237670000000:5000:REF99" } },
     ],
   },
 ];
