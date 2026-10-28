@@ -27,6 +27,7 @@
 | E14 – Écosystème SDK & MCP Registry | WAT-056 → 058 | 100 % |
 | E15 – Cartes bancaires régionales & pan-africaines | WAT-059 → 060 | 100 % |
 | E16 – QR Codes de paiement unifiés (EMVCo & Mobile Money) | WAT-061 → 062 | 100 % |
+| E17 – SDK Python Officiel (`wezas-sdk`) | WAT-063 → 064 | 100 % |
 
 ---
 
@@ -472,6 +473,22 @@
 
 ---
 
+## E17 – SDK Python Officiel (`wezas-sdk`)
+
+### WAT-063 – Architecture du package Python `wezas-sdk` et typage Pydantic
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Package `packages/sdk-py` configuré avec `hatchling` et `uv workspace`, modèles de données génériques `WezasResponse[T]`, `ErrorInfo` et gestion bilingue des erreurs)
+- **Description** : Créer le package Python officiel publiable sur PyPI (`pip install wezas-sdk`), fournissant une abstraction typée des réponses de l'API.
+- **Skills** : Python packaging, Pydantic, hatchling, pip.
+
+### WAT-064 – Clients synchrone (`WezasClient`) et asynchrone (`AsyncWezasClient`)
+- **Priorité / Taille** : P1 / M
+- **Avancement** : Terminé (Clients synchrone et asynchrone httpx couvrant l'ensemble des 12 outils : téléphones, devises, TVA, RIB, NUBAN, IBAN, cartes bancaires GIMAC/UEMOA/Verve, QR codes EMVCo/Wave/OM, et tests unitaires d'intégration passants)
+- **Description** : Implémenter les méthodes d'appels HTTP synchrone et asynchrone vers l'API Wezas avec authentification `X-API-Key` et gestion des exceptions HTTP.
+- **Skills** : httpx, async Python, tests d'intégration.
+
+---
+
 ## Jalons
 
 | Version | Contenu | Tickets |
@@ -483,3 +500,4 @@
 | **v1.2** | Auth avancée, Rate Limiter, Portail clés | E13, E14 |
 | **v1.3** | Cartes régionales GIMAC / GIM-UEMOA / Verve | E15, WAT-059, 060 |
 | **v1.4** | QR Codes EMVCo (GHQR/NQR) & Décodeur multi-standards | E16, WAT-061, 062 |
+| **v1.5** | SDK Python officiel (`wezas-sdk` PyPI) | E17, WAT-063, 064 |
