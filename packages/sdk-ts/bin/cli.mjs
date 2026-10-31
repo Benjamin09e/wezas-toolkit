@@ -7,7 +7,7 @@
 
 import readline from "readline";
 
-const VERSION = "0.3.0";
+const VERSION = "0.3.1";
 const REMOTE_BACKEND = process.env.WEZAS_BACKEND_URL || "https://wezas-backend.onrender.com";
 
 const TOOLS = [
