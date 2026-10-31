@@ -1005,5 +1005,88 @@ export function VisualResultCard({ toolId, response }: ResultCardProps) {
     );
   }
 
+  // --- CALCUL TAXES TRANSACTIONNELLES & BRS ---
+  if (toolId === "calculer_taxe_transaction") {
+    const taxe = data.taxe || {};
+    const calcul = data.calcul || {};
+    const pays = data.pays || {};
+
+    return (
+      <div className="space-y-4">
+        <div className="bg-slate-950/80 rounded-2xl border border-slate-800 p-5 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <div className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <span>{taxe.nom || "Taxe Transactionnelle"}</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-amber-400 border border-slate-700">
+                  {pays.nom || pays.iso2} ({taxe.code})
+                </span>
+              </div>
+              <div className="text-xs text-slate-400 mt-0.5">{taxe.description}</div>
+            </div>
+            <div className="text-right">
+              <span className="text-xs px-2.5 py-0.5 rounded-full font-mono font-medium bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                {taxe.taux_pourcentage ? `${taxe.taux_pourcentage}%` : `${taxe.forfait_fixe} ${taxe.devise}`}
+              </span>
+            </div>
+          </div>
+
+          {/* Grille de calcul financier */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center font-mono">
+            <div className="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Montant Brut</div>
+              <div className="text-sm sm:text-base font-bold text-slate-200">
+                {calcul.montant_brut} {taxe.devise}
+              </div>
+            </div>
+            <div className="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+              <div className="text-[10px] text-slate-500 font-sans">Base Imposable</div>
+              <div className="text-sm sm:text-base font-bold text-slate-300">
+                {calcul.base_imposable} {taxe.devise}
+              </div>
+            </div>
+            <div className="bg-slate-900/80 p-2.5 rounded-xl border border-rose-500/30 bg-rose-500/5">
+              <div className="text-[10px] text-rose-400 font-sans">Taxe Prélevée</div>
+              <div className="text-sm sm:text-base font-bold text-rose-400">
+                {calcul.montant_taxe} {taxe.devise}
+              </div>
+            </div>
+            <div className="bg-slate-900/80 p-2.5 rounded-xl border border-emerald-500/30 bg-emerald-500/5">
+              <div className="text-[10px] text-emerald-400 font-sans">Total Après Taxe</div>
+              <div className="text-sm sm:text-base font-bold text-emerald-400">
+                {calcul.montant_apres_taxe} {taxe.devise}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-900/60 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-center gap-2">
+            <Receipt className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>{calcul.libelle_resultat}</span>
+          </div>
+
+          {data.disponibles_dans_le_pays && data.disponibles_dans_le_pays.length > 0 && (
+            <div className="pt-2 border-t border-slate-800/60">
+              <span className="text-[11px] text-slate-400 block mb-1">Autres taxes disponibles dans ce pays :</span>
+              <div className="flex flex-wrap gap-1.5">
+                {data.disponibles_dans_le_pays.map((t: string) => (
+                  <span key={t} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <SourceFooter
+          source={source}
+          derniereVerification={derniereVerification}
+          confiance={confiance}
+          avertissements={avertissements}
+        />
+      </div>
+    );
+  }
+
   return null;
 }

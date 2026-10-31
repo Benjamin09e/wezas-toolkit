@@ -54,6 +54,7 @@ import { VisualResultCard } from "@/components/VisualResultCard";
 import { SnippetGenerator } from "@/components/SnippetGenerator";
 import { InstallationSection } from "@/components/InstallationSection";
 import { ApiKeyManager } from "@/components/ApiKeyManager";
+import { ComponentsShowcase } from "@/components/ComponentsShowcase";
 
 export interface ToolPreset {
   label: string;
@@ -329,6 +330,25 @@ export const TOOLS: ToolConfig[] = [
       { label: "🌊 QR Wave Mobile Money", args: { payload: "WAVE:+221771234567:2500:Facture42" } },
       { label: "🟠 QR Orange Money", args: { payload: "OM:+2250700000000:10000:CMD1" } },
       { label: "🟡 QR MTN MoMo", args: { payload: "MOMO:+237670000000:5000:REF99" } },
+    ],
+  },
+  {
+    id: "calculer_taxe_transaction",
+    name: "Taxes Transactionnelles & BRS",
+    shortName: "Taxes & E-Levy",
+    category: "Fiscalité",
+    description: "Calcul de l'E-Levy Ghana, TSTA Cameroun, EMTL Nigeria, BRS Côte d'Ivoire / Sénégal et WHT.",
+    icon: Receipt,
+    defaultPayload: {
+      pays: "GH",
+      montant: 250,
+      cumul_journalier_precedent: 0,
+    },
+    presets: [
+      { label: "🇬🇭 E-Levy Ghana (250 GHS)", args: { pays: "GH", montant: 250, cumul_journalier_precedent: 0 } },
+      { label: "🇨🇲 TSTA Cameroun (50 000 XAF)", args: { pays: "CM", montant: 50000 } },
+      { label: "🇳🇬 EMTL Nigeria (10 000 NGN)", args: { pays: "NG", montant: 10000 } },
+      { label: "🇨🇮 BRS Côte d'Ivoire (500 000 XOF)", args: { pays: "CI", montant: 500000, type_taxe: "BRS_PRESTATION" } },
     ],
   },
 ];
@@ -611,6 +631,9 @@ function PlaygroundContent() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+        {/* Composants UI Prêts à l'emploi & Simulateur Checkout */}
+        <ComponentsShowcase />
+
         {/* Section d'Installation NPM / Python / MCP */}
         <InstallationSection />
 
