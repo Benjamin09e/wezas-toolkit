@@ -588,6 +588,15 @@ function PlaygroundContent() {
               27 Pays Couverts
             </span>
 
+            {/* Lien SEO Micro-Outils */}
+            <a
+              href="/outils"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-xs text-amber-400 hover:text-amber-300 transition-all font-semibold min-h-[36px]"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Outils Gratuits</span>
+            </a>
+
             {/* Bouton Partager URL profonde */}
             <button
               onClick={handleCopyShareLink}
