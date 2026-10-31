@@ -80,7 +80,7 @@ if (conv.ok && conv.data) {
 }
 ```
 
-### 4. Validation Bancaire Africaine (RIB, NUBAN, IBAN)
+### 4. Validation Bancaire Africaine (RIB, NUBAN, IBAN, Cartes GIMAC / Verve)
 ```typescript
 import { wezas } from "wezas-africa-toolkit";
 
@@ -104,9 +104,49 @@ if (iban.ok && iban.data) {
   console.log(iban.data.valide);      // true
   console.log(iban.data.pays);        // "TN"
 }
+
+// Cartes bancaires (GIMAC Afrique centrale, GIM-UEMOA, Verve Nigeria, Visa/Mastercard)
+const carte = await wezas.validerCarte("5054851234567899");
+if (carte.ok && carte.data) {
+  console.log(carte.data.reseau.nom); // "Verve (Afrique de l'Ouest)"
+  console.log(carte.data.luhn_valide); // true
+}
 ```
 
-### 5. Formatage monétaire local hors ligne immédiat
+### 5. QR Codes de Paiement EMVCo & Mobile Money
+```typescript
+import { wezas } from "wezas-africa-toolkit";
+
+// Génération QR Code EMVCo (GHQR Ghana, NQR Nigeria, standard Merchant-Presented)
+const qr = await wezas.genererQrEmvco(
+  "Ma Super Boutique",
+  "Dakar",
+  "SN",
+  "ACC-123456",
+  "XOF",
+  5000,
+  "CMD-987"
+);
+console.log(qr.data?.payload); // payload EMVCo avec CRC16 calculé
+
+// Décodage et vérification de QR Code
+const decode = await wezas.decoderQrPaiement(qr.data?.payload!);
+console.log(decode.data?.marchand?.nom); // "Ma Super Boutique"
+```
+
+### 6. Taxes Transactionnelles Africaines (E-Levy, BRS, DST, EMTL)
+```typescript
+import { wezas } from "wezas-africa-toolkit";
+
+// E-Levy Ghana (1% après franchise de 100 GHS)
+const tax = await wezas.calculerTaxeTransaction("GH", 250);
+if (tax.ok && tax.data) {
+  console.log(tax.data.calcul.montant_taxe);       // 1.5
+  console.log(tax.data.calcul.montant_apres_taxe); // 251.5
+}
+```
+
+### 7. Formatage monétaire local hors ligne immédiat
 ```typescript
 import { formatAmountOffline } from "wezas-africa-toolkit";
 

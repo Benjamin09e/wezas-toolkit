@@ -7,7 +7,7 @@
 
 import readline from "readline";
 
-const VERSION = "0.2.0";
+const VERSION = "0.3.0";
 const REMOTE_BACKEND = process.env.WEZAS_BACKEND_URL || "https://wezas-backend.onrender.com";
 
 const TOOLS = [
@@ -161,6 +161,59 @@ const TOOLS = [
         iban: { type: "string", description: "IBAN complet (ex: TN59..., MU..., MR...)" },
       },
       required: ["iban"],
+    },
+  },
+  {
+    name: "valider_carte_bancaire",
+    description: "Valide un numéro de carte bancaire (PAN), identifie le réseau émetteur (GIMAC, GIM-UEMOA, Verve, Visa, Mastercard) et applique l'algorithme Luhn.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        numero_carte: { type: "string", description: "Numéro de carte bancaire (PAN)" },
+      },
+      required: ["numero_carte"],
+    },
+  },
+  {
+    name: "generer_qr_emvco",
+    description: "Génère un payload QR Code standard EMVCo Merchant-Presented Mode (GHQR, NQR) avec checksum CRC16 CCITT.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        nom_marchand: { type: "string", description: "Nom commercial du marchand (max 25 car.)" },
+        ville_marchand: { type: "string", description: "Ville du marchand" },
+        pays: { type: "string", description: "Code pays ISO2 (ex: GH, NG, CI, SN)" },
+        compte_marchand: { type: "string", description: "Identifiant ou compte du marchand" },
+        devise: { type: "string", description: "Code ISO devise (ex: GHS, NGN, XOF, XAF, USD)" },
+        montant: { type: "number", description: "Montant facultatif pour QR dynamique" },
+        reference: { type: "string", description: "Référence facultative de la transaction" },
+      },
+      required: ["nom_marchand", "ville_marchand", "pays", "compte_marchand", "devise"],
+    },
+  },
+  {
+    name: "decoder_qr_paiement",
+    description: "Décode et analyse un QR Code de paiement (EMVCo avec CRC16 ou deep link Mobile Money).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        payload: { type: "string", description: "Chaîne brute du QR Code à décoder" },
+      },
+      required: ["payload"],
+    },
+  },
+  {
+    name: "calculer_taxe_transaction",
+    description: "Calcule les taxes transactionnelles (E-Levy Ghana, TSTA Cameroun, EMTL Nigeria) et retenues à la source (BRS Côte d'Ivoire / Sénégal, WHT, Digital Service Tax Kenya).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        pays: { type: "string", description: "Code ISO2 ou nom du pays" },
+        montant: { type: "number", description: "Montant brut de la transaction" },
+        type_taxe: { type: "string", description: "Code de la taxe spécifique (facultatif)" },
+        cumul_journalier_precedent: { type: "number", description: "Cumul journalier déjà transféré pour les taxes avec franchise (ex: E-Levy)" },
+      },
+      required: ["pays", "montant"],
     },
   },
 ];
