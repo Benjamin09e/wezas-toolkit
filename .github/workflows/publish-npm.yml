@@ -30,6 +30,8 @@ jobs:
 
       - name: Publish to NPM
         working-directory: packages/sdk-ts
-        run: npm publish --access public
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" > .npmrc
+          npm publish --access public --provenance=false
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
