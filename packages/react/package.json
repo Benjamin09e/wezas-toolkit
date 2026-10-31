@@ -1,0 +1,49 @@
+{
+  "name": "@wezas/react",
+  "version": "0.1.0",
+  "description": "Composants React prêts à l'emploi pour fintechs et paiements en Afrique (saisie téléphone intelligente, Mobile Money checkout, validation RIB/cartes, QR EMVCo).",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --external react,react-dom",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "keywords": [
+    "wezas",
+    "africa",
+    "react",
+    "fintech",
+    "mobile-money",
+    "phone-input",
+    "checkout",
+    "orange-money",
+    "wave",
+    "mtn-momo",
+    "gimac",
+    "emvco"
+  ],
+  "author": "Benjamin EKIA",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "lucide-react": "^1.61.0",
+    "wezas-africa-toolkit": "^0.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}
