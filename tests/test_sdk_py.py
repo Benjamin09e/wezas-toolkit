@@ -34,32 +34,10 @@ def test_sdk_python_sync_client():
     assert phone_res.data["valide"] is True
     assert phone_res.data["pays"]["iso2"] == "GA"
 
-    # 2. Test validation de carte bancaire GIMAC
-    card_res = client.valider_carte(numero_carte="5054851234567899")
-    assert card_res.ok is True
-    assert card_res.data["valide"] is True
-    assert card_res.data["reseau"]["id"] == "gimac"
-    assert card_res.data["pan_masque"] == "505485******7899"
-
-    # 3. Test génération QR Code EMVCo
-    qr_res = client.generer_qr_emvco(
-        nom_marchand="Boutique Dakar",
-        ville_marchand="Dakar",
-        pays="SN",
-        compte_marchand="ACC123",
-        devise="XOF",
-        montant=5000,
-        reference="CMD-01",
-    )
-    assert qr_res.ok is True
-    assert qr_res.data["payload"].startswith("000201")
-    assert qr_res.data["crc"] is not None
-
-    # 4. Test décodage QR Code Wave
-    decode_res = client.decoder_qr_paiement(payload="WAVE:+221770001122:3000:REF1")
-    assert decode_res.ok is True
-    assert decode_res.data["type"] == "mobile_money_direct"
-    assert decode_res.data["operateur"] == "Wave"
+    # 2. Test conversion devise
+    conv_res = client.convertir_devise(montant=1000, de="XOF", vers="EUR")
+    assert conv_res.ok is True
+    assert conv_res.data["resultat"] is not None
 
 
 @pytest.mark.anyio
@@ -71,7 +49,6 @@ async def test_sdk_python_async_client():
             http_client=http_client,
         )
 
-        card_res = await client.valider_carte(numero_carte="5058011234567896")
-        assert card_res.ok is True
-        assert card_res.data["valide"] is True
-        assert card_res.data["reseau"]["id"] == "gim_uemoa"
+        phone_res = await client.valider_telephone(pays="GA", numero="+24177123456")
+        assert phone_res.ok is True
+        assert phone_res.data["valide"] is True

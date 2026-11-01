@@ -3,15 +3,10 @@ from typing import Literal
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
-from wezas_core.card import validate_card
 from wezas_core.country import get_country_info
 from wezas_core.currency import convert as convert_currency
 from wezas_core.format_amount import format_amount
-from wezas_core.iban import validate_african_iban
-from wezas_core.nuban import validate_nuban
 from wezas_core.phone import validate_phone
-from wezas_core.qrcode import decode_payment_qr, generate_emv_qr
-from wezas_core.rib import validate_rib
 from wezas_core.taxes import calculate_transaction_tax
 from wezas_core.tin import validate_tax_id
 from wezas_core.vat import calculate_vat
@@ -33,59 +28,12 @@ class RevokeApiKeyRequest(BaseModel):
     key_id: str = Field(..., description="Identifiant public de la clé (wz_key_...)")
 
 
-class CardValidationRequest(BaseModel):
-    numero_carte: str = Field(
-        ...,
-        description="Numéro de carte bancaire PAN (ex: GIMAC, GIM-UEMOA, Verve, Visa, Mastercard)",
-    )
-
-
 class TaxIdValidationRequest(BaseModel):
     pays: str = Field(..., description="Code pays ISO (ex: CI, SN, CM, GA, KE, MA)")
     identifiant: str = Field(
         ...,
         description="Numéro fiscal d'entreprise (ex: NCC, NINEA, NIU, NIF, KRA PIN)",
     )
-
-
-class RibValidationRequest(BaseModel):
-    code_banque: str = Field(
-        ...,
-        description="Code banque à 5 caractères (ex: CI008, SN012, GA040)",
-    )
-    code_guichet: str = Field(..., description="Code guichet à 5 chiffres (ex: 01111)")
-    numero_compte: str = Field(..., description="Numéro de compte à 11 ou 12 caractères")
-    cle_rib: str = Field(..., description="Clé de contrôle à 2 chiffres")
-
-
-class NubanValidationRequest(BaseModel):
-    code_banque: str = Field(
-        ...,
-        description="Code CBN banque à 3 ou 6 chiffres (ex: 044 Access Bank, 090267 Kuda)",
-    )
-    numero_compte: str = Field(..., description="Numéro de compte NUBAN à 10 chiffres")
-    pays: str = Field("NG", description="Code pays ISO (NG ou GH)")
-
-
-class IbanValidationRequest(BaseModel):
-    iban: str = Field(
-        ...,
-        description="Numéro IBAN complet (ex: MA64011780000012345678901234)",
-    )
-
-
-class GenerateEmvQrRequest(BaseModel):
-    nom_marchand: str = Field(..., description="Nom du marchand ou entreprise (ex: Supermarché)")
-    ville_marchand: str = Field(..., description="Ville du marchand (ex: Dakar, Abidjan)")
-    pays: str = Field(..., description="Code pays ISO (ex: SN, CI, GH, NG)")
-    compte_marchand: str = Field(..., description="Identifiant/compte de règlement du marchand")
-    devise: str = Field(..., description="Code devise ISO alphabétique (ex: XOF, XAF, GHS, NGN)")
-    montant: float | None = Field(None, gt=0, description="Montant (pour QR dynamique)")
-    reference: str | None = Field(None, description="Référence de commande ou facture")
-
-
-class DecodePaymentQrRequest(BaseModel):
-    payload: str = Field(..., description="Chaîne de données brute issue du QR code scanné")
 
 
 class PhoneValidationRequest(BaseModel):
@@ -187,20 +135,6 @@ async def api_format_amount(
     return envelope.model_dump()
 
 
-@router.post("/bank/rib/validate")
-async def api_validate_rib(
-    req: RibValidationRequest,
-    api_key: str | None = Depends(verify_api_key),
-):
-    envelope = validate_rib(
-        code_banque=req.code_banque,
-        code_guichet=req.code_guichet,
-        numero_compte=req.numero_compte,
-        cle_rib=req.cle_rib,
-    )
-    return envelope.model_dump()
-
-
 @router.post("/tax/tin/validate")
 async def api_validate_tax_id(
     req: TaxIdValidationRequest,
@@ -210,61 +144,39 @@ async def api_validate_tax_id(
     return envelope.model_dump()
 
 
-@router.post("/bank/nuban/validate")
-async def api_validate_nuban(
-    req: NubanValidationRequest,
-    api_key: str | None = Depends(verify_api_key),
+@router.post("/keys/create", tags=["Gestion Clés API"])
+async def api_create_api_key(
+    req: CreateApiKeyRequest,
 ):
-    envelope = validate_nuban(
-        bank_code=req.code_banque,
-        account_number=req.numero_compte,
-        country=req.pays,
+    """
+    Génère une nouvelle clé API Wezas (Volet 2).
+    La clé secrète n'est retournée qu'une seule fois.
+    """
+    secret_key, record = api_key_repo.create_key(
+        name=req.name,
+        environment=req.environment,
+        scopes=req.scopes,
     )
-    return envelope.model_dump()
+    return {
+        "ok": True,
+        "api_key": secret_key,
+        "key_id": record.key_id,
+        "name": record.name,
+        "environment": record.environment,
+        "scopes": record.scopes,
+        "created_at": record.created_at,
+        "message": "Conservez précieusement votre clé API. Elle ne pourra plus être réaffichée.",
+    }
 
 
-@router.post("/bank/iban/validate")
-async def api_validate_iban(
-    req: IbanValidationRequest,
-    api_key: str | None = Depends(verify_api_key),
+@router.post("/keys/revoke", tags=["Gestion Clés API"])
+async def api_revoke_api_key(
+    req: RevokeApiKeyRequest,
+    current_admin: ApiKeyRecord = admin_required,
 ):
-    envelope = validate_african_iban(iban_str=req.iban)
-    return envelope.model_dump()
-
-
-@router.post("/bank/card/validate")
-async def api_validate_card(
-    req: CardValidationRequest,
-    api_key: str | None = Depends(verify_api_key),
-):
-    envelope = validate_card(pan=req.numero_carte)
-    return envelope.model_dump()
-
-
-@router.post("/payment/qr/emvco/generate")
-async def api_generate_emv_qr(
-    req: GenerateEmvQrRequest,
-    api_key: str | None = Depends(verify_api_key),
-):
-    envelope = generate_emv_qr(
-        merchant_name=req.nom_marchand,
-        merchant_city=req.ville_marchand,
-        country=req.pays,
-        merchant_account=req.compte_marchand,
-        currency=req.devise,
-        amount=req.montant,
-        reference=req.reference,
-    )
-    return envelope.model_dump()
-
-
-@router.post("/payment/qr/decode")
-async def api_decode_payment_qr(
-    req: DecodePaymentQrRequest,
-    api_key: str | None = Depends(verify_api_key),
-):
-    envelope = decode_payment_qr(payload=req.payload)
-    return envelope.model_dump()
+    """Révoque une clé API existante (requiert scope admin)."""
+    success = api_key_repo.revoke_key(req.key_id)
+    return {"ok": success, "key_id": req.key_id}
 
 
 @router.post("/keys/create", tags=["Gestion Clés API"])

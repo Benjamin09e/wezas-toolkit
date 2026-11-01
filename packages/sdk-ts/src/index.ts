@@ -12,13 +12,6 @@ import {
   CountryInfoData,
   OperatorsListData,
   TaxIdValidationData,
-  PaymentPayloadData,
-  RibValidationData,
-  NubanValidationData,
-  IbanValidationData,
-  CardValidationData,
-  EmvQrData,
-  DecodedQrData,
 } from "./types.js";
 import { formatAmountOffline, FIXED_PARITY } from "./offline.js";
 
@@ -155,114 +148,6 @@ export class WezasClient {
    */
   async validerIdentifiantFiscal(pays: string, identifiant: string): Promise<Envelope<TaxIdValidationData>> {
     return this.call<TaxIdValidationData>("valider_identifiant_fiscal", { pays, identifiant });
-  }
-
-  /**
-   * Génère un lien profond, un code USSD et un QR payload pour déclencher un paiement Mobile Money.
-   */
-  async genererPaiementMobileMoney(
-    operateur: string,
-    telephone: string,
-    montant: number | string,
-    pays: string,
-    reference?: string
-  ): Promise<Envelope<PaymentPayloadData>> {
-    return this.call<PaymentPayloadData>("generer_paiement_mobile_money", {
-      operateur,
-      telephone,
-      montant,
-      pays,
-      reference,
-    });
-  }
-
-  /**
-   * Valide et décode les composantes d'un RIB bancaire (UEMOA / CEMAC).
-   */
-  async validerRib(
-    codeBanque: string,
-    codeGuichet: string,
-    numeroCompte: string,
-    cleRib: string
-  ): Promise<Envelope<RibValidationData>> {
-    return this.call<RibValidationData>("valider_rib", {
-      code_banque: codeBanque,
-      code_guichet: codeGuichet,
-      numero_compte: numeroCompte,
-      cle_rib: cleRib,
-    });
-  }
-
-  /**
-   * Valide un numéro de compte NUBAN à 10 chiffres (Nigeria / Ghana).
-   */
-  async validerNuban(
-    codeBanque: string,
-    numeroCompte: string,
-    pays: string = "NG"
-  ): Promise<Envelope<NubanValidationData>> {
-    return this.call<NubanValidationData>("valider_nuban", {
-      code_banque: codeBanque,
-      numero_compte: numeroCompte,
-      pays,
-    });
-  }
-
-  /**
-   * Valide et extrait les composants d'un IBAN pour les pays africains (ISO 13616).
-   */
-  async validerIban(
-    iban: string
-  ): Promise<Envelope<IbanValidationData>> {
-    return this.call<IbanValidationData>("valider_iban_afrique", {
-      iban,
-    });
-  }
-
-  /**
-   * Valide un numéro de carte bancaire (PAN), identifie le réseau émetteur
-   * (GIMAC, GIM-UEMOA, Verve, Visa, Mastercard) et applique l'algorithme Luhn.
-   */
-  async validerCarte(
-    numeroCarte: string
-  ): Promise<Envelope<CardValidationData>> {
-    return this.call<CardValidationData>("valider_carte_bancaire", {
-      numero_carte: numeroCarte,
-    });
-  }
-
-  /**
-   * Génère un payload QR Code standard EMVCo Merchant-Presented Mode (GHQR, NQR).
-   */
-  async genererQrEmvco(
-    nomMarchand: string,
-    villeMarchand: string,
-    pays: string,
-    compteMarchand: string,
-    devise: string,
-    montant?: number | string,
-    reference?: string
-  ): Promise<Envelope<EmvQrData>> {
-    return this.call<EmvQrData>("generer_qr_emvco", {
-      nom_marchand: nomMarchand,
-      ville_marchand: villeMarchand,
-      pays,
-      compte_marchand: compteMarchand,
-      devise,
-      montant,
-      reference,
-    });
-  }
-
-  /**
-   * Décode et analyse un QR Code de paiement (EMVCo avec CRC16 ou Mobile Money).
-   */
-  async decoderQrPaiement(
-    payload: string
-  ): Promise<Envelope<DecodedQrData>> {
-    return this.call<DecodedQrData>("decoder_qr_paiement", {
-      payload,
-    });
   }
 }
 

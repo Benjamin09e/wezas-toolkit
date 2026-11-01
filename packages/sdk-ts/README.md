@@ -80,61 +80,7 @@ if (conv.ok && conv.data) {
 }
 ```
 
-### 4. Validation Bancaire Africaine (RIB, NUBAN, IBAN, Cartes GIMAC / Verve)
-```typescript
-import { wezas } from "wezas-africa-toolkit";
-
-// RIB UEMOA / CEMAC (ex: Côte d'Ivoire, Cameroun, Sénégal, Gabon...)
-const rib = await wezas.validerRib("CI034", "01001", "01234567890", "85");
-if (rib.ok && rib.data) {
-  console.log(rib.data.valide);       // true
-  console.log(rib.data.nom_banque);   // "Ecobank Côte d'Ivoire"
-}
-
-// NUBAN Nigeria (CBN modulo 10)
-const nuban = await wezas.validerNuban("058", "0123456789", "NG");
-if (nuban.ok && nuban.data) {
-  console.log(nuban.data.valide);     // true
-  console.log(nuban.data.nom_banque); // "Guaranty Trust Bank (GTBank)"
-}
-
-// IBAN ISO 13616 (Tunisie, Algérie, Égypte, Madagascar...)
-const iban = await wezas.validerIban("TN5910001000123456789012");
-if (iban.ok && iban.data) {
-  console.log(iban.data.valide);      // true
-  console.log(iban.data.pays);        // "TN"
-}
-
-// Cartes bancaires (GIMAC Afrique centrale, GIM-UEMOA, Verve Nigeria, Visa/Mastercard)
-const carte = await wezas.validerCarte("5054851234567899");
-if (carte.ok && carte.data) {
-  console.log(carte.data.reseau.nom); // "Verve (Afrique de l'Ouest)"
-  console.log(carte.data.luhn_valide); // true
-}
-```
-
-### 5. QR Codes de Paiement EMVCo & Mobile Money
-```typescript
-import { wezas } from "wezas-africa-toolkit";
-
-// Génération QR Code EMVCo (GHQR Ghana, NQR Nigeria, standard Merchant-Presented)
-const qr = await wezas.genererQrEmvco(
-  "Ma Super Boutique",
-  "Dakar",
-  "SN",
-  "ACC-123456",
-  "XOF",
-  5000,
-  "CMD-987"
-);
-console.log(qr.data?.payload); // payload EMVCo avec CRC16 calculé
-
-// Décodage et vérification de QR Code
-const decode = await wezas.decoderQrPaiement(qr.data?.payload!);
-console.log(decode.data?.marchand?.nom); // "Ma Super Boutique"
-```
-
-### 6. Taxes Transactionnelles Africaines (E-Levy, BRS, DST, EMTL)
+### 4. Taxes Transactionnelles Africaines (E-Levy, BRS, DST, EMTL)
 ```typescript
 import { wezas } from "wezas-africa-toolkit";
 
@@ -146,7 +92,7 @@ if (tax.ok && tax.data) {
 }
 ```
 
-### 7. Formatage monétaire local hors ligne immédiat
+### 5. Formatage monétaire local hors ligne immédiat
 ```typescript
 import { formatAmountOffline } from "wezas-africa-toolkit";
 
