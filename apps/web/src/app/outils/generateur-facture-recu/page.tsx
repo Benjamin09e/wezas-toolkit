@@ -6,22 +6,24 @@ import {
   Receipt, 
   ChevronLeft, 
   Printer, 
-  QrCode, 
   Building2, 
   CheckCircle2, 
   ShieldCheck,
   Download
 } from "lucide-react";
+import { INVOICE_COUNTRIES } from "@/data/invoiceCountries";
 
 export default function ReceiptGeneratorPage() {
   const [merchantName, setMerchantName] = useState("Wezas Technologies SARL");
-  const [taxId, setTaxId] = useState("1234567 A"); // NINEA / NCC
-  const [clientName, setClientName] = useState("Société Alpha CI");
+  const [selectedCountryCode, setSelectedCountryCode] = useState("CI");
+  const [taxId, setTaxId] = useState("1234567 A");
+  const [clientName, setClientName] = useState("Société Alpha Partner");
   const [amountHt, setAmountHt] = useState(100000);
-  const [country, setCountry] = useState<"CI" | "SN" | "CM">("CI");
-  const [applyWht, setApplyWht] = useState(false); // Retenue BRS
+  const [applyWht, setApplyWht] = useState(false);
   const [invoiceDate, setInvoiceDate] = useState("01/11/2026");
   const [invoiceYear, setInvoiceYear] = useState("2026");
+
+  const countryConfig = INVOICE_COUNTRIES.find((c) => c.iso2 === selectedCountryCode) || INVOICE_COUNTRIES[0];
 
   useEffect(() => {
     const now = new Date();
@@ -29,14 +31,24 @@ export default function ReceiptGeneratorPage() {
     setInvoiceYear(now.getFullYear().toString());
   }, []);
 
-  const vatRate = country === "CM" ? 0.1925 : 0.18; // 19.25% Cameroun, 18% UEMOA
-  const vatAmount = Math.round(amountHt * vatRate);
-  const amountTtc = amountHt + vatAmount;
+  const handleCountryChange = (newCode: string) => {
+    setSelectedCountryCode(newCode);
+    const matched = INVOICE_COUNTRIES.find((c) => c.iso2 === newCode);
+    if (matched) {
+      setTaxId(matched.exampleTaxId);
+      if (!matched.hasWht) {
+        setApplyWht(false);
+      }
+    }
+  };
 
-  // Retenue BRS (5% en Côte d'Ivoire / Sénégal sur prestations)
-  const whtRate = 0.05;
-  const whtAmount = applyWht ? Math.round(amountHt * whtRate) : 0;
-  const netPayable = amountTtc - whtAmount;
+  const vatRate = countryConfig.vatRate;
+  const vatAmount = Math.round(amountHt * vatRate * 100) / 100;
+  const amountTtc = Math.round((amountHt + vatAmount) * 100) / 100;
+
+  const whtRate = countryConfig.whtRate || 0;
+  const whtAmount = applyWht && countryConfig.hasWht ? Math.round(amountHt * whtRate * 100) / 100 : 0;
+  const netPayable = Math.round((amountTtc - whtAmount) * 100) / 100;
 
   const handlePrint = () => {
     window.print();
@@ -50,13 +62,18 @@ export default function ReceiptGeneratorPage() {
             <ChevronLeft className="w-4 h-4 text-amber-400" />
             <span>Tous les micro-outils</span>
           </Link>
-          <button
-            onClick={handlePrint}
-            className="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3.5 py-1.5 rounded-xl text-xs transition-all cursor-pointer shadow-md"
-          >
-            <Printer className="w-3.5 h-3.5" />
-            <span>Imprimer / Exporter PDF</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <span className="hidden sm:inline-block text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full font-mono">
+              27+ Juridictions Fiscales
+            </span>
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3.5 py-1.5 rounded-xl text-xs transition-all cursor-pointer shadow-md"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>Imprimer / PDF</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -64,13 +81,14 @@ export default function ReceiptGeneratorPage() {
         <div className="space-y-2 print:hidden">
           <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase tracking-wider bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
             <Receipt className="w-4 h-4" />
-            Facturation & Conformité OHADA
+            Facturation Panafricaine & Conformité Fiscale
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            Générateur de Reçus & Factures Conformes avec TVA & QR
+            Générateur de Reçus & Factures Conformes Panafricain (27 Pays)
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-2xl">
-            Émettez des factures conformes aux directives fiscales des pays d'Afrique (TVA légale, NINEA/NCC/TIN, retenue à la source BRS et QR code de vérification).
+            Émettez des factures conformes aux directives fiscales africaines avec calcul automatique de la TVA locale, 
+            identifiant fiscal certifié (NINEA, NCC, IFU, TIN, KRA PIN, ICE), retenue à la source et QR code.
           </p>
         </div>
 
@@ -88,69 +106,95 @@ export default function ReceiptGeneratorPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs text-slate-400 font-medium">Numéro fiscal (NINEA / NCC / TIN) :</label>
+              <label className="text-xs text-slate-400 font-medium">Pays fiscal (27 pays) :</label>
+              <select
+                value={selectedCountryCode}
+                onChange={(e) => handleCountryChange(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs outline-none focus:border-amber-400 cursor-pointer"
+              >
+                {INVOICE_COUNTRIES.map((c) => (
+                  <option key={c.iso2} value={c.iso2}>
+                    {c.flag} {c.name} - {c.vatName} ({c.currency})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs text-slate-400 font-medium truncate block">
+                {countryConfig.taxIdLabel} :
+              </label>
               <input
                 type="text"
                 value={taxId}
                 onChange={(e) => setTaxId(e.target.value)}
+                placeholder={countryConfig.exampleTaxId}
                 className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white font-mono text-xs outline-none focus:border-amber-400 uppercase"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div className="space-y-1">
+              <label className="text-xs text-slate-400 font-medium">Facturé au client :</label>
+              <input
+                type="text"
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs outline-none focus:border-amber-400"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs text-slate-400 font-medium">Pays fiscal :</label>
-              <select
-                value={country}
-                onChange={(e) => setCountry(e.target.value as any)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs outline-none focus:border-amber-400 cursor-pointer"
-              >
-                <option value="CI">🇨🇮 Côte d'Ivoire (TVA 18% + BRS 5%)</option>
-                <option value="SN">🇸🇳 Sénégal (TVA 18% + BRS 5%)</option>
-                <option value="CM">🇨🇲 Cameroun (TVA 19.25%)</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-            <div className="space-y-1">
-              <label className="text-xs text-slate-400 font-medium">Montant Hors Taxe (HT) :</label>
+              <label className="text-xs text-slate-400 font-medium">Montant Hors Taxe (HT en {countryConfig.currency}) :</label>
               <input
                 type="number"
-                min="1000"
-                step="500"
+                min="100"
+                step="100"
                 value={amountHt}
                 onChange={(e) => setAmountHt(Number(e.target.value))}
                 className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white font-mono text-xs outline-none focus:border-amber-400"
               />
             </div>
 
-            <div className="flex items-center gap-3 pt-4 sm:pt-6">
-              <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
-                <input
-                  type="checkbox"
-                  checked={applyWht}
-                  onChange={(e) => setApplyWht(e.target.checked)}
-                  className="rounded border-slate-700 text-amber-500 focus:ring-amber-400 w-4 h-4 cursor-pointer"
-                />
-                <span>Appliquer la Retenue à la Source (BRS Prestation 5%)</span>
-              </label>
+            <div className="flex items-center gap-2 pt-4 sm:pt-6">
+              {countryConfig.hasWht ? (
+                <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                  <input
+                    type="checkbox"
+                    checked={applyWht}
+                    onChange={(e) => setApplyWht(e.target.checked)}
+                    className="rounded border-slate-700 text-amber-500 focus:ring-amber-400 w-4 h-4 cursor-pointer"
+                  />
+                  <span>Appliquer {countryConfig.whtLabel || "la retenue WHT"}</span>
+                </label>
+              ) : (
+                <span className="text-[11px] text-slate-500 italic">Pas de retenue BRS standard pour ce pays.</span>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Facture Imprimable (Feuille A4 Blanche / Pro) */}
-        <div className="bg-white text-slate-950 rounded-2xl p-8 sm:p-12 shadow-2xl space-y-8 border border-slate-200">
-          <div className="flex justify-between items-start border-b border-slate-200 pb-6">
+        {/* Facture Imprimable (Feuille Blanche Professionnelle) */}
+        <div className="bg-white text-slate-950 rounded-2xl p-6 sm:p-12 shadow-2xl space-y-6 sm:space-y-8 border border-slate-200">
+          <div className="flex flex-col sm:flex-row justify-between items-start border-b border-slate-200 pb-6 gap-4">
             <div>
-              <h2 className="text-2xl font-black tracking-tight text-slate-900">{merchantName}</h2>
-              <div className="text-xs text-slate-600 mt-1">Identifiant Fiscal : <strong className="font-mono text-slate-900">{taxId}</strong></div>
-              <div className="text-xs text-slate-600">Régime Fiscal du {country === "CI" ? "Côte d'Ivoire" : country === "SN" ? "Sénégal" : "Cameroun"}</div>
+              <div className="flex items-center gap-2">
+                <span className="text-xl">{countryConfig.flag}</span>
+                <h2 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900">{merchantName}</h2>
+              </div>
+              <div className="text-xs text-slate-600 mt-1">
+                {countryConfig.taxIdLabel} : <strong className="font-mono text-slate-900">{taxId}</strong>
+              </div>
+              <div className="text-xs text-slate-600">
+                Législation Fiscale : <strong>{countryConfig.name}</strong> ({countryConfig.currency})
+              </div>
             </div>
 
-            <div className="text-right">
+            <div className="sm:text-right">
               <div className="text-sm font-bold text-amber-600 uppercase font-mono">Facture Officielle</div>
-              <div className="text-xs text-slate-500 font-mono">N° FAC-{invoiceYear}-0082</div>
-              <div className="text-xs text-slate-500 mt-1">Date : {invoiceDate}</div>
+              <div className="text-xs text-slate-500 font-mono">N° FAC-{invoiceYear}-{countryConfig.iso2}-0082</div>
+              <div className="text-xs text-slate-500 mt-0.5">Date : {invoiceDate}</div>
             </div>
           </div>
 
@@ -161,20 +205,20 @@ export default function ReceiptGeneratorPage() {
             </div>
             <div className="text-right">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">Moyen de règlement :</span>
-              <div className="font-medium text-slate-900">Virement / Mobile Money</div>
+              <div className="font-medium text-slate-900">Virement Bancaire / Mobile Money</div>
             </div>
           </div>
 
           {/* Tableau de calcul */}
           <div className="space-y-3">
             <div className="border-b border-slate-200 pb-2 flex justify-between text-xs font-bold text-slate-500 uppercase">
-              <span>Désignation de la prestation</span>
-              <span>Total</span>
+              <span>Désignation de la prestation / Fourniture</span>
+              <span>Montant HT</span>
             </div>
 
             <div className="flex justify-between text-xs text-slate-800 py-1">
-              <span>Prestations de services numériques & intégration fintech</span>
-              <span className="font-mono font-medium">{amountHt.toLocaleString("fr-FR")} FCFA</span>
+              <span>Prestations de services numériques & intégration fintech ({countryConfig.name})</span>
+              <span className="font-mono font-medium">{amountHt.toLocaleString("fr-FR")} {countryConfig.currency}</span>
             </div>
           </div>
 
@@ -182,39 +226,39 @@ export default function ReceiptGeneratorPage() {
           <div className="border-t border-slate-200 pt-4 flex flex-col sm:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-3">
               <img
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(`WEZAS_REC_FAC-${invoiceYear}-0082:${netPayable}:FCFA`)}`}
-                alt="QR Code de vérification"
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(`WEZAS_REC_FAC-${invoiceYear}-${countryConfig.iso2}-0082:${netPayable}:${countryConfig.currency}`)}`}
+                alt="QR Code de vérification fiscale"
                 className="w-20 h-20 rounded border border-slate-300 p-1"
               />
               <div className="text-[10px] text-slate-500 leading-tight">
-                QR Code de conformité fiscale.<br />Scannez pour vérifier l'authenticité de la quittance.
+                QR Code de conformité fiscale {countryConfig.iso2}.<br />Scannez pour vérifier l'authenticité de la facture.
               </div>
             </div>
 
-            <div className="w-full sm:w-64 space-y-1.5 text-xs text-slate-700 font-mono">
+            <div className="w-full sm:w-72 space-y-1.5 text-xs text-slate-700 font-mono">
               <div className="flex justify-between">
                 <span className="font-sans">Montant HT :</span>
-                <span>{amountHt.toLocaleString("fr-FR")} FCFA</span>
+                <span>{amountHt.toLocaleString("fr-FR")} {countryConfig.currency}</span>
               </div>
               <div className="flex justify-between text-amber-700">
-                <span className="font-sans">TVA ({(vatRate * 100).toFixed(1)}%) :</span>
-                <span>+{vatAmount.toLocaleString("fr-FR")} FCFA</span>
+                <span className="font-sans">{countryConfig.vatName} :</span>
+                <span>+{vatAmount.toLocaleString("fr-FR")} {countryConfig.currency}</span>
               </div>
               <div className="flex justify-between font-bold text-slate-900 pt-1 border-t border-slate-200">
                 <span className="font-sans">Total TTC :</span>
-                <span>{amountTtc.toLocaleString("fr-FR")} FCFA</span>
+                <span>{amountTtc.toLocaleString("fr-FR")} {countryConfig.currency}</span>
               </div>
 
-              {applyWht && (
+              {applyWht && whtAmount > 0 && (
                 <div className="flex justify-between text-rose-600 pt-1 border-t border-slate-200">
-                  <span className="font-sans">Retenue BRS (5%) :</span>
-                  <span>-{whtAmount.toLocaleString("fr-FR")} FCFA</span>
+                  <span className="font-sans">{countryConfig.whtLabel || "Retenue WHT"} :</span>
+                  <span>-{whtAmount.toLocaleString("fr-FR")} {countryConfig.currency}</span>
                 </div>
               )}
 
               <div className="flex justify-between font-black text-sm text-emerald-800 pt-2 border-t-2 border-slate-900">
                 <span className="font-sans">Net à payer :</span>
-                <span>{netPayable.toLocaleString("fr-FR")} FCFA</span>
+                <span>{netPayable.toLocaleString("fr-FR")} {countryConfig.currency}</span>
               </div>
             </div>
           </div>
