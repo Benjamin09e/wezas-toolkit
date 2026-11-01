@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Calculator, QrCode, CreditCard } from "lucide-react";
+import { Building2, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Calculator, QrCode, CreditCard, Coins, Smartphone, Receipt } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Outils Fintech & Fiscaux Gratuits pour l'Afrique - Wezas Africa",
@@ -16,6 +16,30 @@ export const metadata: Metadata = {
 };
 
 const SEO_TOOLS = [
+  {
+    slug: "comparateur-frais-mobile-money",
+    title: "Comparateur de Frais Mobile Money (Wave, Orange, MTN)",
+    description: "Comparez en direct les frais de transfert et taxes locales en zone franc et Ghana pour détecter l'option d'envoi la plus économique.",
+    icon: Coins,
+    badge: "Populaire · Économie",
+    country: "🇸🇳 🇨🇮 🇨🇲 🇬🇭 🇬🇦",
+  },
+  {
+    slug: "simulateur-ussd",
+    title: "Simulateur USSD Push & Webhook Sandbox",
+    description: "Simulez le parcours de validation d'un débit sur smartphone (#144# / *133#) et générez les callbacks webhooks pour vos tests serveurs.",
+    icon: Smartphone,
+    badge: "Nouveau · Dev Studio",
+    country: "Orange, MTN, Wave",
+  },
+  {
+    slug: "generateur-facture-recu",
+    title: "Générateur de Reçus & Factures OHADA (TVA + BRS)",
+    description: "Éditez des factures conformes avec calcul automatique de la TVA locale, retenue BRS 5%, mention NINEA/NCC et QR code scannable.",
+    icon: Receipt,
+    badge: "B2B & Comptabilité",
+    country: "UEMOA, CEMAC",
+  },
   {
     slug: "validateur-rib-uemoa",
     title: "Vérificateur de RIB UEMOA / CEMAC",
