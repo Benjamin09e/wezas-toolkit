@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Calculator, QrCode, CreditCard, Coins, Smartphone, Receipt } from "lucide-react";
+import { Building2, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Calculator, QrCode, CreditCard, Coins, Smartphone, Receipt, FileCheck2, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Outils Fintech & Fiscaux Gratuits pour l'Afrique - Wezas Africa",
@@ -63,6 +63,22 @@ const SEO_TOOLS = [
     icon: QrCode,
     badge: "Encaissement Standard",
     country: "Standard Panafricain",
+  },
+  {
+    slug: "validateur-rccm-ohada",
+    title: "Vérificateur de RCCM OHADA (17 Pays)",
+    description: "Vérifiez la conformité du numéro de Registre du Commerce et du Crédit Mobilier, la juridiction de rattachement et la forme juridique.",
+    icon: FileCheck2,
+    badge: "KYC & Entreprise",
+    country: "17 Pays Membres OHADA",
+  },
+  {
+    slug: "simulateur-charges-sociales",
+    title: "Simulateur Salaire Net & Cotisations Sociales",
+    description: "Calculez les cotisations retraite et maladie (CNPS, IPRES, CSS, CNSS) et découvrez le salaire net ainsi que le coût entreprise réel.",
+    icon: Users,
+    badge: "RH & Paie",
+    country: "🇨🇮 🇸🇳 🇨🇲 🇬🇦",
   },
   {
     slug: "validateur-carte-afrique",
