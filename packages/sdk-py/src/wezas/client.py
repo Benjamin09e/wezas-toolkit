@@ -97,57 +97,6 @@ class WezasClient(BaseClient):
     def valider_identifiant_fiscal(self, pays: str, identifiant: str) -> WezasResponse[dict[str, Any]]:
         return self._post("/v1/tax/tin/validate", {"pays": pays, "identifiant": identifiant})
 
-    def valider_rib(
-        self, code_banque: str, code_guichet: str, numero_compte: str, cle_rib: str
-    ) -> WezasResponse[dict[str, Any]]:
-        return self._post(
-            "/v1/bank/rib/validate",
-            {
-                "code_banque": code_banque,
-                "code_guichet": code_guichet,
-                "numero_compte": numero_compte,
-                "cle_rib": cle_rib,
-            },
-        )
-
-    def valider_nuban(self, code_banque: str, numero_compte: str, pays: str = "NG") -> WezasResponse[dict[str, Any]]:
-        return self._post(
-            "/v1/bank/nuban/validate",
-            {"code_banque": code_banque, "numero_compte": numero_compte, "pays": pays},
-        )
-
-    def valider_iban(self, iban: str) -> WezasResponse[dict[str, Any]]:
-        return self._post("/v1/bank/iban/validate", {"iban": iban})
-
-    def valider_carte(self, numero_carte: str) -> WezasResponse[dict[str, Any]]:
-        return self._post("/v1/bank/card/validate", {"numero_carte": numero_carte})
-
-    def generer_qr_emvco(
-        self,
-        nom_marchand: str,
-        ville_marchand: str,
-        pays: str,
-        compte_marchand: str,
-        devise: str,
-        montant: float | str | None = None,
-        reference: str | None = None,
-    ) -> WezasResponse[dict[str, Any]]:
-        payload: dict[str, Any] = {
-            "nom_marchand": nom_marchand,
-            "ville_marchand": ville_marchand,
-            "pays": pays,
-            "compte_marchand": compte_marchand,
-            "devise": devise,
-        }
-        if montant is not None:
-            payload["montant"] = float(montant)
-        if reference is not None:
-            payload["reference"] = reference
-        return self._post("/v1/payment/qr/emvco/generate", payload)
-
-    def decoder_qr_paiement(self, payload: str) -> WezasResponse[dict[str, Any]]:
-        return self._post("/v1/payment/qr/decode", {"payload": payload})
-
 
 class AsyncWezasClient(BaseClient):
     """Client asynchrone basé sur httpx.AsyncClient."""
@@ -186,32 +135,3 @@ class AsyncWezasClient(BaseClient):
         if type_taxe:
             payload["type_taxe"] = type_taxe
         return await self._post("/v1/tax/transaction/calculate", payload)
-
-    async def valider_carte(self, numero_carte: str) -> WezasResponse[dict[str, Any]]:
-        return await self._post("/v1/bank/card/validate", {"numero_carte": numero_carte})
-
-    async def generer_qr_emvco(
-        self,
-        nom_marchand: str,
-        ville_marchand: str,
-        pays: str,
-        compte_marchand: str,
-        devise: str,
-        montant: float | str | None = None,
-        reference: str | None = None,
-    ) -> WezasResponse[dict[str, Any]]:
-        payload: dict[str, Any] = {
-            "nom_marchand": nom_marchand,
-            "ville_marchand": ville_marchand,
-            "pays": pays,
-            "compte_marchand": compte_marchand,
-            "devise": devise,
-        }
-        if montant is not None:
-            payload["montant"] = float(montant)
-        if reference is not None:
-            payload["reference"] = reference
-        return await self._post("/v1/payment/qr/emvco/generate", payload)
-
-    async def decoder_qr_paiement(self, payload: str) -> WezasResponse[dict[str, Any]]:
-        return await self._post("/v1/payment/qr/decode", {"payload": payload})

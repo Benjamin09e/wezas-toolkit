@@ -1,36 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Calculator, QrCode, CreditCard, Coins, Smartphone, Receipt, FileCheck2, Users } from "lucide-react";
+import { ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Calculator, Smartphone, Receipt, FileCheck2, Users } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Outils Fintech & Fiscaux Gratuits pour l'Afrique - Wezas Africa",
-  description: "Suite d'outils en ligne gratuits et certifiés : validation de RIB UEMOA / CEMAC, simulateur de taxe E-Levy Ghana, générateur de QR Code EMVCo et vérificateur de cartes GIMAC / Verve.",
+  title: "Outils Fiscaux, Juridiques & Télécoms pour l'Afrique - Wezas Africa",
+  description: "Suite d'outils en ligne gratuits et certifiés : vérificateur de RCCM OHADA, simulateur de charges sociales et salaires, générateur de factures normalisées.",
   keywords: [
-    "outils fintech afrique",
-    "verification rib uemoa gratuit",
-    "simulateur e-levy ghana",
-    "qr code emvco senegal cote d'ivoire",
-    "carte gimac verve luhn",
-    "api fintech afrique",
+    "outils entreprises afrique",
+    "simulateur charges sociales afrique",
+    "rccm ohada verification",
+    "facture normalisee afrique",
+    "simulateur ussd afrique",
   ],
 };
 
 const SEO_TOOLS = [
   {
-    slug: "comparateur-frais-mobile-money",
-    title: "Comparateur de Frais Mobile Money (Wave, Orange, MTN)",
-    description: "Comparez en direct les frais de transfert et taxes locales en zone franc et Ghana pour détecter l'option d'envoi la plus économique.",
-    icon: Coins,
-    badge: "Populaire · Économie",
-    country: "🇸🇳 🇨🇮 🇨🇲 🇬🇭 🇬🇦",
-  },
-  {
     slug: "simulateur-ussd",
     title: "Simulateur USSD Push & Webhook Sandbox",
-    description: "Simulez le parcours de validation d'un débit sur smartphone (#144# / *133#) et générez les callbacks webhooks pour vos tests serveurs.",
+    description: "Simulez le parcours de validation d'un parcours USSD sur smartphone (#144# / *133#) et générez les callbacks webhooks pour vos tests serveurs.",
     icon: Smartphone,
-    badge: "Nouveau · Dev Studio",
-    country: "Orange, MTN, Wave",
+    badge: "Dev Studio",
+    country: "Orange, MTN, Moov",
   },
   {
     slug: "generateur-facture-recu",
@@ -39,30 +30,6 @@ const SEO_TOOLS = [
     icon: Receipt,
     badge: "B2B & Comptabilité",
     country: "UEMOA, CEMAC",
-  },
-  {
-    slug: "validateur-rib-uemoa",
-    title: "Vérificateur de RIB UEMOA / CEMAC",
-    description: "Validez instantanément un relevé d'identité bancaire ouest et centre africain : vérification de clé Modulo 97 et identification automatique de la banque.",
-    icon: Building2,
-    badge: "Bancaire & Trésorerie",
-    country: "🇸🇳 🇨🇮 🇨🇲 🇬🇦 +8 pays",
-  },
-  {
-    slug: "calculateur-e-levy-ghana",
-    title: "Calculateur E-Levy Ghana & Taxes Transactionnelles",
-    description: "Simulez l'impact de l'E-Levy ghanéen (1% après franchise de 100 GHS) et découvrez le montant exact net débité ou reçu.",
-    icon: Calculator,
-    badge: "Fiscalité Fintech",
-    country: "🇬🇭 Ghana (BoG / GRA)",
-  },
-  {
-    slug: "generateur-qr-emvco",
-    title: "Générateur de QR Code EMVCo Marchand",
-    description: "Créez gratuitement vos QR Codes marchands conformes au standard international EMVCo MPM avec checksum CRC16 CCITT pour GHQR, NQR et UEMOA.",
-    icon: QrCode,
-    badge: "Encaissement Standard",
-    country: "Standard Panafricain",
   },
   {
     slug: "validateur-rccm-ohada",
@@ -81,12 +48,12 @@ const SEO_TOOLS = [
     country: "🇨🇮 🇸🇳 🇨🇲 🇬🇦",
   },
   {
-    slug: "validateur-carte-afrique",
-    title: "Validateur Cartes GIMAC, GIM-UEMOA & Verve",
-    description: "Testez la validité d'un numéro de carte bancaire régionale ou internationale : détection du BIN réseau et algorithme Luhn ISO 7812.",
-    icon: CreditCard,
-    badge: "Sécurité Paiement",
-    country: "CEMAC, UEMOA, Nigeria",
+    slug: "calculateur-e-levy-ghana",
+    title: "Calculateur E-Levy Ghana & Taxes Transactionnelles",
+    description: "Simulez l'impact de l'E-Levy ghanéen (1% après franchise de 100 GHS) et découvrez le montant exact net après taxe.",
+    icon: Calculator,
+    badge: "Fiscalité",
+    country: "🇬🇭 Ghana (BoG / GRA)",
   },
 ];
 
