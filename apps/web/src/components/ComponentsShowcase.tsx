@@ -160,32 +160,32 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
   };
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800/80 rounded-2xl p-4 sm:p-6 space-y-6 shadow-xl">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+    <div className="bg-slate-900/90 border border-slate-800/80 rounded-2xl p-3.5 sm:p-6 space-y-5 sm:space-y-6 shadow-xl">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b border-slate-800 pb-4 sm:pb-5">
         <div>
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30">
-              <Sparkles className="w-5 h-5" />
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="p-1.5 sm:p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30 shrink-0">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                Composants Frontend & Simulateur de Checkout
-                <span className="text-[10px] bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <h2 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-1.5 sm:gap-2">
+                <span>Composants Frontend</span>
+                <span className="text-[9px] sm:text-[10px] bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black px-1.5 sm:px-2 py-0.5 rounded-full uppercase tracking-wider">
                   Nouveau
                 </span>
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Composants React / Tailwind prêts à copier-coller pour intégrer les paiements africains en moins d'une minute.
+              <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
+                Composants React / Tailwind prêts à copier-coller pour intégrer les paiements africains.
               </p>
             </div>
           </div>
         </div>
 
         {/* Onglets de navigation */}
-        <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 self-start md:self-auto">
+        <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 self-stretch sm:self-auto overflow-x-auto">
           <button
             onClick={() => setActiveTab("phone")}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap min-h-[36px] cursor-pointer ${
               activeTab === "phone"
                 ? "bg-amber-500 text-slate-950 shadow-md"
                 : "text-slate-400 hover:text-white"
@@ -196,7 +196,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
           </button>
           <button
             onClick={() => setActiveTab("checkout")}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap min-h-[36px] cursor-pointer ${
               activeTab === "checkout"
                 ? "bg-amber-500 text-slate-950 shadow-md"
                 : "text-slate-400 hover:text-white"
@@ -209,28 +209,28 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
       </div>
 
       {activeTab === "phone" ? (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
           {/* Simulateur interactif */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+          <div className="lg:col-span-6 space-y-3 sm:space-y-4">
+            <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
               <span>Aperçu Interactif en Direct</span>
-              <span className="text-emerald-400 text-[11px] font-mono flex items-center gap-1">
+              <span className="text-emerald-400 text-[10px] sm:text-[11px] font-mono flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                 Détection Réseau Active
               </span>
             </div>
 
-            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-inner space-y-4">
+            <div className="bg-slate-950 p-4 sm:p-6 rounded-2xl border border-slate-800 shadow-inner space-y-4">
               <label className="text-xs text-slate-300 font-medium block">
                 Numéro de téléphone destinataire / client :
               </label>
 
-              {/* Champ interactif */}
-              <div className="flex items-center gap-2 bg-slate-900 border-2 border-amber-500/50 rounded-xl p-2.5 focus-within:border-amber-400 transition-all shadow-lg">
+              {/* Champ interactif mobile-friendly */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 bg-slate-900 border-2 border-amber-500/50 rounded-xl p-2 sm:p-2.5 focus-within:border-amber-400 transition-all shadow-lg">
                 <select
                   value={selectedCountry}
                   onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="bg-slate-950 text-white font-medium text-xs sm:text-sm px-2.5 py-1.5 rounded-lg border border-slate-700 outline-none cursor-pointer"
+                  className="bg-slate-950 text-white font-medium text-xs sm:text-sm px-2.5 py-2 rounded-lg border border-slate-700 outline-none cursor-pointer w-full sm:w-auto"
                 >
                   {SUPPORTED_COUNTRIES.map((c) => (
                     <option key={c.iso2} value={c.iso2}>
@@ -239,26 +239,28 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
                   ))}
                 </select>
 
-                <input
-                  type="tel"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  placeholder="Ex: 07 08 12 34 56"
-                  className="bg-transparent flex-1 text-white font-mono text-sm sm:text-base outline-none placeholder-slate-500 min-w-0"
-                />
+                <div className="flex items-center gap-2 flex-1 min-w-0">
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="Ex: 07 08 12 34 56"
+                    className="bg-transparent flex-1 text-white font-mono text-sm sm:text-base outline-none placeholder-slate-500 min-w-0 px-1 py-1"
+                  />
 
-                <div className="shrink-0 flex items-center gap-1.5">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md text-white ${detectedOp.color} shadow-sm`}>
-                    {detectedOp.name}
-                  </span>
+                  <div className="shrink-0 flex items-center">
+                    <span className={`text-[10px] font-bold px-2 py-1 rounded-md text-white ${detectedOp.color} shadow-sm whitespace-nowrap`}>
+                      {detectedOp.name}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               {/* Carte d'information temps réel */}
-              <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 text-xs">
+              <div className="p-3 sm:p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 text-xs">
                 <div className="flex items-center justify-between text-slate-400">
                   <span>Format International :</span>
-                  <span className="font-mono text-amber-300 font-bold">
+                  <span className="font-mono text-amber-300 font-bold truncate ml-2">
                     {countryData.dialCode} {phoneNumber.replace(/\s+/g, "")}
                   </span>
                 </div>
@@ -268,7 +270,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
                 </div>
                 <div className="flex items-center justify-between text-slate-400">
                   <span>Statut de conformité :</span>
-                  <span className="text-emerald-400 flex items-center gap-1">
+                  <span className="text-emerald-400 flex items-center gap-1 font-medium">
                     <CheckCircle2 className="w-3.5 h-3.5" /> E.164 Valide
                   </span>
                 </div>
@@ -284,7 +286,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
               </span>
               <button
                 onClick={() => copySnippet(phoneInputReactCode, "phone-code")}
-                className="flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 transition-all cursor-pointer"
+                className="flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 transition-all cursor-pointer min-h-[32px]"
               >
                 {copiedCode === "phone-code" ? (
                   <>
@@ -301,27 +303,27 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
             </div>
 
             <div className="relative rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-              <pre className="p-4 text-[11px] sm:text-xs font-mono text-slate-300 overflow-x-auto max-h-[290px] leading-relaxed">
+              <pre className="p-3 sm:p-4 text-[10px] sm:text-xs font-mono text-slate-300 overflow-x-auto max-h-[260px] sm:max-h-[290px] leading-relaxed">
                 <code>{phoneInputReactCode}</code>
               </pre>
             </div>
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
           {/* Simulateur de Checkout Hybride */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-              <span>Checkout Hybride (Mobile Money, QR EMVCo & Cartes)</span>
-              <span className="text-amber-400 text-[11px] font-mono">Prêt pour Production</span>
+          <div className="lg:col-span-6 space-y-3 sm:space-y-4">
+            <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+              <span>Checkout Hybride (Mobile Money & Cartes)</span>
+              <span className="text-amber-400 text-[10px] sm:text-[11px] font-mono">Prêt pour Production</span>
             </div>
 
-            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-inner space-y-5">
+            <div className="bg-slate-950 p-4 sm:p-6 rounded-2xl border border-slate-800 shadow-inner space-y-4 sm:space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                 <div>
-                  <div className="text-xs text-slate-400">Total à régler</div>
-                  <div className="text-2xl font-black font-mono text-white">
-                    {checkoutAmount.toLocaleString("fr-FR")} <span className="text-amber-400 text-lg">XOF</span>
+                  <div className="text-[11px] text-slate-400">Total à régler</div>
+                  <div className="text-xl sm:text-2xl font-black font-mono text-white">
+                    {checkoutAmount.toLocaleString("fr-FR")} <span className="text-amber-400 text-base sm:text-lg">XOF</span>
                   </div>
                 </div>
                 <div className="text-right">
@@ -345,7 +347,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <button
                     onClick={() => setCheckoutOperator("wave")}
-                    className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                    className={`p-2 sm:p-2.5 rounded-xl border text-center transition-all cursor-pointer min-h-[50px] ${
                       checkoutOperator === "wave"
                         ? "bg-sky-500/20 border-sky-500 text-white shadow-lg shadow-sky-500/10"
                         : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-white"
@@ -357,7 +359,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
 
                   <button
                     onClick={() => setCheckoutOperator("orange")}
-                    className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                    className={`p-2 sm:p-2.5 rounded-xl border text-center transition-all cursor-pointer min-h-[50px] ${
                       checkoutOperator === "orange"
                         ? "bg-orange-500/20 border-orange-500 text-white shadow-lg shadow-orange-500/10"
                         : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-white"
@@ -369,7 +371,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
 
                   <button
                     onClick={() => setCheckoutOperator("mtn")}
-                    className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                    className={`p-2 sm:p-2.5 rounded-xl border text-center transition-all cursor-pointer min-h-[50px] ${
                       checkoutOperator === "mtn"
                         ? "bg-amber-500/20 border-amber-500 text-white shadow-lg shadow-amber-500/10"
                         : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-white"
@@ -381,7 +383,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
 
                   <button
                     onClick={() => setCheckoutOperator("card")}
-                    className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                    className={`p-2 sm:p-2.5 rounded-xl border text-center transition-all cursor-pointer min-h-[50px] ${
                       checkoutOperator === "card"
                         ? "bg-emerald-500/20 border-emerald-500 text-white shadow-lg shadow-emerald-500/10"
                         : "bg-slate-900/60 border-slate-800 text-slate-400 hover:text-white"
@@ -393,12 +395,12 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
                 </div>
               </div>
 
-              {/* Rendu dynamique : Bouton de paiement ou QR Code */}
-              <div className="pt-2">
+              {/* Rendu dynamique : Bouton de paiement */}
+              <div className="pt-1">
                 <button
                   onClick={handleSimulatePayment}
                   disabled={isProcessing}
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 text-xs sm:text-sm min-h-[44px]"
                 >
                   {isProcessing ? (
                     <span className="flex items-center gap-2">
@@ -428,7 +430,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
               </span>
               <button
                 onClick={() => copySnippet(checkoutReactCode, "checkout-code")}
-                className="flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 transition-all cursor-pointer"
+                className="flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 transition-all cursor-pointer min-h-[32px]"
               >
                 {copiedCode === "checkout-code" ? (
                   <>
@@ -445,7 +447,7 @@ export function AfricaCheckoutWidget({ amount, currency, phone }: { amount: numb
             </div>
 
             <div className="relative rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-              <pre className="p-4 text-[11px] sm:text-xs font-mono text-slate-300 overflow-x-auto max-h-[290px] leading-relaxed">
+              <pre className="p-3 sm:p-4 text-[10px] sm:text-xs font-mono text-slate-300 overflow-x-auto max-h-[260px] sm:max-h-[290px] leading-relaxed">
                 <code>{checkoutReactCode}</code>
               </pre>
             </div>

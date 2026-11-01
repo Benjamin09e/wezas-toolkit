@@ -57,25 +57,25 @@ export function InstallationSection() {
   );
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-2xl mb-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-5">
+    <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl mb-6 sm:mb-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b border-slate-800 pb-4 sm:pb-5 mb-4 sm:mb-5">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+            <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
               OPEN SOURCE & MCP
             </span>
-            <span className="text-xs text-slate-400">Licence MIT · 19 pays couverts</span>
+            <span className="text-[11px] sm:text-xs text-slate-400">Licence MIT · 27 pays couverts</span>
           </div>
-          <h2 className="text-lg font-bold text-white mt-1">
+          <h2 className="text-base sm:text-lg font-bold text-white mt-1">
             Intégrez Wezas Africa Toolkit dans vos projets & assistants IA
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
             SDK TypeScript pour vos apps ou Serveur MCP pour Claude Desktop, Cursor et Windsurf.
           </p>
         </div>
 
         {/* Sélecteur d'onglets (NPM et MCP) */}
-        <div className="flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+        <div className="flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs self-stretch sm:self-auto">
           <button
             onClick={() => setActiveTab("npm")}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${

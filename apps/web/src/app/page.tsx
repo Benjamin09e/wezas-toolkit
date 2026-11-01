@@ -569,21 +569,21 @@ function PlaygroundContent() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       {/* Header Responsive */}
-      <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-base sm:text-lg shrink-0">
+      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+            <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-sm sm:text-lg shrink-0">
               W
             </div>
             <div className="truncate">
-              <span className="font-semibold text-white tracking-tight text-sm sm:text-base">Wezas Africa</span>
-              <span className="hidden sm:inline-block ml-2 text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full font-mono">
-                MCP Playground
+              <span className="font-bold text-white tracking-tight text-xs sm:text-base">Wezas Africa</span>
+              <span className="hidden md:inline-block ml-2 text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full font-mono">
+                Fintech & MCP
               </span>
             </div>
           </div>
-          <div className="flex items-center space-x-2 sm:space-x-3 text-sm shrink-0">
-            <span className="hidden lg:flex items-center gap-1.5 text-emerald-400 text-xs mr-2">
+          <div className="flex items-center space-x-1.5 sm:space-x-3 text-sm shrink-0">
+            <span className="hidden xl:flex items-center gap-1.5 text-emerald-400 text-xs mr-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               27 Pays Couverts
             </span>
@@ -591,9 +591,9 @@ function PlaygroundContent() {
             {/* Lien SEO Micro-Outils */}
             <a
               href="/outils"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-xs text-amber-400 hover:text-amber-300 transition-all font-semibold min-h-[36px]"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-[11px] sm:text-xs text-amber-400 hover:text-amber-300 transition-all font-semibold min-h-[32px] sm:min-h-[36px]"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>Outils Gratuits</span>
             </a>
 
@@ -601,16 +601,16 @@ function PlaygroundContent() {
             <button
               onClick={handleCopyShareLink}
               title="Copier le lien direct vers cette configuration"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:text-white transition-all cursor-pointer min-h-[36px]"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-[11px] sm:text-xs text-slate-300 hover:text-white transition-all cursor-pointer min-h-[32px] sm:min-h-[36px]"
             >
               {copiedLink ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-emerald-400 font-medium hidden sm:inline">Lien copié</span>
+                  <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
+                  <span className="text-emerald-400 font-medium hidden sm:inline">Copié</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="w-3.5 h-3.5 text-amber-400" />
+                  <Share2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
                   <span className="hidden sm:inline">Partager</span>
                 </>
               )}
@@ -620,18 +620,18 @@ function PlaygroundContent() {
               href="https://www.npmjs.com/package/wezas-africa-toolkit"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:text-white transition-all min-h-[36px]"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-[11px] sm:text-xs text-slate-300 hover:text-white transition-all min-h-[32px] sm:min-h-[36px]"
             >
-              <Package className="w-3.5 h-3.5 text-amber-400" />
-              <span>NPM</span>
+              <Package className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
+              <span className="hidden xs:inline">NPM</span>
             </a>
             <a
               href="https://github.com/Benjamin09e/wezas-toolkit"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:text-white transition-all min-h-[36px]"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-[11px] sm:text-xs text-slate-300 hover:text-white transition-all min-h-[32px] sm:min-h-[36px]"
             >
-              <GithubIcon className="w-3.5 h-3.5 text-amber-400" />
+              <GithubIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
           </div>
