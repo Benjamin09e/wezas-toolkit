@@ -183,43 +183,6 @@ export const TOOLS: ToolConfig[] = [
       { label: "🌍 Tous les pays", args: { pays: "", avec_mobile_money_seulement: false } },
     ],
   },
-  {
-    id: "valider_identifiant_fiscal",
-    name: "Identifiant Fiscal (NIF/TIN)",
-    shortName: "Fiscal (NIF)",
-    category: "Fiscalité & B2B",
-    description: "Validation et normalisation des identifiants fiscaux (NCC, NINEA, NIU, NIF, KRA PIN, TIN).",
-    icon: FileCheck2,
-    defaultPayload: {
-      pays: "CI",
-      identifiant: "1234567 A",
-    },
-    presets: [
-      { label: "🇨🇮 Côte d'Ivoire (NCC)", args: { pays: "CI", identifiant: "1234567 A" } },
-      { label: "🇸🇳 Sénégal (NINEA)", args: { pays: "SN", identifiant: "001234567 2V2" } },
-      { label: "🇬🇦 Gabon (NIF)", args: { pays: "GA", identifiant: "012345A" } },
-      { label: "🇨🇲 Cameroun (NIU)", args: { pays: "CM", identifiant: "M012345678901A" } },
-    ],
-  },
-  {
-    id: "calculer_taxe_transaction",
-    name: "Taxes Transactionnelles & BRS",
-    shortName: "Taxes & E-Levy",
-    category: "Fiscalité",
-    description: "Calcul de l'E-Levy Ghana, TSTA Cameroun, EMTL Nigeria, BRS Côte d'Ivoire / Sénégal et WHT.",
-    icon: Receipt,
-    defaultPayload: {
-      pays: "GH",
-      montant: 250,
-      cumul_journalier_precedent: 0,
-    },
-    presets: [
-      { label: "🇬🇭 E-Levy Ghana (250 GHS)", args: { pays: "GH", montant: 250, cumul_journalier_precedent: 0 } },
-      { label: "🇨🇲 TSTA Cameroun (50 000 XAF)", args: { pays: "CM", montant: 50000 } },
-      { label: "🇳🇬 EMTL Nigeria (10 000 NGN)", args: { pays: "NG", montant: 10000 } },
-      { label: "🇨🇮 BRS Côte d'Ivoire (500 000 XOF)", args: { pays: "CI", montant: 500000, type_taxe: "BRS_PRESTATION" } },
-    ],
-  },
 ];
 
 interface ExecutionHistoryItem {
@@ -271,7 +234,6 @@ function PlaygroundContent() {
       if (args.numero) summary = `Tél: ${args.numero}`;
       else if (args.montant && args.devise) summary = `${args.montant} ${args.devise}`;
       else if (args.montant && args.vers) summary = `${args.montant} -> ${args.vers}`;
-      else if (args.identifiant) summary = `Id: ${args.identifiant}`;
       else if (args.operateur) summary = `${args.operateur} (${args.pays || ""})`;
       else if (args.pays) summary = `Pays: ${args.pays}`;
       else summary = "Test";
@@ -867,20 +829,6 @@ function PlaygroundContent() {
                       <label htmlFor="mm_only" className="text-xs text-slate-300 cursor-pointer">
                         Uniquement opérateurs avec Mobile Money
                       </label>
-                    </div>
-                  )}
-
-                  {/* Champ Identifiant Fiscal */}
-                  {"identifiant" in currentArgs && (
-                    <div className="space-y-1.5 md:col-span-2">
-                      <label className="text-xs font-medium text-slate-400">Numéro fiscal (NIF / NCC / NINEA / NIU / TIN) :</label>
-                      <input
-                        type="text"
-                        value={currentArgs.identifiant || ""}
-                        onChange={(e) => updateArg("identifiant", e.target.value)}
-                        placeholder="Ex: 1234567 A ou 001234567 2V2..."
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-amber-500 font-mono min-h-[42px]"
-                      />
                     </div>
                   )}
 
