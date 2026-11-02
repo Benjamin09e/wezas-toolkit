@@ -12,6 +12,7 @@ Pays couverts :
 
 from __future__ import annotations
 
+import datetime as dt
 from typing import Any
 
 from wezas_core.envelope import Envelope, ErrorCode, failure, success
@@ -85,19 +86,24 @@ PAYROLL_CONFIGS: dict[str, dict[str, Any]] = {
 def calculer_salaire_net(
     pays: str,
     salaire_brut: float | int,
-) -> Envelope[dict[str, Any]]:
+) -> Envelope:
     """Calcule les cotisations sociales employeur/salarié et le salaire net estimé."""
     if not pays or not isinstance(pays, str):
-        return failure(ErrorCode.INVALID_ARGUMENT, "Le pays est obligatoire (CI, SN, CM, GA).")
+        return failure(
+            ErrorCode.ENTREE_INVALIDE,
+            "Le pays est obligatoire (CI, SN, CM, GA).",
+            "Country is required (CI, SN, CM, GA).",
+        )
 
     pays_code = pays.strip().upper()
     config = PAYROLL_CONFIGS.get(pays_code)
 
     if not config:
         return failure(
-            ErrorCode.COUNTRY_NOT_SUPPORTED,
+            ErrorCode.PAYS_INCONNU,
             f"Le pays '{pays}' n'est pas encore pris en charge pour le calcul social.",
-            {"pays_supportes": list(PAYROLL_CONFIGS.keys())},
+            f"Country '{pays}' is not supported yet for social payroll calculation.",
+            details={"pays_supportes": list(PAYROLL_CONFIGS.keys())},
         )
 
     try:
@@ -105,7 +111,11 @@ def calculer_salaire_net(
         if brut <= 0:
             raise ValueError()
     except Exception:
-        return failure(ErrorCode.INVALID_ARGUMENT, "Le salaire brut doit être un nombre strictement positif.")
+        return failure(
+            ErrorCode.MONTANT_INVALIDE,
+            "Le salaire brut doit être un nombre strictement positif.",
+            "Gross salary must be a strictly positive number.",
+        )
 
     devise = config["devise"]
     cotisations_employe: list[dict[str, Any]] = []
@@ -206,6 +216,6 @@ def calculer_salaire_net(
             "organisme_principal": config["organisme_securite"],
         },
         source=config["source"],
-        derniere_verification="2026-11-01",
+        derniere_verification=dt.date(2026, 11, 1),
         confiance="haute",
     )

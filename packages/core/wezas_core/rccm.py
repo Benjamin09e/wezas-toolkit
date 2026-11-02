@@ -14,6 +14,7 @@ Exemples :
 
 from __future__ import annotations
 
+import datetime as dt
 import re
 from typing import Any
 
@@ -74,13 +75,14 @@ REGEX_RCCM_SOUPLE = re.compile(
 )
 
 
-def valider_rccm(numero_rccm: str) -> Envelope[dict[str, Any]]:
+def valider_rccm(numero_rccm: str) -> Envelope:
     """Valide et décortique un numéro RCCM de l'espace OHADA."""
     if not numero_rccm or not isinstance(numero_rccm, str):
         return failure(
-            ErrorCode.INVALID_ARGUMENT,
+            ErrorCode.ENTREE_INVALIDE,
             "Le numéro RCCM est obligatoire et doit être une chaîne.",
-            {"numero_rccm": numero_rccm},
+            "RCCM number is required and must be a string.",
+            details={"numero_rccm": str(numero_rccm) if numero_rccm is not None else ""},
         )
 
     nettoye = numero_rccm.strip().upper()
@@ -171,6 +173,6 @@ def valider_rccm(numero_rccm: str) -> Envelope[dict[str, Any]]:
             "tolerance_appliquee": is_souple,
         },
         source="OHADA - Registre du Commerce et du Crédit Mobilier (AUDCG Art. 37)",
-        derniere_verification="2026-11-01",
+        derniere_verification=dt.date(2026, 11, 1),
         confiance="haute",
     )
