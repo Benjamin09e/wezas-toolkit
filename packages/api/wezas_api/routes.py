@@ -178,37 +178,3 @@ async def api_revoke_api_key(
     success = api_key_repo.revoke_key(req.key_id)
     return {"ok": success, "key_id": req.key_id}
 
-
-@router.post("/keys/create", tags=["Gestion Clés API"])
-async def api_create_api_key(
-    req: CreateApiKeyRequest,
-):
-    """
-    Génère une nouvelle clé API Wezas (Volet 2).
-    La clé secrète n'est retournée qu'une seule fois.
-    """
-    secret_key, record = api_key_repo.create_key(
-        name=req.name,
-        environment=req.environment,
-        scopes=req.scopes,
-    )
-    return {
-        "ok": True,
-        "api_key": secret_key,
-        "key_id": record.key_id,
-        "name": record.name,
-        "environment": record.environment,
-        "scopes": record.scopes,
-        "created_at": record.created_at,
-        "message": "Conservez précieusement votre clé API. Elle ne pourra plus être réaffichée.",
-    }
-
-
-@router.post("/keys/revoke", tags=["Gestion Clés API"])
-async def api_revoke_api_key(
-    req: RevokeApiKeyRequest,
-    current_admin: ApiKeyRecord = admin_required,
-):
-    """Révoque une clé API existante (requiert scope admin)."""
-    success = api_key_repo.revoke_key(req.key_id)
-    return {"ok": success, "key_id": req.key_id}
